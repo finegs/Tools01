@@ -12,7 +12,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 
-
 call vundle#end()
 
 colorscheme darkblue
@@ -101,5 +100,5 @@ map <S-F3> <ESC><C-t>
 
 
 "Call Plugins
-:TagbarToggle
-:NERDTree
+":TagbarToggle
+":NERDTree
