@@ -37,10 +37,10 @@ set comments=sl:/*,mb:\ *,elx:\ */
 
 set path+=.,..,../..,./*,./*/*,.../*,~/,~/**,/usr/include/*
 
+set tags=tags
 set tags+=$MINGW_HOME/include/tags
 set tags+=$MINGW_HOME/x86_64-w64-mingw64/include/tags
 set tags+=$MSYS_HOME/usr/include/tags
-set tags+=./tags
 "set tags+=~/.vim/ctags/tags
 "set tags+=~/.vim/ctags/cpp
 "set tags+=~/.vim/ctags/gl
@@ -97,6 +97,18 @@ map <F8> <ESC>:TagbarToggle<CR>
 
 map <F3> <ESC><C-]>
 map <S-F3> <ESC><C-t>
+
+"map for move lines
+map <S-Up> :m-1<CR>
+map <S-Down> :m+1<CR>
+imap <S-Up> <ESC>:m-1<CR>
+imap <S-Down> <ESC>:m+1<CR>
+
+nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+nnoremap ,<Down> :<C-u>silent! move+<CR>==
+xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
+
 
 
 "Call Plugins
