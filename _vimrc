@@ -39,7 +39,7 @@ set path+=.,..,../..,./*,./*/*,.../*,~/,~/**,/usr/include/*
 
 set tags=tags
 set tags+=$MINGW_HOME/include/tags
-set tags+=$MINGW_HOME/x86_64-w64-mingw64/include/tags
+set tags+=$MINGW_HOME/x86_64-w64-mingw32/include/tags
 set tags+=$MSYS_HOME/usr/include/tags
 "set tags+=~/.vim/ctags/tags
 "set tags+=~/.vim/ctags/cpp
