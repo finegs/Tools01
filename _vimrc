@@ -101,5 +101,5 @@ map <S-F3> <ESC><C-t>
 
 
 "Call Plugins
-:TagbarToggle
-:NERDTree
+":TagbarToggle
+":NERDTree
