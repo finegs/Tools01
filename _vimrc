@@ -71,8 +71,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_checkers = ['g++']
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++1y'
 
 nmap <Tab> <C-W>w
+nmap <S-TAB> <C-W><C-P>
 map <F2> :w<CR><ESC>
 nmap <F2> :w<CR><ESC>
 imap <F2> <ESC> :w<CR>i
@@ -114,3 +118,16 @@ xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
 "Call Plugins
 ":TagbarToggle
 ":NERDTree
+
+" Remove Include serach file paths
+" ctags -R -n --fields=+i+K+S+l+m+a --exclude=src/react/conf-srch/node_modules
+set complete-=i
+
+let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
+                                     \ --ignore .git
+                                     \ --ignore .svn
+                                     \ --ignore .hg
+                                     \ --ignore .DS_Store
+                                     \ --ignore "**/*.pyc"
+                                     \ -g ""'
+
