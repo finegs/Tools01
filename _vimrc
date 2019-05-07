@@ -11,6 +11,7 @@ Plugin 'majutsushi/tagbar.git'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
@@ -41,7 +42,10 @@ set tags=tags
 set tags+=$MINGW_HOME/include/tags
 set tags+=$MINGW_HOME/x86_64-w64-mingw32/include/tags
 set tags+=$MSYS_HOME/usr/include/tags
+set tags+=$MSYS_HOME/usr/lib/gcc/x86_64-pc-msys/7.4.0/include/c++/tags
+set tags+=$MSYS_HOME/usr/include/c++/tags
 "set tags+=~/.vim/ctags/tags
+set
 "set tags+=~/.vim/ctags/cpp
 "set tags+=~/.vim/ctags/gl
 "set tags+=~/.vim/ctags/gtk
@@ -96,16 +100,17 @@ map <C-F7> :make release<CR>
 "map <F11> <C-t>
 "map <F12> <C-]>
 
-map <S-F2> <ESC>:NERDTree<CR>
-map <F8> <ESC>:TagbarToggle<CR>
+map <C-8> <ESC>:SyntasticCheck<CR>
+map <C-9> <ESC>:NERDTree<CR>
+map <C-0> <ESC>:TagbarToggle<CR>
 
 map <F3> <ESC><C-]>
 map <S-F3> <ESC><C-t>
 
 "map for move lines
-map <S-Up> :m-1<CR>
+map <S-Up> :m-2<CR>
 map <S-Down> :m+1<CR>
-imap <S-Up> <ESC>:m-1<CR>
+imap <S-Up> <ESC>:m-2<CR>
 imap <S-Down> <ESC>:m+1<CR>
 
 nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
