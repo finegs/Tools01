@@ -12,11 +12,13 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+
 
 call vundle#end()
 
 colorscheme darkblue
-"set enc=utf-8
+set enc=utf-8
 set fenc=utf-8
 set termencoding=utf-8
 set nocompatible
