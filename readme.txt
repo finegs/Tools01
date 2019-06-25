@@ -1,10 +1,9 @@
-
+0.0
+ 1) Install VIM : https://github.com/vim/vim-win32-installer/releases/tag/v8.1.1587 64bit Installer
 
 0. set System  Properties on systempropertiesadvanced
    >set MSYS_HOME=D:\Programs\msys64
    >set MINGW_HOME=%MSYS_HOME%\mingw64
-
-
 
 1. Install 'chocolatey'  : Software Management for Windows
   >@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass
