@@ -86,13 +86,12 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_cpp_checkers = ['gcc']
 "let g:syntastic_cpp_checkers = 'g++'
 let g:syntastic_cpp_compiler = 'g++'
-"let g:syntastic_cpp_compiler_options = '-std=c++1y -stdlib=libc++'
 let g:syntastic_cpp_compiler_options = '-std=c++1y'
 let g:syntastic_error_symbol = 'X'
+let g:syntastic_c_include_dirs=[ '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include/c++', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include/c++/x86_64-pc-msys', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include/c++/backward', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include-fixed', '/usr/include', '/usr/lib/../lib/../include/w32api']
 let g:syntastic_cpp_check_header = 1
 " g++ Include path here, separate by ',' wrap with [, ] 
 " g++ -E -x c++ - -v < nul
-let g:syntastic_c_include_dirs=[ '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include/c++', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include/c++/x86_64-pc-msys', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include/c++/backward', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include', '/usr/lib/gcc/x86_64-pc-msys/7.4.0/include-fixed', '/usr/include', '/usr/lib/../lib/../include/w32api']
 
 nmap <Tab> <ESC><C-W>w
 nmap <S-TAB> <ESC><C-W><C-P>
