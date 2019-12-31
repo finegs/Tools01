@@ -6,7 +6,10 @@
    >set MINGW_HOME=%MSYS_HOME%\mingw64
 
 1. Install 'chocolatey'  : Software Management for Windows
-  >@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass
+  1.1 open cmd.exe with administratro privileges
+  1.2 paste to cmd.exe and Enter
+
+  "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass
   -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET
   "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
