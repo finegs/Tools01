@@ -1,20 +1,14 @@
 source $VIMRUNTIME/vimrc_example.vim
 source $VIM/_func.vim
+source $VIM/_myenv.vim
 behave mswin
-
-" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
 
 set rtp+=$HOME/.vim/bundle/Vundle.vim/
 set rtp+=$HOME/.vim/bundle/vim-cmake-syntax
 
+"==================================================================
 call vundle#begin('$HOME/.vim/bundle/')
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'majutsushi/tagbar.git'
 Plugin 'vim-airline/vim-airline'
@@ -23,75 +17,24 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/ListToggle'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-" Added by SGK 20190629
 Plugin 'pboettch/vim-cmake-syntax'
 
 call vundle#end()            " required
+"==================================================================
+
 filetype plugin indent on    " required
 
 set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg1 = substitute(arg1, '!', '\!', 'g')
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg2 = substitute(arg2, '!', '\!', 'g')
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let arg3 = substitute(arg3, '!', '\!', 'g')
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  let cmd = substitute(cmd, '!', '\!', 'g')
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
 
+"set colorscheme to darkblue
 colorscheme darkblue
 set nowrap
-" VIM Configuration File
-" Description: Optimized for C/C++ development, but useful also for other things.
-" Author: Gerhard Gappmeier
-
-" set UTF-8 encoding
-
+"
 if has("gui_running")
+"  set enc=cp949 
   set enc=utf-8
   language message ko_kr.utf-8
   source $VIMRUNTIME/delmenu.vim
@@ -101,6 +44,8 @@ else
   set enc=utf-8
 endif
 
+
+" adde by SGK 20200101 
 set fenc=utf-8
 set termencoding=utf-8
 " disable vi compatibility (emulation of old bugs)
@@ -115,8 +60,7 @@ set tabstop=4        " tab width is 4 spaces
 set shiftwidth=4     " indent also with 4 spaces
 "set expandtab        " expand tabs to spaces
 " wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
-
-set textwidth=180
+set textwidth=120
 " turn syntax highlighting on
 set t_Co=256
 syntax on
@@ -129,32 +73,6 @@ set showmatch
 "set comments=sl:/*,mb:\ *,elx:\ */
 set comments=sr:/*,mb:*,ex:\*/
 
-set path+=inc
-set path+=.
-set path+=..
-set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++
-set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32
-set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward
-set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include
-set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed
-set path+=C:/Programs/msys64/mingw64/x86_64-w64-mingw32/include
-set path+=C:/Programs/boost/1_70_0/include/boost-1_70
-
-" Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
-" This offers intelligent C++ completion when typing ‘.’ ‘->’ or <C-o>
-" Load standard tag files
-"set tags+=~/.vim/tags/cpp
-"set tags+=~/.vim/tags/gl
-"set tags+=~/.vim/tags/sdl
-
-set tags+=tags
-set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tags
-set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/tags
-set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward/tags
-set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/tags
-set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/tags
-set tags+=C:/Programs/msys64/mingw64/x86_64-w64-mingw32/include/tags
-set tags+=C:/Programs/boost/1_70_0/include/boost-1_70/tags
 
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
@@ -167,8 +85,7 @@ set lazyredraw
 set cul
 
 " added by SGK 20190629
-highlight SpellBad ctermbg=darkred ctermfg=gray guibg=darkred guifg=white
-
+highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
 
 ",vi => show edit tab .vimrc
 nnoremap <leader>e :tabe $MYVIMRC<CR> 
@@ -190,7 +107,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 nmap <Tab> <C-W>w
-nmap <S-Tab> <C-W><C-P>
+nmap <S-TAB> <C-W><C-P>
 
 map <F2> :w<CR><ESC>
 nmap <F2> :w<CR><ESC>
@@ -202,21 +119,9 @@ map <F3> <ESC><C-]>
 map <S-F3> <ESC><C-t>
 map <C-F3> :ts<CR>
 
-
-map <F4> <ESC>:e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
-
-" recreate tags file with F5
-"map <F4> :!ctags -R -c++kinds=+p -fields=+ias -extra=+q .<CR>
-"map <S-F4> :!ctags -R -n --c++-kinds=+p --extra=+f --fields=+i+K+S+l+m+a .<CR>
-" ctags -R -n --fields=+i+K+S+l+m+a --exclude=src/react/conf-srch/node_modules
-"map <S-F4> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-"map <S-F4> :!ctags -R -n --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-"map <S-F4> :!ctags -R -n --c++-kinds=+p --fields=+i+K+S+l+m+a --extra=+q .<CR>
-" Remove Include search file paths
-" ctags -R -n --fields=+i+K+S+l+m+a --exclude=src/react/conf-srch/node_modules
-" map <S-F4> <ESC>:ctags -L - --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-map <S-F4> <ESC>:!ctags -R -h=".h.hpp.c.cpp.cxx.hxx" --c++-kinds=+p --extra=+q --fields=+iaS --language-force=C++ .<CR>
 map <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
+
+map <S-F4> <ESC>:!ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ --exclude=*~,*.html,*bak* .<CR>
 
 " recreate tags file with F5
 
@@ -239,14 +144,6 @@ map <C-9> <ESC>:TagbarToggle<CR>
 map <C-8> <ESC>:term<CR>
 map <C-7> <ESC>:YcmDiag<CR>
 
-map <F7> <ESC>:make debug<CR>
-map <S-F7> <ESC>:make clean debug<CR>
-map <C-F7> <ESC>:make release<CR>
-
-map <S-F12> :setlocal spell! spelllang=en_us<CR>
-
-map <C-0> <ESC>:NERDTreeToggle<CR>
-map <C-9> <ESC>:TagbarToggle<CR>
 
 map <S-Down> :m+1<CR>
 map <S-Up> :m-2<CR>
@@ -260,7 +157,6 @@ nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
 nnoremap ,<Down> :<C-u>silent! move+<CR>==
 xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
-
 
 " in diff mode we use the spell check keys for merging
 if &diff
@@ -298,7 +194,6 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="left"
 
 " NERD Tree 
-
 let NERDSpaceDelims=1
 let NERDCompactSexyComs=1
 
@@ -317,26 +212,31 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_cpp_checkers = ['gcc']
+"let g:syntastic_cpp_checkers = ['gcc']
 let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++2a'
+let g:syntastic_cpp_compiler_options = '-std=c++17'
 let g:syntastic_error_symbol = 'X'
+let g:syntastic_warning_symbol = 'W'
+
+nmap <Tab> <C-W>w
+nmap <S-TAB> <C-W><C-P>
+map <F2> :w<CR><ESC>
+nmap <F2> :w<CR><ESC>
+imap <F2> <ESC> :w<CR>i
 
 
-let g:syntastic_c_include_dirs = ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++']
-let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32']
-let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward']
-let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include']
-let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed']
-let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/x86_64-w64-mingw32/include']
-let g:syntastic_c_include_dirs += [ '../include/', 'include/', 'inc/', 'C:/Programs/boost/boost_inc', './' ]
+map <F5> :cn<CR>
+map <S-F5> :cp<CR>
+map <C-F5> :cl<CR>
+
+map <F7> <ESC>:make debug<CR>
+map <S-F7> <ESC>:make clean debug<CR>
+map <C-F7> <ESC>:make release<CR>
 
 
-"Call Plugins
-":TagbarToggle
-":NERDTree
+map <C-0> <ESC>:NERDTreeToggle<CR>
+map <C-9> <ESC>:TagbarToggle<CR>
 
-" Remove Include search file paths
-" ctags -R -n --fields=+i+K+S+l+m+a --exclude=src/react/conf-srch/node_modules
 set complete-=i
 
 let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
@@ -347,18 +247,13 @@ let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
                                      \ --ignore "**/*.pyc"
                                      \ -g ""'
 
-
 "YouCompleteMe
 let g:ycm_use_clangd = 1
-let g:ycm_clangd_binary_path = "C:/Programs/LLVM/LLVM/bin/clangd.exe"
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
-"let g:ycm_global_ycm_extra_conf = [ "~/.vim/*" ]
-let g:ycm_clangd_uses_ycmd_caching = 1
 "let g:ycm_clangd_binary_path = "D:\Programs\LLVM\LLVM\bin\clangd.exe"
 
 let g:ycm_clangd_uses_ycmd_caching = 1
 let g:ycm_confirm_extra_conf = 1
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>'] 
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -368,8 +263,12 @@ let g:ycm_server_log_level = 'debug'
 let g:ycm_clangd_args = []
 "let g:ycm_clangd_args = [ '-limit-results=0', '-log=verbose', '-function-arg-placeholders', '-j=4', '-color'  ]
 
-"nnoremap <leader>p :e ./.ycm_extra_conf.py<CR>
-
+nnoremap <leader>gg :YcmCompleter GoTo<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gi :YcmCompleter GoToImprecise <CR>
+nnoremap <leader>gt :YcmCompleter GetType<CR>
+nnoremap <leader>gy :YcmCompleter GetTypeImprecise<CR>
 
 let g:ycm_min_num_of_chars_for_completion = 1			  " 기본값은 2입니다. 문자가 1개 입력되면 그 때부터 자동완성을 시작합니다. 쓰지 않을려면 99같은 큰 값을 넣어줍니다.
 let g:ycm_auto_trigger = 1								  " 기본값은 1입니다. '.'이나 '->'을 받으면 자동으로 목록들을 출력해주죠.
@@ -379,31 +278,8 @@ let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
       \ 'qf' : 1,
       \ 'notes' : 1,
-      \}											  " 블랙 리스트를 설정합니다.
+      \}												  " 블랙 리스트를 설정합니다.
 
-nnoremap <leader>g  :YcmCompleter GoTo<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gd  :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gi  :YcmCompleter GoToImprecise <CR>
-nnoremap <leader>gt  :YcmCompleter GetType<CR>
-nnoremap <leader>p :YcmCompleter GetParent<CR>
-nnoremap <leader>gr  :YcmCompleter GoToReferences<CR>
-"nnoremap <leader>p :YcmCompleter GetParent<CR>
-nnoremap <leader>gy  :YcmCompleter GetTypeImprecise<CR>
-
-
-function MyFont()
-    if has('gui_running')
-        "set guioption-=T " No Toolbar
-        colorscheme darkblue
-        set lines=45 columns=120 linespace=0
-        if has('gui_win32')
-            set guifont=Consolas:h12:cANSI
-        else
-            set guifont=Consolas\ 10
-        endif
-    endif
-endfunction
 
 " FileType
 " enable FileType detection:
@@ -460,12 +336,10 @@ if &diff
   syntax off
 endif
 
-
 " added by SGK 20190622 : highlight color changed
 "hi SpellBad term=bold,undercurl ctermfg=lightgrey ctermbg=darkgrey
 hi SpellBad term=undercurl,bold ctermbg=lightgrey ctermfg=darkblue cterm=undercurl,bold gui=undercurl,bold
 
 
-" added by SGK 20191225
-map  <leader>/ :call Comment()<CR>
-map  <leader>// :call Uncomment()<CR>
+" added by SGK 20191229
+set noundofile
