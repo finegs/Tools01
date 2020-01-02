@@ -1,4 +1,5 @@
-let s:comment_map = { 
+
+let s:comment_map = {
     \   "c": '\/\/',
     \   "cpp": '\/\/',
     \   "go": '\/\/',
