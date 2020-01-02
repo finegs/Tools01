@@ -92,8 +92,11 @@ set nowrap
 " set UTF-8 encoding
 
 if has("gui_running")
-" set enc=utf-8 
-  set enc=cp949 
+  set enc=utf-8
+  language message ko_kr.utf-8
+  source $VIMRUNTIME/delmenu.vim
+  set langmenu=ko_kr.utf-8
+  source $VIMRUNTIME/menu.vim
 else
   set enc=utf-8
 endif
