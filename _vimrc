@@ -1,4 +1,5 @@
 source $VIMRUNTIME/vimrc_example.vim
+source $VIM/_func.vim
 behave mswin
 
 " set the runtime path to include Vundle and initialize
@@ -7,6 +8,7 @@ behave mswin
 
 set rtp+=$HOME/.vim/bundle/Vundle.vim/
 set rtp+=$HOME/.vim/bundle/vim-cmake-syntax
+
 call vundle#begin('$HOME/.vim/bundle/')
 
 " alternatively, pass a path where Vundle should install plugins
@@ -47,7 +49,6 @@ Plugin 'pboettch/vim-cmake-syntax'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-
 set diffexpr=MyDiff()
 function MyDiff()
   let opt = '-a --binary '
@@ -82,7 +83,6 @@ function MyDiff()
   endif
 endfunction
 
-"set colorscheme to darkblue
 colorscheme darkblue
 set nowrap
 " VIM Configuration File
@@ -101,7 +101,6 @@ else
   set enc=utf-8
 endif
 
-"set enc=utf-8
 set fenc=utf-8
 set termencoding=utf-8
 " disable vi compatibility (emulation of old bugs)
@@ -116,7 +115,8 @@ set tabstop=4        " tab width is 4 spaces
 set shiftwidth=4     " indent also with 4 spaces
 "set expandtab        " expand tabs to spaces
 " wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
-set textwidth=120
+
+set textwidth=180
 " turn syntax highlighting on
 set t_Co=256
 syntax on
@@ -132,12 +132,13 @@ set comments=sr:/*,mb:*,ex:\*/
 set path+=inc
 set path+=.
 set path+=..
-"set path+=/usr/include
-"set path+=/usr/local/include
-set path+=D:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++
-set path+=D:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include
-set path+=D:/Programs/mingw-w64/mingw64/x86_64-w64-mingw32/include
-set path+=D:/Programs/boost/1.69.0/include/boost-1_69
+set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++
+set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32
+set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward
+set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include
+set path+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed
+set path+=C:/Programs/msys64/mingw64/x86_64-w64-mingw32/include
+set path+=C:/Programs/boost/1_70_0/include/boost-1_70
 
 " Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
 " This offers intelligent C++ completion when typing ‘.’ ‘->’ or <C-o>
@@ -145,16 +146,17 @@ set path+=D:/Programs/boost/1.69.0/include/boost-1_69
 "set tags+=~/.vim/tags/cpp
 "set tags+=~/.vim/tags/gl
 "set tags+=~/.vim/tags/sdl
-set tags+=./tags
-set tags+=D:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/tags
-set tags+=D:/Programs/mingw-w64/mingw64/include/tags
-set tags+=D:/Programs/mingw-w64/mingw64/x86_64-w64-mingw32/include/tags
 
-
-
+set tags+=tags
+set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tags
+set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/tags
+set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward/tags
+set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/tags
+set tags+=C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/tags
+set tags+=C:/Programs/msys64/mingw64/x86_64-w64-mingw32/include/tags
+set tags+=C:/Programs/boost/1_70_0/include/boost-1_70/tags
 
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
-"let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
 let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
 
 " Enhanced keyboard mappings
@@ -165,7 +167,7 @@ set lazyredraw
 set cul
 
 " added by SGK 20190629
-highlight SpellBad ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+highlight SpellBad ctermbg=darkred ctermfg=gray guibg=darkred guifg=white
 
 
 ",vi => show edit tab .vimrc
@@ -188,7 +190,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 nmap <Tab> <C-W>w
-nmap <S-TAB> <C-W><C-P>
+nmap <S-Tab> <C-W><C-P>
 
 map <F2> :w<CR><ESC>
 nmap <F2> :w<CR><ESC>
@@ -200,9 +202,21 @@ map <F3> <ESC><C-]>
 map <S-F3> <ESC><C-t>
 map <C-F3> :ts<CR>
 
-map <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
 
-map <S-F4> <ESC>:!ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ --exclude=*~,*.html,*bak* .<CR>
+map <F4> <ESC>:e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
+
+" recreate tags file with F5
+"map <F4> :!ctags -R -c++kinds=+p -fields=+ias -extra=+q .<CR>
+"map <S-F4> :!ctags -R -n --c++-kinds=+p --extra=+f --fields=+i+K+S+l+m+a .<CR>
+" ctags -R -n --fields=+i+K+S+l+m+a --exclude=src/react/conf-srch/node_modules
+"map <S-F4> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+"map <S-F4> :!ctags -R -n --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+"map <S-F4> :!ctags -R -n --c++-kinds=+p --fields=+i+K+S+l+m+a --extra=+q .<CR>
+" Remove Include search file paths
+" ctags -R -n --fields=+i+K+S+l+m+a --exclude=src/react/conf-srch/node_modules
+" map <S-F4> <ESC>:ctags -L - --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <S-F4> <ESC>:!ctags -R -h=".h.hpp.c.cpp.cxx.hxx" --c++-kinds=+p --extra=+q --fields=+iaS --language-force=C++ .<CR>
+map <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
 
 " recreate tags file with F5
 
@@ -225,6 +239,14 @@ map <C-9> <ESC>:TagbarToggle<CR>
 map <C-8> <ESC>:term<CR>
 map <C-7> <ESC>:YcmDiag<CR>
 
+map <F7> <ESC>:make debug<CR>
+map <S-F7> <ESC>:make clean debug<CR>
+map <C-F7> <ESC>:make release<CR>
+
+map <S-F12> :setlocal spell! spelllang=en_us<CR>
+
+map <C-0> <ESC>:NERDTreeToggle<CR>
+map <C-9> <ESC>:TagbarToggle<CR>
 
 map <S-Down> :m+1<CR>
 map <S-Up> :m-2<CR>
@@ -295,33 +317,18 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_cpp_checkers = ['gcc']
-"let g:syntastic_cpp_checkers = ['gcc']
 let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++17'
-let g:syntastic_c_include_dirs = [ '../include/', 'include/', 'inc/', './' ]
+let g:syntastic_cpp_compiler_options = '-std=c++2a'
 let g:syntastic_error_symbol = 'X'
-let g:syntastic_cpp_include_dirs = [ '../include', 'include', 'inc', '.', 'D:\Programs\mingw-w64\mingw64\lib\gcc\x86_64-w64-mingw32\8.1.0\include', 'D:\Programs\mingw-w64\mingw64\lib\gcc\x86_64-w64-mingw32\8.1.0\include\c++', 'D:\Programs\mingw-w64\mingw64\x86_64-w64-mingw32\include', 'D:\Programs\mingw-w64\mingw64\include' ]
 
 
-nmap <Tab> <C-W>w
-nmap <S-TAB> <C-W><C-P>
-map <F2> :w<CR><ESC>
-nmap <F2> :w<CR><ESC>
-imap <F2> <ESC> :w<CR>i
-
-
-map <F5> :cn<CR>
-map <S-F5> :cp<CR>
-map <C-F5> :cl<CR>
-
-map <F7> <ESC>:make debug<CR>
-map <S-F7> <ESC>:make clean debug<CR>
-map <C-F7> <ESC>:make release<CR>
-
-
-map <C-0> <ESC>:NERDTreeToggle<CR>
-map <C-9> <ESC>:TagbarToggle<CR>
-
+let g:syntastic_c_include_dirs = ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++']
+let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32']
+let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward']
+let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include']
+let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed']
+let g:syntastic_c_include_dirs += ['C:/Programs/msys64/mingw64/x86_64-w64-mingw32/include']
+let g:syntastic_c_include_dirs += [ '../include/', 'include/', 'inc/', 'C:/Programs/boost/boost_inc', './' ]
 
 
 "Call Plugins
@@ -343,12 +350,15 @@ let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
 
 "YouCompleteMe
 let g:ycm_use_clangd = 1
-"let g:ycm_clangd_binary_path = "C:\Users\user\.vim\bundle\YouCompleteMe\third_party\ycmd\third_party\clangd\output\bin\clangd.exe"
+let g:ycm_clangd_binary_path = "C:/Programs/LLVM/LLVM/bin/clangd.exe"
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
+"let g:ycm_global_ycm_extra_conf = [ "~/.vim/*" ]
+let g:ycm_clangd_uses_ycmd_caching = 1
 "let g:ycm_clangd_binary_path = "D:\Programs\LLVM\LLVM\bin\clangd.exe"
 
 let g:ycm_clangd_uses_ycmd_caching = 1
 let g:ycm_confirm_extra_conf = 1
-"let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>'] 
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -360,14 +370,6 @@ let g:ycm_clangd_args = []
 
 "nnoremap <leader>p :e ./.ycm_extra_conf.py<CR>
 
-nnoremap <leader>gg :YcmCompleter GoTo<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gi :YcmCompleter GoToImprecise <CR>
-nnoremap <leader>gt :YcmCompleter GetType<CR>
-"nnoremap <leader>p YcmCompleter GetParent<CR>
-nnoremap <leader>gy :YcmCompleter GetTypeImprecise<CR>
-
 
 let g:ycm_min_num_of_chars_for_completion = 1			  " 기본값은 2입니다. 문자가 1개 입력되면 그 때부터 자동완성을 시작합니다. 쓰지 않을려면 99같은 큰 값을 넣어줍니다.
 let g:ycm_auto_trigger = 1								  " 기본값은 1입니다. '.'이나 '->'을 받으면 자동으로 목록들을 출력해주죠.
@@ -377,7 +379,17 @@ let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
       \ 'qf' : 1,
       \ 'notes' : 1,
-      \}												  " 블랙 리스트를 설정합니다.
+      \}											  " 블랙 리스트를 설정합니다.
+
+nnoremap <leader>g  :YcmCompleter GoTo<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gd  :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gi  :YcmCompleter GoToImprecise <CR>
+nnoremap <leader>gt  :YcmCompleter GetType<CR>
+nnoremap <leader>p :YcmCompleter GetParent<CR>
+nnoremap <leader>gr  :YcmCompleter GoToReferences<CR>
+"nnoremap <leader>p :YcmCompleter GetParent<CR>
+nnoremap <leader>gy  :YcmCompleter GetTypeImprecise<CR>
 
 
 function MyFont()
@@ -452,3 +464,8 @@ endif
 " added by SGK 20190622 : highlight color changed
 "hi SpellBad term=bold,undercurl ctermfg=lightgrey ctermbg=darkgrey
 hi SpellBad term=undercurl,bold ctermbg=lightgrey ctermfg=darkblue cterm=undercurl,bold gui=undercurl,bold
+
+
+" added by SGK 20191225
+map  <leader>/ :call Comment()<CR>
+map  <leader>// :call Uncomment()<CR>
