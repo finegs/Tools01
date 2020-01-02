@@ -269,6 +269,9 @@ nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gi :YcmCompleter GoToImprecise <CR>
 nnoremap <leader>gt :YcmCompleter GetType<CR>
 nnoremap <leader>gy :YcmCompleter GetTypeImprecise<CR>
+nnoremap <leader>gi  :YcmCompleter GoToImprecise <CR>
+nnoremap <leader>p :YcmCompleter GetParent<CR>
+nnoremap <leader>gr  :YcmCompleter GoToReferences<CR>
 
 let g:ycm_min_num_of_chars_for_completion = 1			  " 기본값은 2입니다. 문자가 1개 입력되면 그 때부터 자동완성을 시작합니다. 쓰지 않을려면 99같은 큰 값을 넣어줍니다.
 let g:ycm_auto_trigger = 1								  " 기본값은 1입니다. '.'이나 '->'을 받으면 자동으로 목록들을 출력해주죠.
@@ -340,6 +343,9 @@ endif
 "hi SpellBad term=bold,undercurl ctermfg=lightgrey ctermbg=darkgrey
 hi SpellBad term=undercurl,bold ctermbg=lightgrey ctermfg=darkblue cterm=undercurl,bold gui=undercurl,bold
 
-
 " added by SGK 20191229
 set noundofile
+
+" added by SGK 20200103
+nnoremap <leader>/ :call ToggleComment()<cr>
+vnoremap <leader>/ :call ToggleComment()<cr>
