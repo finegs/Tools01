@@ -3,11 +3,12 @@ source $VIM/_func.vim
 source $VIM/_myenv.vim
 behave mswin
 
-set rtp+=$HOME/.vim/bundle/Vundle.vim/
-set rtp+=$HOME/.vim/bundle/vim-cmake-syntax
+set rtp+=$VIM/Vimfiles/bundle/Vundle.vim/
+set rtp+=$VIM/Vinfiles/bundle/vim-cmake-syntax
 
 "==================================================================
-call vundle#begin('$HOME/.vim/bundle/')
+"call vundle#begin('$HOME/.vim/bundle/')
+call vundle#begin('$VIM/Vimfiles/bundle/')
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'majutsushi/tagbar.git'
@@ -171,7 +172,7 @@ else
   " spell settings
   :setlocal spell spelllang=en
   " set the spellfile - folders must exist
-  set spellfile=~/.vim/spellfile.add
+  set spellfile=$VIM/spellfile.add
   map <M-Down> ]s
   map <M-Up> [s
 endif
@@ -249,11 +250,11 @@ let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
 
 "YouCompleteMe
 let g:ycm_use_clangd = 1
-"let g:ycm_clangd_binary_path = "D:\Programs\LLVM\LLVM\bin\clangd.exe"
+let g:ycm_clangd_binary_path = "C:/Programs/LLVM/bin/clangd.exe"
 
 let g:ycm_clangd_uses_ycmd_caching = 1
-let g:ycm_confirm_extra_conf = 1
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = "$VIM/Vimfiles/bundle/YouCompleteMe/.ycm_extra_conf.py"
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>'] 
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -269,9 +270,9 @@ nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gi :YcmCompleter GoToImprecise <CR>
 nnoremap <leader>gt :YcmCompleter GetType<CR>
 nnoremap <leader>gy :YcmCompleter GetTypeImprecise<CR>
-nnoremap <leader>gi  :YcmCompleter GoToImprecise <CR>
-nnoremap <leader>p :YcmCompleter GetParent<CR>
-nnoremap <leader>gr  :YcmCompleter GoToReferences<CR>
+nnoremap <leader>gi :YcmCompleter GoToImprecise <CR>
+nnoremap <leader>p  :YcmCompleter GetParent<CR>
+nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 
 let g:ycm_min_num_of_chars_for_completion = 1			  " 기본값은 2입니다. 문자가 1개 입력되면 그 때부터 자동완성을 시작합니다. 쓰지 않을려면 99같은 큰 값을 넣어줍니다.
 let g:ycm_auto_trigger = 1								  " 기본값은 1입니다. '.'이나 '->'을 받으면 자동으로 목록들을 출력해주죠.
