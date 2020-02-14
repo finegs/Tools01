@@ -32,3 +32,5 @@ let g:syntastic_cpp_include_dirs += [ 'C:/Programs/mingw-w64/mingw64/x86_64-w64-
 let g:syntastic_cpp_include_dirs += [ 'C:/Programs/mingw-w64/mingw64/include']
 let g:syntastic_cpp_include_dirs += [ 'C:/Download/wxWidgets-3.0.4/include' ]
 
+
+cs add cscope.out

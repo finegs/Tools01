@@ -1,6 +1,7 @@
 source $VIMRUNTIME/vimrc_example.vim
 source $VIM/_func.vim
 source $VIM/_myenv.vim
+source $VIM/cscopse_maps.vim
 behave mswin
 
 set rtp+=$VIM/Vimfiles/bundle/Vundle.vim/
