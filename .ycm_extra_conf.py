@@ -38,7 +38,25 @@ DIR_OF_THIS_SCRIPT = p.abspath( p.dirname( __file__ ) )
 DIR_OF_THIRD_PARTY = p.join( DIR_OF_THIS_SCRIPT, 'third_party' )
 SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
 
-flags = [
+
+# def FlagsForFile( filename ):
+  # dirname = os.path.dirname(filename)
+  # flags = {'flags': [
+                      # '--std=gnu89', 
+                      # '-MMD', 
+                      # '-Wall', 
+                      # '-fms-extensions', 
+                      # '-Wno-multichar', 
+                      # '-g3', '-mavx', 
+                      # '-I', '/usr/include/infiniband', 
+                      # '-I-', '.', 
+                      # '-I' '../include', 
+                      # '-I', dirname, 
+                      # '-I', dirname + '/../include'
+# 
+def FlagsForFile( filename ):
+  dirname = os.path.dirname(filename)
+  flags = {'flags': [
        '-x', 'c++',
        '-Wall',
        '-Wextra',
@@ -60,6 +78,9 @@ flags = [
        '-isystem', 'cpp/pybind11',
        '-isystem', 'cpp/BoostParts',
        # '-isystem', get_python_inc(),
+       '-I', dirname,
+       '-I', dirname + '/../include',
+       '-I', dirname + '/include',
        '-isystem', 'cpp/llvm/include',
        '-isystem', 'cpp/llvm/tools/clang/include',
        '-I', 'cpp/ycm',
@@ -82,7 +103,11 @@ flags = [
        #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/um',
        #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/winrt',
        #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/cppwinrt',
-]
+        ],
+    'do_cache': True
+    }
+  return flags
+
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,
 # which is required for compiling the standard library, and to 'c++11' for older
