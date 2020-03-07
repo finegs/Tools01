@@ -28,92 +28,82 @@
 #
 # For more information, please refer to <http://unlicense.org/>
 
-import platform
+from distutils.sysconfig import get_python_inc
 import os
+import platform
 import os.path as p
 import subprocess
-import ycm_core
 
 DIR_OF_THIS_SCRIPT = p.abspath( p.dirname( __file__ ) )
 DIR_OF_THIRD_PARTY = p.join( DIR_OF_THIS_SCRIPT, 'third_party' )
 SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
 
+database = None
 
-# def FlagsForFile( filename ):
-  # dirname = os.path.dirname(filename)
-  # flags = {'flags': [
-                      # '--std=gnu89', 
-                      # '-MMD', 
-                      # '-Wall', 
-                      # '-fms-extensions', 
-                      # '-Wno-multichar', 
-                      # '-g3', '-mavx', 
-                      # '-I', '/usr/include/infiniband', 
-                      # '-I-', '.', 
-                      # '-I' '../include', 
-                      # '-I', dirname, 
-                      # '-I', dirname + '/../include'
-# 
-def FlagsForFile( filename ):
-  dirname = os.path.dirname(filename)
-  flags = {'flags': [
-       '-x', 'c++',
-       '-Wall',
-       '-Wextra',
-       '-Werror',
-       '-Wno-long-long',
-       '-Wno-variadic-macros',
-       '-fexceptions',
-       '-DNDEBUG',
-       # You 100% do NOT need -DUSE_CLANG_COMPLETER and/or -DYCM_EXPORT in your flags;
-       # only the YCM source code needs it.
-       '-DUSE_CLANG_COMPLETER',
-       '-DYCM_EXPORT=',
-       # THIS IS IMPORTANT! Without the '-x' flag, Clang won't know which language to
-       # use when compiling headers. So it will guess. Badly. So C++ headers will be
-       # compiled as C headers. You don't want that so ALWAYS specify the '-x' flag.
-       # For a C project, you would set this to 'c' instead of 'c++'.
-       '-target', 'x86_64-pc-windows-gnu++',
-#       '-nostdinc++',
-       '-isystem', 'cpp/pybind11',
-       '-isystem', 'cpp/BoostParts',
-       # '-isystem', get_python_inc(),
-       '-I', dirname,
-       '-I', dirname + '/../include',
-       '-I', dirname + '/include',
-       '-isystem', 'cpp/llvm/include',
-       '-isystem', 'cpp/llvm/tools/clang/include',
-       '-I', 'cpp/ycm',
-       '-I', 'cpp/ycm/ClangCompleter',
-       '-isystem', 'cpp/ycm/tests/gmock/gtest',
-       '-isystem', 'cpp/ycm/tests/gmock/gtest/include',
-       '-isystem', 'cpp/ycm/tests/gmock',
-       '-isystem', 'cpp/ycm/tests/gmock/include',
-       '-isystem', 'cpp/ycm/benchmarks/benchmark/include',
-       '-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include',
-       '-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++',
-       '-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed',
-       '-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/finclude',
-       '-isystem', 'C:/Programs/mingw-w64/mingw64/x86_64-w64-mingw32/include',
-       #'-isystem', 'C:/Programs/LLVM/lib/clang/9.0.0/include',
-       #'-isystem', 'C:/Programs/MSVS/2017/Community/VC/Tools/MSVC/14.16.27023/ATLMFC/include',
-       #'-isystem', 'C:/Programs/MSVS/2017/Community/VC/Tools/MSVC/14.16.27023/include',
-       #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/ucrt',
-       #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/shared',
-       #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/um',
-       #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/winrt',
-       #'-isystem', 'C:/Windows Kits/10/include/10.0.17763.0/cppwinrt',
-        ],
-    'do_cache': True
-    }
-  return flags
-
+# These are the compilation flags that will be used in case there's no
+# compilation database set (by default, one is not set).
+# CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
+flags = [
+'-Wall',
+'-Wextra',
+'-Werror',
+'-Wno-long-long',
+'-Wno-variadic-macros',
+'-fexceptions',
+'-DNDEBUG',
+# You 100% do NOT need -DUSE_CLANG_COMPLETER and/or -DYCM_EXPORT in your flags;
+# only the YCM source code needs it.
+#'-DUSE_CLANG_COMPLETER',
+'-DYCM_EXPORT=',
+# THIS IS IMPORTANT! Without the '-x' flag, Clang won't know which language to
+# use when compiling headers. So it will guess. Badly. So C++ headers will be
+# compiled as C headers. You don't want that so ALWAYS specify the '-x' flag.
+# For a C project, you would set this to 'c' instead of 'c++'.
+'-x', 'c++',
+#		'-isystem', 'cpp/pybind11',
+#		'-isystem', 'cpp/whereami',
+#		'-isystem', 'cpp/BoostParts',
+#		'-isystem', get_python_inc(),
+#		'-isystem', 'cpp/llvm/include',
+#		'-isystem', 'cpp/llvm/tools/clang/include',
+#		'-I', 'cpp/ycm',
+#		'-I', 'cpp/ycm/ClangCompleter',
+#		'-isystem', 'cpp/ycm/tests/gmock/gtest',
+#		'-isystem', 'cpp/ycm/tests/gmock/gtest/include',
+#		'-isystem', 'cpp/ycm/tests/gmock',
+#		'-isystem', 'cpp/ycm/tests/gmock/include',
+#		'-isystem', 'cpp/ycm/benchmarks/benchmark/include',
+'-std=c++17',
+#'-target', 'x86_64-pc-windows-gnu++',
+'-target', 'x86_64-w64-mingw32',
+'-nostdinc++',
+# '-isystem', 'cpp/pybind11',
+# '-isystem', 'cpp/whereami',
+# '-isystem', 'cpp/BoostParts',
+# '-isystem', get_python_inc(),
+# '-isystem', 'cpp/llvm/include',
+# '-isystem', 'cpp/llvm/tools/clang/include',
+# '-I', 'cpp/ycm',
+# '-I', 'cpp/ycm/ClangCompleter',
+# '-isystem', 'cpp/ycm/tests/gmock/gtest',
+# '-isystem', 'cpp/ycm/tests/gmock/gtest/include',
+# '-isystem', 'cpp/ycm/tests/gmock',
+# '-isystem', 'cpp/ycm/tests/gmock/include',
+# '-isystem', 'cpp/ycm/benchmarks/benchmark/include',
+'-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++',
+'-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32',
+'-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward',
+'-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include',
+'-isystem', 'C:/Programs/mingw-w64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed',
+'-isystem', 'C:/Programs/mingw-w64/mingw64/x86_64-w64-mingw32',
+]
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,
 # which is required for compiling the standard library, and to 'c++11' for older
 # versions.
 if platform.system() != 'Windows':
   flags.append( '-std=c++11' )
+
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for
@@ -127,29 +117,42 @@ if platform.system() != 'Windows':
 # 'flags' list of compilation flags. Notice that YCM itself uses that approach.
 compilation_database_folder = ''
 
-if os.path.exists( compilation_database_folder ):
-  database = ycm_core.CompilationDatabase( compilation_database_folder )
-else:
-  database = None
-
 
 def IsHeaderFile( filename ):
-  extension = os.path.splitext( filename )[ 1 ]
+  extension = p.splitext( filename )[ 1 ]
   return extension in [ '.h', '.hxx', '.hpp', '.hh' ]
 
 
 def FindCorrespondingSourceFile( filename ):
   if IsHeaderFile( filename ):
-    basename = os.path.splitext( filename )[ 0 ]
+    basename = p.splitext( filename )[ 0 ]
     for extension in SOURCE_EXTENSIONS:
       replacement_file = basename + extension
-      if os.path.exists( replacement_file ):
+      if p.exists( replacement_file ):
         return replacement_file
   return filename
 
 
+def PathToPythonUsedDuringBuild():
+  try:
+    filepath = p.join( DIR_OF_THIS_SCRIPT, 'PYTHON_USED_DURING_BUILDING' )
+    with open( filepath ) as f:
+      return f.read().strip()
+  except OSError:
+    return None
+
+
 def Settings( **kwargs ):
-  if kwargs[ 'language' ] == 'cfamily':
+  # Do NOT import ycm_core at module scope.
+  import ycm_core
+
+  global database
+  if database is None and p.exists( compilation_database_folder ):
+    database = ycm_core.CompilationDatabase( compilation_database_folder )
+
+  language = kwargs[ 'language' ]
+
+  if language == 'cfamily':
     # If the file is a header, try to find the corresponding source file and
     # retrieve its flags from the compilation database if using one. This is
     # necessary since compilation databases don't have entries for header files.
@@ -186,38 +189,41 @@ def Settings( **kwargs ):
       'include_paths_relative_to_dir': compilation_info.compiler_working_dir_,
       'override_filename': filename
     }
+
+  if language == 'python':
+    return {
+      'interpreter_path': PathToPythonUsedDuringBuild()
+    }
+
   return {}
-
-
-def GetStandardLibraryIndexInSysPath( sys_path ):
-  for index, path in enumerate( sys_path ):
-    if p.isfile( p.join( path, 'os.py' ) ):
-      return index
-  raise RuntimeError( 'Could not find standard library path in Python path.' )
 
 
 def PythonSysPath( **kwargs ):
   sys_path = kwargs[ 'sys_path' ]
 
-  dependencies = [ p.join( DIR_OF_THIS_SCRIPT, 'python' ),
-                   p.join( DIR_OF_THIRD_PARTY, 'requests-futures' ),
-                   p.join( DIR_OF_THIRD_PARTY, 'ycmd' ),
-                   p.join( DIR_OF_THIRD_PARTY, 'requests_deps', 'idna' ),
-                   p.join( DIR_OF_THIRD_PARTY, 'requests_deps', 'chardet' ),
-                   p.join( DIR_OF_THIRD_PARTY, 'requests_deps', 'urllib3', 'src' ),
-                   p.join( DIR_OF_THIRD_PARTY, 'requests_deps', 'certifi' ),
-                   p.join( DIR_OF_THIRD_PARTY, 'requests_deps', 'requests' ) ]
-
-  # The concurrent.futures module is part of the standard library on Python 3.
   interpreter_path = kwargs[ 'interpreter_path' ]
-  major_version = int( subprocess.check_output( [
+  major_version = subprocess.check_output( [
     interpreter_path, '-c', 'import sys; print( sys.version_info[ 0 ] )' ]
-  ).rstrip().decode( 'utf8' ) )
-  if major_version == 2:
-    dependencies.append( p.join( DIR_OF_THIRD_PARTY, 'pythonfutures' ) )
+  ).rstrip().decode( 'utf8' )
 
-  sys_path[ 0:0 ] = dependencies
-  sys_path.insert( GetStandardLibraryIndexInSysPath( sys_path ) + 1,
-                   p.join( DIR_OF_THIRD_PARTY, 'python-future', 'src' ) )
+  sys_path[ 0:0 ] = [ p.join( DIR_OF_THIS_SCRIPT ),
+                      p.join( DIR_OF_THIRD_PARTY, 'bottle' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'cregex',
+                              'regex_{}'.format( major_version ) ),
+                      p.join( DIR_OF_THIRD_PARTY, 'frozendict' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'jedi_deps', 'jedi' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'jedi_deps', 'parso' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'requests_deps', 'requests' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'requests_deps',
+                                                  'urllib3',
+                                                  'src' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'requests_deps',
+                                                  'chardet' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'requests_deps',
+                                                  'certifi' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'requests_deps',
+                                                  'idna' ),
+                      p.join( DIR_OF_THIRD_PARTY, 'waitress' ) ]
 
+  sys_path.append( p.join( DIR_OF_THIRD_PARTY, 'jedi_deps', 'numpydoc' ) )
   return sys_path
