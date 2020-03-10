@@ -5,7 +5,7 @@ source $VIM/cscopse_maps.vim
 behave mswin
 
 set rtp+=$VIM/Vimfiles/bundle/Vundle.vim/
-set rtp+=$VIM/Vinfiles/bundle/vim-cmake-syntax
+set rtp+=$VIM/Vimfiles/bundle/vim-cmake-syntax
 
 "==================================================================
 "call vundle#begin('$HOME/.vim/bundle/')
@@ -251,7 +251,7 @@ let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
 
 "YouCompleteMe
 let g:ycm_use_clangd = 1
-let g:ycm_clangd_binary_path = "C:/Programs/LLVM/bin/clangd.exe"
+let g:ycm_clangd_binary_path = "C:/Programs/LLVM/LLVM/bin/clangd.exe"
 
 let g:ycm_clangd_uses_ycmd_caching = 1
 let g:ycm_confirm_extra_conf = 0
