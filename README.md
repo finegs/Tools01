@@ -65,3 +65,19 @@
 3. LLVM 8.0.0 x64
 4. Git 2.21.0
 5. cmake 3.14.3
+
+
+#############################################################
+cd D:\Dev\git\boost
+bootstrap --prefix=D:\Programs\boost\boost.1.72.0 gcc
+./b2 --reconfigure --without-python --without-locale toolset=gcc variant=debug link=shared threading=multi runtime-link=shared address-model=64 install
+
+
+
+### for MSVC ###
+b2 -j4 -a --toolset=msvc-14.21 variant=debug,release link=static threading=multi address-model=32 lib32
+b2 -j4 -a --toolset=msvc-14.21 variant=debug,release link=static threading=multi address-model=64 lib64
+
+#################
+
+############################################################
