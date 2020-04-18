@@ -1,14 +1,13 @@
 source $VIMRUNTIME/vimrc_example.vim
 source $VIM/_func.vim
 source $VIM/_myenv.vim
-source $VIM/cscopse_maps.vim
+source $VIM/_cscope_maps.vim
 behave mswin
 
 set rtp+=$VIM/Vimfiles/bundle/Vundle.vim/
 set rtp+=$VIM/Vimfiles/bundle/vim-cmake-syntax
 
 "==================================================================
-"call vundle#begin('$HOME/.vim/bundle/')
 call vundle#begin('$VIM/Vimfiles/bundle/')
 
 Plugin 'VundleVim/Vundle.vim'
@@ -17,7 +16,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'Valloric/ListToggle'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
@@ -113,13 +112,14 @@ nmap <S-TAB> <C-W><C-P>
 
 map <F2> :w<CR><ESC>
 nmap <F2> :w<CR><ESC>
-imap <F2> <ESC> :w<CR>i
+imap <F2> <ESC> :w<CR><ESC>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
-map <F3> <ESC><C-]>
+"map <F3> <ESC><C-]>
 map <S-F3> <ESC><C-t>
 map <C-F3> :ts<CR>
+map <F3> :YcmCompleter GoTo<CR>
 
 map <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
 
@@ -213,8 +213,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-let g:syntastic_cpp_checkers = ['gcc']
 "let g:syntastic_cpp_checkers = ['gcc']
+let g:syntastic_cpp_checkers = ['g++']
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++17'
 let g:syntastic_error_symbol = 'X'
@@ -224,7 +224,8 @@ nmap <Tab> <C-W>w
 nmap <S-TAB> <C-W><C-P>
 map <F2> :w<CR><ESC>
 nmap <F2> :w<CR><ESC>
-imap <F2> <ESC> :w<CR>i
+imap <F2> <ESC> :w<CR><ESC>
+" imap <F2> <ESC> :w<CR>i
 
 
 map <F5> :cn<CR>
@@ -251,13 +252,21 @@ let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
 
 "YouCompleteMe
 let g:ycm_use_clangd = 1
-let g:ycm_clangd_binary_path = "C:/Programs/LLVM/LLVM/bin/clangd.exe"
+let g:ycm_clangd_binary_path = "D:/Programs/LLVM/bin/clangd.exe"
 
 let g:ycm_clangd_uses_ycmd_caching = 1
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = "$VIM/Vimfiles/bundle/YouCompleteMe/.ycm_extra_conf.py"
+if filereadable(".ycm_extra_conf.py")
+  let g:ycm_global_ycm_extra_conf = ".ycm_extra_conf.py"
+else
+  let g:ycm_global_ycm_extra_conf = "$VIM/Vimfiles/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
+endif
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>'] 
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+" let g:ycm_key_list_select_completion = ['<C-n>'] 
+" let g:ycm_key_list_previous_completion = ['<C-p>']
+let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_comments = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_warning_symbol = '>*'
 let g:ycm_server_use_vim_stdout = 1
@@ -277,6 +286,7 @@ nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 
 let g:ycm_min_num_of_chars_for_completion = 1			  " 기본값은 2입니다. 문자가 1개 입력되면 그 때부터 자동완성을 시작합니다. 쓰지 않을려면 99같은 큰 값을 넣어줍니다.
 let g:ycm_auto_trigger = 1								  " 기본값은 1입니다. '.'이나 '->'을 받으면 자동으로 목록들을 출력해주죠.
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 "주석과 문자열도 자동완성에 사용할 소스로 수집한다.
 let g:ycm_collect_identifiers_from_tags_files = 1		  " tags 파일을 사용합니다. 성능상 이익이 있는걸로 알고 있습니다.
 let g:ycm_filetype_whitelist = { '*': 1 }				  " 화이트 리스트를 설정합니다.
 let g:ycm_filetype_blacklist = {
@@ -300,6 +310,9 @@ augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
   autocmd BufNewFile,BufRead *.txt set filetype=human
   autocmd BufNewFile,BufRead *.mk set filetype=make
+  autocmd BufNewFile,BufRead makefile set filetype=make
+  autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
+  autocmd BufNewFile,BufRead *.py set filetype=python
 augroup END
 
 autocmd FileType mail set formatoptions+=t textwidth=72 " enable wrapping in mail
@@ -331,6 +344,9 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 " needed, and have indentation at 8 chars to be sure that all indents are tabs
 " (despite the mappings later):
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+"
+" for Python noexpandtab
+autocmd FileType python set noexpandtab ts=4 shiftwidth=4 softtabstop=0
 
 " ensure normal tabs in assembly files
 " and set to NASM syntax highlighting
