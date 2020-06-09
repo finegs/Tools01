@@ -1,14 +1,18 @@
 source $VIMRUNTIME/vimrc_example.vim
-source $VIM/_func.vim
-source $VIM/_myenv.vim
-source $VIM/_cscope_maps.vim
+source $VIM/../_func.vim
+source $VIM/../_myenv.vim
+source $VIM/../_cscope_maps.vim
 behave mswin
 
-set rtp+=$VIM/Vimfiles/bundle/Vundle.vim/
-set rtp+=$VIM/Vimfiles/bundle/vim-cmake-syntax
+if filereadable(".vimrc_pjt.vim")
+  let g:ycm_global_ycm_extra_conf = ".vimrc_pjt.vim"
+endif
+
+set rtp+=$VIM/../Vimfiles/bundle/Vundle.vim/
+set rtp+=$VIM/../Vimfiles/bundle/vim-cmake-syntax
 
 "==================================================================
-call vundle#begin('$VIM/Vimfiles/bundle/')
+call vundle#begin('$VIM/../Vimfiles/bundle/')
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'majutsushi/tagbar.git'
@@ -173,7 +177,7 @@ else
   " spell settings
   :setlocal spell spelllang=en
   " set the spellfile - folders must exist
-  set spellfile=$VIM/spellfile.add
+  set spellfile=$VIM/../spellfile.add
   map <M-Down> ]s
   map <M-Up> [s
 endif
@@ -252,14 +256,14 @@ let g:ctrlp_user_command = 'ag %s -i -nocolor --nogroup -- hidden \
 
 "YouCompleteMe
 let g:ycm_use_clangd = 1
-let g:ycm_clangd_binary_path = "D:/Programs/LLVM/bin/clangd.exe"
+let g:ycm_clangd_binary_path = "D:/Programs/LLVM/LLVM/bin/clangd.exe"
 
 let g:ycm_clangd_uses_ycmd_caching = 1
 let g:ycm_confirm_extra_conf = 0
-if filereadable(".ycm_extra_conf.py")
-  let g:ycm_global_ycm_extra_conf = ".ycm_extra_conf.py"
+if filereadable(".ycm_pjt_conf.py")
+  let g:ycm_global_ycm_extra_conf = ".ycm_pjt_conf.py"
 else
-  let g:ycm_global_ycm_extra_conf = "$VIM/Vimfiles/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
+  let g:ycm_global_ycm_extra_conf = "$VIM/../Vimfiles/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
 endif
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>'] 
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
@@ -271,8 +275,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_warning_symbol = '>*'
 let g:ycm_server_use_vim_stdout = 1
 let g:ycm_server_log_level = 'debug'
-let g:ycm_clangd_args = []
-"let g:ycm_clangd_args = [ '-limit-results=0', '-log=verbose', '-function-arg-placeholders', '-j=4', '-color'  ]
+"let g:ycm_clangd_args = []
+let g:ycm_clangd_args = [ '-limit-results=0', '-log=verbose', '-function-arg-placeholders', '-j=4', '-color'  ]
 
 nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
@@ -284,7 +288,7 @@ nnoremap <leader>gi :YcmCompleter GoToImprecise <CR>
 nnoremap <leader>p  :YcmCompleter GetParent<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 
-let g:ycm_min_num_of_chars_for_completion = 1			  " 기본값은 2입니다. 문자가 1개 입력되면 그 때부터 자동완성을 시작합니다. 쓰지 않을려면 99같은 큰 값을 넣어줍니다.
+let g:ycm_min_num_of_chars_for_completion = 0			  " 기본값은 2입니다. 문자가 1개 입력되면 그 때부터 자동완성을 시작합니다. 쓰지 않을려면 99같은 큰 값을 넣어줍니다.
 let g:ycm_auto_trigger = 1								  " 기본값은 1입니다. '.'이나 '->'을 받으면 자동으로 목록들을 출력해주죠.
 let g:ycm_collect_identifiers_from_comments_and_strings = 1 "주석과 문자열도 자동완성에 사용할 소스로 수집한다.
 let g:ycm_collect_identifiers_from_tags_files = 1		  " tags 파일을 사용합니다. 성능상 이익이 있는걸로 알고 있습니다.
