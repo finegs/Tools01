@@ -77,6 +77,8 @@ set showmatch
 " intelligent comments
 "set comments=sl:/*,mb:\ *,elx:\ */
 set comments=sr:/*,mb:*,ex:\*/
+"set show function prototype in preview
+set completeopt+=preview
 
 
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
