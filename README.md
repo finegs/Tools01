@@ -81,3 +81,30 @@ b2 -j4 -a --toolset=msvc-14.21 variant=debug,release link=static threading=multi
 #################
 
 ############################################################
+
+
+### For ncurses in msys2 ###
+## 0. open msys2 
+Windows KEy -> Ctrl+R -> cmd -> run with administrator -> start msys2
+## 1. git clone
+git clone 	git://ncurses.scripts.mit.edu/ncurses.git
+## 2. cd ncurses
+cd ncurses
+## 3. configgure with options
+configure --enable-term-driver --enable-sp-funcs
+## 4. make (be patient)
+make
+## 5. make install
+make install
+
+## 6. Use library with  below
+
+-- source --
+#include <ncurses.h>
+
+-- link --
+-lncurses
+
+#############################################################
+
+
