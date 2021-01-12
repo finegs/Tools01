@@ -1,0 +1,60 @@
+source /usr/share/vim/vim82/defaults.vim
+source /usr/share/vim/vim82/cscope_maps.vim
+
+set ts=4
+set sw=4
+set hlsearch
+set nu
+
+colorscheme darkblue
+
+
+let ddirs = ['/D/Programs/msys64/mingw64/include/c++/10.2.0/']
+let ddirs += ['/D/Programs/msys64/mingw64/include/c++/10.2.0/x86_64-w64-mingw32/']
+let ddirs += ['/D/Programs/msys64/mingw64/include/c++/10.2.0/backward/']
+let ddirs += ['/D/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/10.2.0/include/']
+let ddirs += ['/D/Programs/msys64/mingw64/include/']
+let ddirs += ['/D/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/10.2.0/include-fixed/']
+let ddirs += ['/D/Programs/msys64/mingw64/x86_64-w64-mingw32/include/']
+
+"let ddirs += ["/D/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/10.2.0/"
+"				, "/D/Programs/glibc/glibc/"
+"				, "/mingw64/include/"]
+for ddir in ddirs
+	let tt = ddir.'cscope.out'
+	if filereadable(tt)
+		echo 'cscope add :'.tt
+		let ttt = 'cs add '.tt
+		execute "cs add ".fnameescape(tt)
+	endif
+
+	let tt = ddir . "tags"
+	if filereadable(tt)
+		set tags+=tt
+	endif
+
+	set path+=ddir
+endfor
+
+"if filereadable("/D/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/10.2.0/cscope.out")
+"	cs add /D/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/10.2.0/cscope.out
+"endif
+"
+"if filereadable("/D/Programs/glibc/glibc/cscope.out")
+"	cs add /D/Programs/glibc/glibc/cscope.out
+"endif
+"
+"if filereadable("/mingw64/include/cscope.out")
+"	cs add /mingw64/include/cscope.out
+"endif
+
+
+"set tags+=/D/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/10.2.0/tags
+"set tags+=/D/Programs/glibc/glibc/tags
+"set tags+=/mingw64/include/tags
+set tags+=./tags
+
+"set path+=/D/Programs/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/10.2.0
+"set path+=/D/Programs/glibc/glibc
+"set path+=/mingw64/include
+set path+=.
