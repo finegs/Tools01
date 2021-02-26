@@ -22,6 +22,9 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "Plug '~/my-prototype-plugin'
 " Initialize plugin system
@@ -30,7 +33,7 @@ call plug#end()
 "encoding
 set enc=utf-8
 set guifont=Consolas:h10:cANSI
-set guifontwide=Dotumche:h9:cDEFAULT
+set guifontwide=Dotumche:h8:cDEFAULT
 lang mes en_US
 
 source $VIMRUNTIME/delmenu.vim
@@ -47,7 +50,7 @@ set sw=4
 set hlsearch
 set nu
 set relativenumber
-set lines=50 columns=150 " initial windows size
+set lines=50 columns=125 " initial windows size
 
 colorscheme darkblue
 
@@ -263,4 +266,18 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" ############# air-line ##############
+" Smarter tab line 활성화: 모든 파일 버퍼 출력
+let g:airline#extensions#tabline#enabled = 1
+
+" Tab line 구분자 '|' 로 설정
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" Tab line 에 파일명만 출력되도록 설정
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" Powerline-font 활성화
+let g:airline_powerline_fonts = 1 
 
