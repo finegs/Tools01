@@ -57,3 +57,12 @@
 4. >vim +PluginInstall +qall
    or :PluginInstall after vim execuring..
 
+
+
+################## for python on windows
+
+1. pip install python-language-server
+2. pip install -U jedi-language-server
+3. CocInstall coc-jedi
+
+
