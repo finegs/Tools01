@@ -1,0 +1,8 @@
+{
+"python.pythonPath": "python",
+"python.jediEnabled": true,
+"python.jediPath": "D:/Programs/python/Python/lib/site-packages",
+"python.linting.pylintEnabled": true,
+"python.linting.pylintPath": "D:/Programs/Python/Python/Scripts/pylint",
+"python.linting.flake8Enabled": false
+}

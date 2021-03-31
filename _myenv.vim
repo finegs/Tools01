@@ -1,18 +1,12 @@
 "============= path =====================================
-"set path+=inc
-"set path+=.
-"set path+=..
-"set path+=D:/Programs/mingw64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++                                     
-"set path+=D:/Programs/mingw64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32                  
-"set path+=D:/Programs/mingw64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward                            
-"set path+=D:/Programs/mingw64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include                                         
-"set path+=D:/Programs/mingw64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed                                   
-"set path+=D:/Programs/mingw64/mingw64/x86_64-w64-mingw32/include
-"set path+=D:/Dev/git/gnuplot-gnuplot-main/src
+set path+=inc
+set path+=.
+set path+=..
 
 if executable('sed')
   if executable('g++')
     let s:expr = 'echo |g++ -Wp,-v -x c++ - -fsyntax-only 2>&1 | grep "^ " | sed "s/^ //"'
+
     let s:lines = systemlist(s:expr)
 	let s:lines = add(s:lines, 'inc')
 	let s:lines = add(s:lines, '.')
@@ -23,8 +17,8 @@ if executable('sed')
 
 "============= path =====================================
       execute 'set path+=' . fnameescape(s:line)
-
 "============= tags =====================================
+"
 	  let s:tagfile = s:line.'/tags'
 	  if filereadable(s:tagfile)
 		  execute 'set tags+='.s:tagfile
@@ -41,7 +35,6 @@ endif
 "if filereadable('./tags')
 "	set tags+=./tags
 "endif
-
 
 
 "============= syntastic =====================================
