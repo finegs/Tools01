@@ -61,8 +61,13 @@
 
 ################## for python on windows
 
-1. pip install python-language-server
-2. pip install -U jedi-language-server
-3. CocInstall coc-jedi
+#1. pip install python-language-server
+1. install Python39
+2. pip uninstall jedi-language-server
+3. pip install -Iv jedi-language-server==0.19.1
+4. pip install -Iv jedi==0.18.0
+5. pip install pylint
+6. CocUninstall coc-python
+7. CocInstall coc-jedi
 
 
