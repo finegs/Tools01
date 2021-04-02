@@ -2,8 +2,8 @@
 set  (STAMP=%DATE% %TIME%)
 echo ########## %STAMP% : Start to build dev meta files  cscope.files, cscope.out, tags ##########
 
-set MINGW_HOME=D:\Programs\msys64\mingw64
-set ZMQ_HOME=D:\Dev\git\libzmq
+rem set MINGW_HOME=D:\Programs\msys64\mingw64
+set ZMQ_HOME=D:\Programs\glibc\glibc
 
 setlocal enableDelayedExpansion
 
@@ -34,7 +34,8 @@ rem	:end_each_cscope
 
 	(set STAMP=%DATE% %TIME%)
 	echo "%STAMP% : !idx! : 3. build tags : %%d"
-	ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ -h ".h.H.hh.hpp.hxx.h++.c.cpp.cxx" --exclude=tags --exclude=*~,*bak -L cscope.files
+rem	ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ -h ".h.H.hh.hpp.hxx.h++.c.cpp.cxx" --exclude=tags --exclude=*~,*bak -L cscope.files
+	ctags --languages="c++,c" -R *
 )
 
 endlocal

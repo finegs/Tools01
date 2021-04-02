@@ -4,30 +4,9 @@ filetype off
 source $VIM/vim82/defaults.vim
 source $VIM/_cscope_maps.vim
 source $VIM/_func.vim
+source $VIM/_plugins.vim
 source $VIM/_myenv.vim
-
-call plug#begin('$VIM/vimfiles/plugged')
-
-" Make sure you use single quotes
-" Use release branch (recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/vim-easy-align'
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ervandew/supertab'
-
-"Plug '~/my-prototype-plugin'
-" Initialize plugin system
-call plug#end()
+source $VIM/_coc.vim
 
 "encoding
 set enc=utf-8
@@ -228,4 +207,5 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Powerline-font 활성화
 let g:airline_powerline_fonts = 1 
+
 
