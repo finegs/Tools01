@@ -1,6 +1,6 @@
 @echo off
-set  (STAMP=%DATE% %TIME%)
-echo ########## %STAMP% : Start to build dev meta files  cscope.files, cscope.out, tags ##########
+
+echo %DATE% %TIME% : Start to build dev meta files [ cscope.files, cscope.out, tags ]
 
 rem set MINGW_HOME=D:\Programs\msys64\mingw64
 set ZMQ_HOME=D:\Programs\glibc\glibc
@@ -11,39 +11,61 @@ pushd .
 
 set /a idx=0
 
+rem	ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ -h ".h.H.hh.hpp.hxx.h++.c.cpp.cxx" --exclude=tags --exclude=*~,*bak -L cscope.files
 FOR %%d IN (
 	%MINGW_HOME%
 	%ZMQ_HOME%
 	%CD%
 ) DO (
 
-	(set STAMP=%DATE% %TIME%)
-	echo "%STAMP% : build dev files startd : %%d "
-rem	set /a idx=!idx!+1
-	set tf=%%d\cscope.out
-rem	if exist (%tf%) goto end_each_cscope 
-	cd /d %%d
-	(set STAMP=%DATE% %TIME%)
-	echo "%STAMP% : !idx! : 1. create cscope files : %%d"
-	dir /b /s %%d | findstr "\.c$ \.cpp$ \.h$ \.hpp$ \.cxx$" > cscope.files
-rem rem	dir /b /s %MINGW_HOME% | findstr ".*\.[ch]$" > cscope.files
-	(set STAMP=%DATE% %TIME%)
-	echo "%STAMP% : !idx! : 2. build cscope db : %%d"
-	cscope -b
-rem	:end_each_cscope
+	set /a idx=!idx!+1
+	echo !DATE! !TIME! : !idx! - Build dev files started : %%d "
+	set CDF=%%d\cscope.out
 
-	(set STAMP=%DATE% %TIME%)
-	echo "%STAMP% : !idx! : 3. build tags : %%d"
-rem	ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ -h ".h.H.hh.hpp.hxx.h++.c.cpp.cxx" --exclude=tags --exclude=*~,*bak -L cscope.files
-	ctags --languages="c++,c" -R *
+	set "GEN="
+	IF %%d == %CD% set GEN=1
+	IF NOT EXIST !CDF! SET GEN=1
+
+	IF DEFINED GEN (
+		cd /d %%d
+
+		echo !DATE! !TIME! :    1. do cscope files
+		dir /b /s %%d | findstr "\.c$ \.cpp$ \.h$ \.hpp$ \.cxx$" > cscope.files
+		echo !DATE! !TIME! :    1. done cscope files
+
+		echo !DATE! !TIME! :    2. do cscope db
+		cscope -b
+		echo !DATE! !TIME! :    2. done cscope db
+
+		echo !DATE! !TIME! :    3. do tags
+		ctags --languages="c++,c" -R *
+		echo !DATE! !TIME! :    3. done tags
+
+	) ELSE (
+		echo !DATE! !TIME! ;    9. already exist : !CDF!
+	)
+rem rem	if exist (%tf%) goto end_each_cscope 
+rem 	cd /d %%d
+rem 	(set STAMP=%DATE% %TIME%)
+rem 	echo "%STAMP% : !idx! : 1. create cscope files : %%d"
+rem 	dir /b /s %%d | findstr "\.c$ \.cpp$ \.h$ \.hpp$ \.cxx$" > cscope.files
+rem rem rem	dir /b /s %MINGW_HOME% | findstr ".*\.[ch]$" > cscope.files
+rem 	(set STAMP=%DATE% %TIME%)
+rem 	echo "%STAMP% : !idx! : 2. build cscope db : %%d"
+rem 	cscope -b
+rem rem	:end_each_cscope
+rem 
+rem 	(set STAMP=%DATE% %TIME%)
+rem 	echo "%STAMP% : !idx! : 3. build tags : %%d"
+rem rem	ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ -h ".h.H.hh.hpp.hxx.h++.c.cpp.cxx" --exclude=tags --exclude=*~,*bak -L cscope.files
+rem 	ctags --languages="c++,c" -R *
 )
 
 endlocal
 
 popd
 
-(set STAMP=%DATE% %TIME%)
-echo ########## %STAMP% : Complete to build cscopew database ##########
+echo %DATE% %TIME% : Complete to build dev meta files [ cscope.files, cscope.out, tags ]
 
 
 rem echo #############  old source ######################
