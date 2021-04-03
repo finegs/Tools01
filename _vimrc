@@ -9,17 +9,27 @@ source $VIM/_myenv.vim
 source $VIM/_coc.vim
 
 "encoding
-set enc=utf-8
-set guifont=Consolas:h10:cANSI
-set guifontwide=Dotumche:h8:cDEFAULT
-lang mes en_US
+if has("gui_running")
+"  set enc=cp949 
+  set enc=utf-8
+"  language message ko_kr.utf-8
+  source $VIMRUNTIME/delmenu.vim
+  set langmenu=ko_kr.utf-8
+  source $VIMRUNTIME/menu.vim
+  set guifont=Consolas:h10:cANSI
+  set guifontwide=Dotumche:h8:cDEFAULT
+  lang mes en_US
+  set lines=50 columns=125 " initial windows size
+else
+  set enc=utf-8
+endif
 
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 set fileencodings=utf-8,cp949
 set termencoding=utf-8
-set langmenu=cp949
+"set langmenu=cp949
 
 
 syntax on
@@ -28,7 +38,6 @@ set sw=4
 set hlsearch
 set nu
 set relativenumber
-set lines=50 columns=125 " initial windows size
 
 colorscheme darkblue
 
