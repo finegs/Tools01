@@ -3,7 +3,13 @@
 echo %DATE% %TIME% : Start to build dev meta files [ cscope.files, cscope.out, tags ]
 
 rem set MINGW_HOME=D:\Programs\msys64\mingw64
-set ZMQ_HOME=D:\Programs\glibc\glibc
+set GLIBC=C:\Programs\glibc\glibc
+
+rem by SGK 20210404 : --force option added to support force creation meta files
+set "optionForce="
+IF "%~1" == "--force" SET optionForce=1
+
+IF DEFINED optionForce echo ## optionForce : ##
 
 setlocal enableDelayedExpansion
 
@@ -14,7 +20,7 @@ set /a idx=0
 rem	ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ -h ".h.H.hh.hpp.hxx.h++.c.cpp.cxx" --exclude=tags --exclude=*~,*bak -L cscope.files
 FOR %%d IN (
 	%MINGW_HOME%
-	%ZMQ_HOME%
+	%GLIBC%
 	%CD%
 ) DO (
 
@@ -22,11 +28,13 @@ FOR %%d IN (
 	echo !DATE! !TIME! : !idx! - Build dev files started : %%d "
 	set CDF=%%d\cscope.out
 
-	set "GEN="
-	IF %%d == %CD% set GEN=1
-	IF NOT EXIST !CDF! SET GEN=1
+	set "optionGEN="
+	IF %%d == %CD% set optionGEN=1
+	IF NOT EXIST !CDF! SET optionGEN=1
+	IF DEFINED optionForce SET optionGEN=1
+	IF NOT EXIST %%d set "optionGEN="
 
-	IF DEFINED GEN (
+	IF DEFINED optionGEN (
 		cd /d %%d
 
 		echo !DATE! !TIME! :    1. do cscope files
@@ -38,11 +46,15 @@ FOR %%d IN (
 		echo !DATE! !TIME! :    2. done cscope db
 
 		echo !DATE! !TIME! :    3. do tags
-		ctags --languages="c++,c" -R *
+rem		ctags --languages="c++,c" -R *
+rem		ctags -R --c++-kinds=+p --extra=+q --fields=+iaS --exclude=tags .
+		ctags -R --c++-kinds=+p --extra=+q --fields=+l --exclude={.git/*,tags,*~,*bak} -h ".h.H.hh.hpp.hxx.h++.c.cpp.cxx" *
 		echo !DATE! !TIME! :    3. done tags
 
+	) ELSE IF EXIST !CDF! (
+		echo !DATE! !TIME! :    9-1. already exist : !CDF!
 	) ELSE (
-		echo !DATE! !TIME! ;    9. already exist : !CDF!
+		echo !DATE! !TIME! ;    9-2. Not Exist Path : %%d
 	)
 rem rem	if exist (%tf%) goto end_each_cscope 
 rem 	cd /d %%d
