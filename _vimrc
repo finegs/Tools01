@@ -1,3 +1,6 @@
+" :w ++ff=unix     " E492: Not an editor command: ^M   or 'unix' or 'dos2unix'
+
+ 
 set nocompatible
 filetype off
 
