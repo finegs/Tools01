@@ -1,3 +1,5 @@
+" :w ++ff=unix     " E492: Not an editor command: ^M   or 'unix' or 'dos2unix'
+ 
 set nocompatible
 filetype off
 
@@ -224,3 +226,4 @@ set t_Co=256
 
 highlight ctermbg=0
 
+highlight SpellBad ctermbg=DarkGrey ctermfg=white
