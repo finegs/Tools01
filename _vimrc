@@ -540,5 +540,10 @@ set t_Co=256
 
 highlight CursorLine ctermbg=Black
 
-highlight CocErrorFloat ctermfg=yellow
 highlight SpellBad ctermbg=DarkGrey ctermfg=white
+highlight CocErrorFloat ctermfg=Yellow
+
+" vimspector for gdb plugin
+let g:vimspector_enable_mappings = 'HUMAN'
+packadd! vimspector
+

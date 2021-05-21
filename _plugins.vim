@@ -17,6 +17,7 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ervandew/supertab'
+Plug 'puremourning/vimspector'
 
 "Plug '~/my-prototype-plugin'
 " Initialize plugin system
