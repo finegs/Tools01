@@ -1,0 +1,30 @@
+
+keeper 실행
+docker run -d -p 2181:2181 -e "ZOO_PORT=2181"  --name zoo1 --hostname zoo1 zookeeper:3.4.9
+
+rem ##2. kafak #1 실행
+sudo docker run -d \
+-e "KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.0.14:9092" \
+-e "KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092" \
+-e "KAFKA_ZOOKEEPER_CONNECT=zoo1:2181" \
+-e "KAFKA_BROKER_ID=1" \
+-e "KAFKA_LOG4J_LOGGERS=kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"  \
+-p 9092:9092 --link zoo1:zoo1 --name kafka1 --hostname kafka1 confluentinc/cp-kafka:5.5.0
+
+sudo docker run -d \
+-e "KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.0.14:9093" \
+-e "KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9093" \
+-e "KAFKA_ZOOKEEPER_CONNECT=zoo1:2181" \
+-e "KAFKA_BROKER_ID=2" \
+-e "KAFKA_LOG4J_LOGGERS=kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO" \
+-p 9093:9093 --link zoo1:zoo1 --link kafka1:kafka1 --name kafka2 --hostname kafka2 confluentinc/cp-kafka:5.5.0
+
+sudo docker run -d \
+-e "KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.0.14:9094" \
+-e "KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9094" \
+-e "KAFKA_ZOOKEEPER_CONNECT=zoo1:2181" \
+-e "KAFKA_BROKER_ID=3" \
+-e "KAFKA_LOG4J_LOGGERS=kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"  \
+-p 9094:9094 --link zoo1:zoo1 --link kafka2:kafka2 --link kafka1:kafka1 --name kafka3 --hostname kafka3 confluentinc/cp-kafka:5.5.0
+
+
