@@ -49,6 +49,7 @@ set hlsearch
 set nu
 set relativenumber
 
+set termguicolors
 colorscheme darkblue
 
 " TextEdit might fail if hidden is not set.
@@ -98,8 +99,13 @@ set lazyredraw
 set cul
 
 " SuperTab
-let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+"let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc','&completefunc']
+let g:SuperTabRetainCompletionType=2
 
+inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " added by SGK 20190629
 highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
 
@@ -570,3 +576,7 @@ nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+" VimspectorInstall
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
+
