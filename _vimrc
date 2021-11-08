@@ -218,8 +218,7 @@ else
   map <M-Down> ]s
   map <M-Up> [s
 endif
-
-let NERDChistmasTree=0
+gkulet NERDChistmasTree=0
 let NERDTreeWinSize=35
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp']
@@ -255,7 +254,11 @@ set lazyredraw
 set cul
 
 " SuperTab
-let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+"let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-p>", "&omnifunc:<c-x><c-o>"]
 
 " added by SGK 20190629
 highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
