@@ -583,3 +583,7 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 " VimspectorInstall
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
+" Config for python
+let g:python3_host_prog='C:\\Python39\\python'
+let g:coc_global_extensions = ['coc-explorer', 'coc-json', 'coc-tsserver', 'coc-import-cost', 'coc-eslint', 'coc-snippets', 'coc-template', 'coc-html', 'coc-css', 'coc-emmet', 'coc-phpls', 'coc-angular', 'coc-git']
+let g:coc_global_extensions += ['https://github.com/andys8/vscode-jest-snippets']
