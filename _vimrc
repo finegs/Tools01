@@ -100,12 +100,10 @@ set cul
 
 " SuperTab
 "let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc','&completefunc']
-let g:SuperTabRetainCompletionType=2
+""let g:SuperTabDefaultCompletionType = 'context'
+""let g:SuperTabContextTextOmniPrecedence = ['&omnifunc','&completefunc']
+""let g:SuperTabRetainCompletionType=2
 
-inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " added by SGK 20190629
 highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
 
@@ -218,7 +216,7 @@ else
   map <M-Down> ]s
   map <M-Up> [s
 endif
-gkulet NERDChistmasTree=0
+let NERDChistmasTree=0
 let NERDTreeWinSize=35
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp']
@@ -244,7 +242,7 @@ set comments=sr:/*,mb:*,ex:\*/
 
 
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
-let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
+let g:DoxygenToolkit_authorName="SoonGoo Kang <finegs@gmail.com>"
 
 " Enhanced keyboard mappings
 let mapleader=","
@@ -282,8 +280,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-nmap <Tab> <C-W>w
-nmap <S-TAB> <C-W><C-P>
+"nmap <Tab> <C-W>w
+"nmap <S-TAB> <C-W><C-P>
 
 map <F2> :w<CR><ESC>
 nmap <F2> :w<CR><ESC>
@@ -394,11 +392,12 @@ let g:tagbar_width=15
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"########### by SGK ###### 20211224
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -583,3 +582,11 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 " VimspectorInstall
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
+"inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" added by SGK 20211224
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
+" added by SGK 20211225
+set wildmenu=longest,full,list
