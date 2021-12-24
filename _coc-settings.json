@@ -1,8 +1,8 @@
 {
-  "suggest.noselect":true,
+        "suggest.noselect":true,
 	"codeLens.enable":true,
 	"python.pythonPath": "D:/Programs/Python/Python39/python.exe",
-  "python.jediEnabled": false,
+        "python.jediEnabled": false,
 	"python.jediPath": "D:/Programs/Python/Python39/Lib/site-packages",
 	"python.linting.enabled": true,
 	"python.linting.pylintEnabled": true,
