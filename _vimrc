@@ -590,3 +590,4 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " added by SGK 20211225
 set wildmenu=longest,full,list
+
