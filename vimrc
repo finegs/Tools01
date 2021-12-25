@@ -3,12 +3,12 @@
 set nocompatible
 filetype off
 
-source $VIM/vim82/defaults.vim
-source $HOME/_cscope_maps.vim
-source $HOME/_func.vim
-source $HOME/_plugins.vim
-source $HOME/_myenv.vim
-source $HOME/_coc.vim
+source $VIM/vim81/defaults.vim
+source $HOME/.vim/_cscope_maps.vim
+source $HOME/.vim/_func.vim
+source $HOME/.vim/_plugins.vim
+source $HOME/.vim/_myenv.vim
+source $HOME/.vim/_coc.vim
 
 "encoding
 if has("gui_running")
@@ -78,6 +78,7 @@ else
   set signcolumn=yes
 endif
 
+" colorscheme womba" colorscheme wombat256
 " turn line numbers on
 set number
 " highlight matching braces
@@ -105,6 +106,8 @@ let g:SuperTabRetainCompletionType=2
 
 inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" added by SGK 20190629
+highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
 
 ",vi => show edit tab .vimrc
 nnoremap <leader>e :tabe $MYVIMRC<CR> 
@@ -231,6 +234,159 @@ let NERDCompactSexyComs=1
 let g:tagbar_left=1
 let g:tagbar_vertical=15
 let g:tagbar_width=15
+
+" turn line numbers on
+set number
+" highlight matching braces
+set showmatch
+" intelligent comments
+"set comments=sl:/*,mb:\ *,elx:\ */
+set comments=sr:/*,mb:*,ex:\*/
+
+
+" Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
+let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
+
+" Enhanced keyboard mappings
+let mapleader=","
+let g:mapleader=","
+set lazyredraw
+" highlight current line
+set cul
+
+" SuperTab
+let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+
+" added by SGK 20190629
+highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
+
+",vi => show edit tab .vimrc
+nnoremap <leader>e :tabe $MYVIMRC<CR> 
+",src => reload .vimrc
+nnoremap <leader>src :source $MYVIMRC<CR>
+
+",q => Quit
+map <leader><S>q <ESC><ESC>:q<CR>
+
+"jk => esc, Escape insert mode
+"inoremap jk <ESC>
+
+""""""""""""""""""""""""""
+"   Moving tab Setting
+""""""""""""""""""""""""""
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+nmap <Tab> <C-W>w
+nmap <S-TAB> <C-W><C-P>
+
+map <F2> :w<CR><ESC>
+nmap <F2> :w<CR><ESC>
+imap <F2> <ESC> :w<CR><ESC>
+" in normal mode F2 will save the file
+" in insert mode F2 will exit insert, save, enters insert again
+" switch between header/source with F4
+"map <F3> <ESC><C-]>
+map <S-F3> <ESC><C-t>
+map <C-F3> :ts<CR>
+"map <F3> :YcmCompleter GoTo<CR>
+
+map <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
+
+map <S-F4> <ESC>:!ctags -R --c++-kinds=+p --extra=+q --fields=+l --language-force=C++ --exclude=*~,*.html,*bak* .<CR>
+
+map <F5> :cn<CR>
+map <S-F5> :cp<CR>
+map <C-F5> :cl<CR>
+
+" create doxygen comment
+map <F6> :Dox<CR>
+" build using makeprg with <F7>
+map <F7> <ESC>:make debug<CR>
+" build using makeprg with <S-F7>
+map <S-F7> :make clean all<CR>
+map <C-F7> <ESC>:make release<CR>
+" goto definition with F12
+map <S-F12> :setlocal spell! spelllang=en_us<CR>
+
+map <C-0> <ESC>:NERDTreeToggle<CR>
+map <C-9> <ESC>:TagbarToggle<CR>
+map <C-8> <ESC>:term<CR>
+"map <C-7> <ESC>:YcmDiag<CR>
+
+
+map <S-Down> :m+1<CR>
+map <S-Up> :m-2<CR>
+"map for move lines
+vnoremap <S-Up> :m-2<CR>
+vnoremap <S-Down> :m+1<CR>
+imap <S-Up> <ESC>:m-2<CR>
+imap <S-Down> <ESC>:m+1<CR>
+
+nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+nnoremap ,<Down> :<C-u>silent! move+<CR>==
+xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
+
+"" FileType
+"" enable FileType detection:
+filetype on
+filetype plugin on
+filetype indent on " file type based indentation
+"
+"" recognize anything in my .Postponed directory as a news article, and anything
+"" at all with a .txt extension as being human-language text [this clobbers the
+"" `help' filetype, but that doesn't seem to prevent help from working
+"" properly]:
+
+augroup filetype
+  autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
+  autocmd BufNewFile,BufRead *.txt set filetype=human
+  autocmd BufNewFile,BufRead *.mk set filetype=make noexpandtab
+  autocmd BufNewFile,BufRead makefile set filetype=make noexpandtab
+  autocmd BufNewFile,BufRead Makefile set filetype=make noexpandtab
+  autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
+  autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
+augroup END
+
+
+" in diff mode we use the spell check keys for merging
+if &diff
+  ” diff settings
+  syntax off
+  map <M-Down> ]c
+  map <M-Up> [c
+  map <M-Left> do
+  map <M-Right> dp
+  map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
+else
+  " spell settings
+  :setlocal spell spelllang=en
+  " set the spellfile - folders must exist
+  set spellfile=$VIM/spellfile.add
+  map <M-Down> ]s
+  map <M-Up> [s
+endif
+
+let NERDChistmasTree=0
+let NERDTreeWinSize=35
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
+"
+" NERD Tree 
+let NERDSpaceDelims=1
+let NERDCompactSexyComs=1
+"
+" Tagbar
+let g:tagbar_left=1
+let g:tagbar_vertical=15
+let g:tagbar_width=15
+
+
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -389,16 +545,16 @@ execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 set t_Co=256
 
 highlight CursorLine ctermbg=Black
+
 highlight SpellBad ctermbg=DarkGrey ctermfg=white
-" added by SGK 20190629
-"highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
 highlight CocErrorFloat ctermfg=Yellow
 
 " vimspector for gdb plugin
 let g:vimspector_enable_mappings = 'HUMAN'
-packadd! vimspector
-
+"packadd! vimspector
+ 
 " Debugger remaps
+let mapleader = ","
 nnoremap <leader>m :MaximizerToggle!<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
@@ -427,27 +583,14 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 "inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
 "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " added by SGK 20211224
-"inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-"inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " added by SGK 20211225
 set wildmenu
 set wildmode=full
 
+
 map gn :bn<cr>
 map gp :bp<cr>
 map gx :bd<cr>
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
- 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
- 
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = "-std=c++20a -Wall -Wextra -Wpedantic"
-let g:syntastic_c_compiler_options = "-std=c11 -Wall -Wextra -Wpedantic"

@@ -1,4 +1,3 @@
-
 "call plug#begin('$VIM/vimfiles/plugged')
 call plug#begin('$HOME/.vim/bundle')
 
@@ -17,11 +16,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'puremourning/vimspector'
 Plug 'vim-syntastic/syntastic'
 
 "Plug '~/my-prototype-plugin'
 " Initialize plugin system
 call plug#end()
-
