@@ -3,12 +3,12 @@
 set nocompatible
 filetype off
 
-source $VIM/vim82/defaults.vim
-source $HOME/_cscope_maps.vim
-source $HOME/_func.vim
-source $HOME/_plugins.vim
-source $HOME/_myenv.vim
-source $HOME/_coc.vim
+source $VIM/vim81/defaults.vim
+source $HOME/.vim/_cscope_maps.vim
+source $HOME/.vim/_func.vim
+source $HOME/.vim/_plugins.vim
+source $HOME/.vim/_myenv.vim
+source $HOME/.vim/_coc.vim
 
 "encoding
 if has("gui_running")
@@ -551,8 +551,8 @@ highlight CocErrorFloat ctermfg=Yellow
 
 " vimspector for gdb plugin
 let g:vimspector_enable_mappings = 'HUMAN'
-packadd! vimspector
-
+"packadd! vimspector
+ 
 " Debugger remaps
 let mapleader = ","
 nnoremap <leader>m :MaximizerToggle!<CR>
@@ -589,6 +589,7 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 " added by SGK 20211225
 set wildmenu
 set wildmode=full
+
 
 map gn :bn<cr>
 map gp :bp<cr>
