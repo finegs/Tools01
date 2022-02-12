@@ -1,5 +1,6 @@
 
-call plug#begin('$VIM/vimfiles/plugged')
+"call plug#begin('$VIM/vimfiles/plugged')
+call plug#begin('$HOME/.vim/bundle')
 
 " Make sure you use single quotes
 " Use release branch (recommend)
@@ -18,6 +19,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ervandew/supertab'
 Plug 'puremourning/vimspector'
+Plug 'vim-syntastic/syntastic'
 
 "Plug '~/my-prototype-plugin'
 " Initialize plugin system
