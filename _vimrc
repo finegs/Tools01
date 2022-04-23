@@ -194,7 +194,7 @@ augroup filetype
   autocmd BufNewFile,BufRead makefile set filetype=make noexpandtab
   autocmd BufNewFile,BufRead Makefile set filetype=make noexpandtab
   autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
-  autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
+"  autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
 augroup END
 
 
@@ -396,7 +396,9 @@ highlight CocErrorFloat ctermfg=Yellow
 
 " vimspector for gdb plugin
 let g:vimspector_enable_mappings = 'HUMAN'
-packadd! vimspector
+
+"packadd! vimspector
+packloadall!
 
 " Debugger remaps
 nnoremap <leader>m :MaximizerToggle!<CR>
@@ -431,17 +433,16 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 "inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " added by SGK 20211225
-set wildmenu
-set wildmode=full
+set wildmode=longest,list
 
 map gn :bn<cr>
 map gp :bp<cr>
 map gx :bd<cr>
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
  
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
