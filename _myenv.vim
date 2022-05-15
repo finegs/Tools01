@@ -1,35 +1,40 @@
 "============= path =====================================
 
 let s:lines = []
-if executable('sed')
-  if (executable('cl'))
-	let s:lines = add(s:lines, 'D:/Programs/VS2017/WDExpress/VC/Tools/MSVC/14.16.27023/include')
-	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/NETFXSDK/4.6.1/include/um')
-	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/ucrt')
-	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/shared')
-	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/um')
-	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/winrt')
-	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/cppwinrt')
-"  endif
-"  if executable('g++')
-  elseif executable('g++')
-    let s:expr = 'echo |g++ -Wp,-v -x c++ - -fsyntax-only 2>&1 | grep "^ " | sed "s/^ //"'
-    let s:lines = systemlist(s:expr)
+"if executable('sed')
+if (executable('cl'))
+  let s:expr = 'echo $INCLUDE'
+  let s:lines = split(system('echo $INCLUDE'), ';')
 
-"	let s:lines = add(s:lines, $MINGW_HOME)
-	let s:lines = add(s:lines, 'inc')
-	let s:lines = add(s:lines, '.')
-	let s:lines = add(s:lines, 'D:/Programs/glibc/glibc')
+  if(len(s:lines) < 1)
+  	let s:lines = add(s:lines, 'D:/Programs/VS2017/WDExpress/VC/Tools/MSVC/14.16.27023/include')
+  	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/NETFXSDK/4.6.1/include/um')
+  	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/ucrt')
+  	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/shared')
+  	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/um')
+  	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/winrt')
+  	let s:lines = add(s:lines, 'C:/Program\\\ Files\\\ (x86)/Windows\\\ Kits/10/include/10.0.19041.0/cppwinrt')
+  else
+  	echo '#### len(s:lines):'len(s:lines)
   endif
+  "  if executable('g++')
+elseif executable('g++')
+  let s:expr = 'echo |g++ -Wp,-v -x c++ - -fsyntax-only 2>&1 | grep "^ " | sed "s/^ //"'
+  let s:lines = systemlist(s:expr)
 
+  "	let s:lines = add(s:lines, $MINGW_HOME)
+  let s:lines = add(s:lines, 'inc')
+  let s:lines = add(s:lines, '.')
+  let s:lines = add(s:lines, 'D:/Programs/glibc/glibc')
+endif
+"endif
 "execute 'setlocal path+='. fnameescape("C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\**")
 
-  for s:line in s:lines
-
+for s:line in s:lines
 "============= path =====================================
 "      execute 'setlocal path+=' . shellescape(s:line)
       "execute 'setlocal path+=' . fnameescape(s:line)
-      execute 'setlocal path+=' . s:line
+  execute 'setlocal path+=' . s:line
 "============= tags =====================================
 "
 "	  let s:tagfile = s:line.'\tags'
@@ -40,9 +45,7 @@ if executable('sed')
 "	  if filereadable(s:csf)
 "	   cs add s:csf
 "	  endif
-  endfor
-
-endif
+endfor
 
 "============= tags =====================================
 "if filereadable('./tags')
