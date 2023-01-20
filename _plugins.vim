@@ -1,8 +1,10 @@
-"call plug#begin('$VIM/vimfiles/plugged')
-call plug#begin('$HOME/.vim/bundle')
+
+call plug#begin('$VIM/vimfiles/plugged')
 
 " Make sure you use single quotes
 " Use release branch (recommend)
+"
+"Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
@@ -16,10 +18,22 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'ervandew/supertab'
-Plug 'puremourning/vimspector'
-Plug 'vim-syntastic/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'rust-lang/rust.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-commentary'
+Plug 'dmerejkowsky/vim-ale'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'mattn/emmet-vim'
+Plug 'airblade/vim-gitgutter'
+
+" Optional:
+Plug 'honza/vim-snippets'
 
 "Plug '~/my-prototype-plugin'
 " Initialize plugin system
 call plug#end()
+
