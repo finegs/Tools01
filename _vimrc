@@ -3,12 +3,12 @@
 set nocompatible
 filetype off
 
-source $VIM/vim82/defaults.vim
-source $VIM/_cscope_maps.vim
-source $VIM/_func.vim
-source $VIM/_plugins.vim
-source $VIM/_myenv.vim
-source $VIM/_coc.vim
+source $VIM/vim90/defaults.vim
+source $HOME/.vim//_cscope_maps.vim
+source $HOME/.vim//_func.vim
+source $HOME/.vim//_plugins.vim
+source $HOME/.vim//_myenv.vim
+source $HOME/.vim//_coc.vim
 
 "encoding
 if has("gui_running")
@@ -245,8 +245,8 @@ set comments=sr:/*,mb:*,ex:\*/
 let g:DoxygenToolkit_authorName="SoonGoo Kang <finegs@gmail.com>"
 
 " Enhanced keyboard mappings
-let mapleader=","
-let g:mapleader=","
+let mapleader=" "
+let g:mapleader=" "
 set lazyredraw
 " highlight current line
 set cul
@@ -612,3 +612,4 @@ map gn :bn<cr>
 map gp :bp<cr>
 map gx :bd<cr>
 
+let g:snipMate = { 'snippet_version' : 1 }
