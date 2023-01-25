@@ -4,12 +4,11 @@ set nocompatible
 filetype off
 
 source $VIM/vim90/defaults.vim
-source $HOME/.vim/_cscope_maps.vim
-source $HOME/.vim/_func.vim
-source $HOME/.vim/_plugins.vim
-source $HOME/.vim/_myenv.vim
-source $HOME/.vim/_coc.vim
-
+source $HOME/.vim//_cscope_maps.vim
+source $HOME/.vim//_func.vim
+source $HOME/.vim//_plugins.vim
+source $HOME/.vim//_myenv.vim
+source $HOME/.vim//_coc.vim
 "encoding
 if has("gui_running")
 "set enc=cp949 
