@@ -3,12 +3,12 @@
 set nocompatible
 filetype off
 
-source $VIM/vim82/defaults.vim
-source $VIM/_cscope_maps.vim
-source $VIM/_func.vim
-source $VIM/_plugins.vim
-source $VIM/_myenv.vim
-source $VIM/_coc.vim
+source $VIM/vim90/defaults.vim
+source $HOME/.vim/_cscope_maps.vim
+source $HOME/.vim/_func.vim
+source $HOME/.vim/_plugins.vim
+source $HOME/.vim/_myenv.vim
+source $HOME/.vim/_coc.vim
 
 "encoding
 if has("gui_running")
@@ -25,8 +25,8 @@ if has("gui_running")
     set langmenu=ko_kr.utf-8
     source $VIMRUNTIME/menu.vim
 
-    set guifont=Consolas:h10:cANSI
-    set guifontwide=Dotumche:h8:cDEFAULT
+    set guifont=Consolas:h12:cANSI
+    set guifontwide=Dotumche:h12:cDEFAULT
   endif
   lang mes en_US
   set lines=50 columns=125 " initial windows size
@@ -50,9 +50,7 @@ set nu
 set relativenumber
 
 set termguicolors
-colorscheme gruvbox
-set bg=dark
-highlight Normal ctermbg=black ctermfg=white
+colorscheme darkblue
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -93,9 +91,6 @@ set comments=sr:/*,mb:*,ex:\*/
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
 
-" Enhanced keyboard mappings
-let mapleader=","
-let g:mapleader=","
 set lazyredraw
 " highlight current line
 set cul
@@ -160,9 +155,9 @@ map <C-F7> <ESC>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
-nnoremap <C-0> <ESC>:NERDTreeToggle<CR>
-nnoremap <C-9> <ESC>:TagbarToggle<CR>
-nnoremap <C-8> <ESC>:term<CR>
+map <C-0> <ESC>:NERDTreeToggle<CR>
+map <C-9> <ESC>:TagbarToggle<CR>
+map <C-8> <ESC>:term<CR>
 "map <C-7> <ESC>:YcmDiag<CR>
 
 
@@ -218,20 +213,22 @@ else
   map <M-Down> ]s
   map <M-Up> [s
 endif
-
-" NERDTree
 let NERDChistmasTree=0
 let NERDTreeWinSize=35
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="left"
-
-
+"
+" NERD Tree 
+let NERDSpaceDelims=1
+let NERDCompactSexyComs=1
+"
 " Tagbar
 let g:tagbar_left=1
 let g:tagbar_vertical=15
 let g:tagbar_width=15
+
 " turn line numbers on
 set number
 " highlight matching braces
@@ -244,9 +241,6 @@ set comments=sr:/*,mb:*,ex:\*/
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_authorName="SoonGoo Kang <finegs@gmail.com>"
 
-" Enhanced keyboard mappings
-let mapleader=","
-let g:mapleader=","
 set lazyredraw
 " highlight current line
 set cul
@@ -315,7 +309,7 @@ map <S-F12> :setlocal spell! spelllang=en_us<CR>
 map <C-0> <ESC>:NERDTreeToggle<CR>
 map <C-9> <ESC>:TagbarToggle<CR>
 map <C-8> <ESC>:term<CR>
-map <C-7> <ESC>:CocDiagnostics<CR>
+"map <C-7> <ESC>:YcmDiag<CR>
 
 
 map <S-Down> :m+1<CR>
@@ -371,15 +365,22 @@ else
   map <M-Up> [s
 endif
 
-" NERD Tree 
 let NERDChistmasTree=0
 let NERDTreeWinSize=35
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="left"
+"
+" NERD Tree 
 let NERDSpaceDelims=1
 let NERDCompactSexyComs=1
+"
+" Tagbar
+let g:tagbar_left=1
+let g:tagbar_vertical=15
+let g:tagbar_width=15
+
 
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -539,17 +540,18 @@ execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 "added by SGK 20210508
 set t_Co=256
 
-highlight CursorLine ctermbg=Black
+highlight CursorLine ctermbg=Black guibg=#282828
 
 highlight SpellBad ctermbg=DarkGrey ctermfg=white
 highlight CocErrorFloat ctermfg=Yellow
 
 " vimspector for gdb plugin
 let g:vimspector_enable_mappings = 'HUMAN'
-packadd! vimspector
+"packadd! vimspector
 
 " Debugger remaps
-let mapleader = ","
+let mapleader = "\\"
+let g:mapleader="\\"
 nnoremap <leader>m :MaximizerToggle!<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
@@ -575,40 +577,23 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 " VimspectorInstall
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
-" Use tab for trigger completion with characters ahead and navigate
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+"inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" added by SGK 20211224
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " added by SGK 20211225
+set wildmenu
 set wildmode=list
-
-nnoremap <Leader>b :ls<Cr>:b<Space>
 
 map gn :bn<cr>
 map gp :bp<cr>
 map gx :bd<cr>
 
+nnoremap <Leader>b :ls<CR>:b<Space>
+let g:snipMate = { 'snippet_version' : 1 }
+
+map <C-/> gc<CR>
+vmap <C-/> gc<CR>
+imap <C-/> <Esc>VgcA
