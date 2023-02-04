@@ -50,7 +50,7 @@ set nu
 set relativenumber
 
 set termguicolors
-colorscheme darkblue
+colorscheme gruvbox
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -78,7 +78,6 @@ else
   set signcolumn=yes
 endif
 
-" colorscheme womba" colorscheme wombat256
 " turn line numbers on
 set number
 " highlight matching braces
@@ -130,9 +129,10 @@ let NERDSpaceDelims=1
 let NERDCompactSexyComs=1
 "
 " Tagbar
-let g:tagbar_left=1
+let g:tagbar_left=0
 let g:tagbar_vertical=15
 let g:tagbar_width=15
+let g:tagbar_posiotion='botright'
 
 " turn line numbers on
 set number
@@ -157,48 +157,6 @@ let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-p>", "&omnifunc:<c-x><c-o>"]
 
-" added by SGK 20190629
-highlight SpellBad ctermbg=darkred ctermfg=lightgrey guibg=darkred guifg=white
-
-"" FileType
-"" enable FileType detection:
-filetype on
-filetype plugin on
-filetype indent on " file type based indentation
-"
-"" recognize anything in my .Postponed directory as a news article, and anything
-"" at all with a .txt extension as being human-language text [this clobbers the
-"" `help' filetype, but that doesn't seem to prevent help from working
-"" properly]:
-
-augroup filetype
-  autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
-  autocmd BufNewFile,BufRead *.txt set filetype=human
-  autocmd BufNewFile,BufRead *.mk set filetype=make noexpandtab
-  autocmd BufNewFile,BufRead makefile set filetype=make noexpandtab
-  autocmd BufNewFile,BufRead Makefile set filetype=make noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
-  autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
-augroup END
-
-
-let NERDChistmasTree=0
-let NERDTreeWinSize=35
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp']
-let NERDTreeShowBookmarks=1
-let NERDTreeWinPos="left"
-"
-" NERD Tree 
-let NERDSpaceDelims=1
-let NERDCompactSexyComs=1
-"
-" Tagbar
-let g:tagbar_left=1
-let g:tagbar_vertical=15
-let g:tagbar_width=15
-
-" Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Add `:Format` command to format current buffer.
