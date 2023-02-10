@@ -166,7 +166,9 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
+" nnoremap <space>e <Cmd>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
@@ -237,5 +239,11 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
-" Toogle Menubar/Toolbar
+" Toggle menu bar/tool bar
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
+
+" Toggle Comment  
+map <C-/> gcc
+vmap <C-/> gc
+imap <C-/> <C-o>gc
+
