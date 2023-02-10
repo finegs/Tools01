@@ -247,3 +247,7 @@ map <C-/> gcc
 vmap <C-/> gc
 imap <C-/> <C-o>gc
 
+" Help of Document 
+nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : ':call Show_documentation()' . "\n")
+
+
