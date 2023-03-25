@@ -49,8 +49,6 @@ set hlsearch
 set nu
 set relativenumber
 
-set termguicolors
-colorscheme gruvbox
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -205,4 +203,7 @@ set wildmenu
 set wildmode=list
 let g:snipMate = { 'snippet_version' : 1 }
 
+set termguicolors
+colorscheme darkblue
+colorscheme gruvbox
 

@@ -1,5 +1,5 @@
 
-call plug#begin('$VIM/vimfiles/plugged')
+call plug#begin('$HOME/.vim/plugged')
 
 " Make sure you use single quotes
 " Use release branch (recommend)
