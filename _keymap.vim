@@ -251,3 +251,4 @@ imap <C-/> <C-o>gc
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : ':call Show_documentation()' . "\n")
 
 
+nnoremap <C-P> :Files<CR>

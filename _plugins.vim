@@ -16,6 +16,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -33,7 +34,9 @@ Plug 'airblade/vim-gitgutter'
 
 " Optional:
 Plug 'honza/vim-snippets'
+Plug 'puremourning/vimspector'
 
+Plug 'cdelledonne/vim-cmake'
 "Plug '~/my-prototype-plugin'
 " Initialize plugin system
 call plug#end()

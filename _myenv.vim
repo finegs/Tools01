@@ -13,7 +13,7 @@ if executable('sed')
 "	let s:lines = add(s:lines, $MINGW_HOME)
 	let s:lines = add(s:lines, 'inc')
 	let s:lines = add(s:lines, '.')
-	let s:lines = add(s:lines, 'D:\\Programs\\glibc\\glibc')
+	" let s:lines = add(s:lines, 'D:\\Programs\\glibc\\glibc')
   endif
 
   for s:line in s:lines
