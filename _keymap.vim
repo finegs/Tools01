@@ -1,6 +1,6 @@
 
 ",vi => show edit tab .vimrc
-nnoremap <leader>e :e $MYVIMRC<CR> 
+nnoremap <leader>mvrc :e $MYVIMRC<CR> 
 ",src => reload .vimrc
 nnoremap <leader>src :source $MYVIMRC<CR>
 
@@ -56,7 +56,8 @@ map <S-F12> :setlocal spell! spelllang=en_us<CR>
 map <C-0> <Esc>:NERDTreeToggle<CR>
 map <C-9> <Esc>:TagbarToggle<CR>
 map <C-8> <Esc>:term<CR>
-"map <C-7> <Esc>:YcmDiag<CR>
+
+" nnoremap <C-p> :Files<Cr>
 
 map <S-Down> :m+1<CR>
 map <S-Up> :m-2<CR>
@@ -166,7 +167,10 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+" nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
+nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
@@ -242,3 +246,12 @@ map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 
 " Help of Document 
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
+
+" added by SGK 20230429
+noremap <slient> <C-Left> :vertical resize +3<CR>
+noremap <slient> <C-Right> :vertical resize -3<CR>
+noremap <slient> <C-Up> :resize +3<CR>
+noremap <slient> <C-Down> :vertical resize -3<CR>
+
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
