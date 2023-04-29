@@ -168,8 +168,6 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-" nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
 nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
@@ -241,12 +239,17 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
-" Toogle Menubar/Toolbar
+" Toggle menu bar/tool bar
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 
-" Help of Document 
-nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
+" Toggle Comment  
+map <C-/> gcc
+vmap <C-/> gc
+imap <C-/> <C-o>gc
 
+" Help of Document 
+nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : ':call Show_documentation()' . "\n")
+"
 " added by SGK 20230429
 noremap <slient> <C-Left> :vertical resize +3<CR>
 noremap <slient> <C-Right> :vertical resize -3<CR>
@@ -255,3 +258,5 @@ noremap <slient> <C-Down> :vertical resize -3<CR>
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
+
+nnoremap <C-P> :Files<CR>

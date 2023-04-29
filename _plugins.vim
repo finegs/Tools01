@@ -1,7 +1,7 @@
 
 
 filetype off
-call plug#begin('$VIM/vimfiles/plugged')
+call plug#begin('$HOME/.vim/plugged')
 
 " Make sure you use single quotes
 " Use release branch (recommend)
@@ -14,7 +14,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
@@ -58,7 +58,9 @@ Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 
 " Optional:
 Plug 'honza/vim-snippets'
+Plug 'puremourning/vimspector'
 
+Plug 'cdelledonne/vim-cmake'
 "Plug '~/my-prototype-plugin'
 " Initialize plugin system
 call plug#end()
