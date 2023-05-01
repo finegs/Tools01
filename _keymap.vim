@@ -251,12 +251,14 @@ imap <C-/> <C-o>gc
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : ':call Show_documentation()' . "\n")
 "
 " added by SGK 20230429
-noremap <slient> <C-Left> :vertical resize +3<CR>
-noremap <slient> <C-Right> :vertical resize -3<CR>
-noremap <slient> <C-Up> :resize +3<CR>
-noremap <slient> <C-Down> :vertical resize -3<CR>
+nnoremap <slient> <C-Left> :vertical resize +3<CR>
+nnoremap <slient> <C-Right> :vertical resize -3<CR>
+nnoremap <slient> <C-Up> :resize +3<CR>
+nnoremap <slient> <C-Down> :vertical resize -3<CR>
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
+nnoremap <Leader>bb :Buffers<CR>
+
