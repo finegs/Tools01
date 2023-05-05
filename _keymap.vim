@@ -261,4 +261,5 @@ map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bb :Buffers<CR>
-
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>r :Rg <C-R><C-W><CR>
