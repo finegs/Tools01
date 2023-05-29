@@ -59,18 +59,25 @@ map <C-8> <Esc>:term<CR>
 
 " nnoremap <C-p> :Files<Cr>
 
-map <S-Down> :m+1<CR>
-map <S-Up> :m-2<CR>
-"map for move lines
-vnoremap <S-Up> :m-2<CR>
-vnoremap <S-Down> :m+1<CR>
-imap <S-Up> <Esc>:m-2<CR>
-imap <S-Down> <Esc>:m+1<CR>
+"map <S-Down> :m+1<CR>
+"map <S-Up> :m-2<CR>
+""map for move lines
+"vnoremap <S-Up> :m-2<CR>
+"vnoremap <S-Down> :m+1<CR>
+"imap <S-Up> <Esc>:m-2<CR>
+"imap <S-Down> <Esc>:m+1<CR>
+" nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+" nnoremap ,<Down> :<C-u>silent! move+<CR>==
+" xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+" xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
-nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
-nnoremap ,<Down> :<C-u>silent! move+<CR>==
-xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
+nnoremap <A-k> :m .-2<CR>==
+nnoremap <A-j> :m .+1<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
 
 " in diff mode we use the spell check keys for merging
 if &diff
@@ -168,6 +175,8 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+" nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
 nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
@@ -239,24 +248,17 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
-" Toggle menu bar/tool bar
+" Toogle Menubar/Toolbar
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 
-" Toggle Comment  
-map <C-/> gcc
-vmap <C-/> gc
-imap <C-/> <C-o>gc
-
 " Help of Document 
-nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : ':call Show_documentation()' . "\n")
-"
+nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
+
 " added by SGK 20230429
-noremap <slient> <C-Left> :vertical resize +3<CR>
-noremap <slient> <C-Right> :vertical resize -3<CR>
-noremap <slient> <C-Up> :resize +3<CR>
-noremap <slient> <C-Down> :vertical resize -3<CR>
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :vertical resize -3<CR>
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
-
-nnoremap <C-P> :Files<CR>
