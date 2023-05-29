@@ -1,23 +1,5 @@
 {
-	"suggest.noselect":true,
-	"codeLens.enable":true,
-	"python.pythonPath": "D:/Programs/Python/Python39/python.exe",
-	"python.linting.enabled": true,
-	"python.linting.pylintEnabled": true,
-	"python.linting.pylintPath": "D:/Programs/Python/Python39/Scripts/pylint.exe",
-	"python.linting.flake8Enabled": false,
-	"python.linting.pylintArgs": [
-		"--load-plugins", "pylint_django", 
-		"--extension-pkg-whitelist=wx, time, pygame",
-		"--disable=C0114,C0115,C0116,C0103",
-		"--disable=django-not-configured"
-	],
-	"python.analysis.autoImportCompletions": true,
-	"python.analysis.diagnosticSeverityOverrides": {
-		"reportMissingImports": "none"
-	},
-	"pyright.enable": true,
-	"python.analysis.autoSearchPaths": true,
-	"python.analysis.logLevel": "Information",
-	"python.analysis.typeCheckingMode": "off"
+	"rust-analyzer.server.path": "/home/user01/.cargo/bin/rust-analyzer",
+	"rust-analyzer.workspace.symbol.search.kind": "all_symbols",
+	"rust-analyzer.workspace.symbol.search.scope": "workspace_and_dependencies"
 }

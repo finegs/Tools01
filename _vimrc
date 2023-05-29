@@ -169,7 +169,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " ############# air-line ##############
 " Smarter tab line 활성화: 모든 파일 버퍼 출력
 let g:airline#extensions#tabline#enabled = 1
@@ -184,10 +184,12 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Powerline-font 활성화
 let g:airline_powerline_fonts = 1 
 
-execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+" execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 
 "added by SGK 20210508
-set t_Co=256
+if &term == "screen"
+  set t_Co=256
+endif
 
 highlight CursorLine ctermbg=Black guibg=#282828
 
@@ -196,6 +198,8 @@ highlight CocErrorFloat ctermfg=Yellow
 
 " vimspector for gdb plugin
 let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ]
 "packadd! vimspector
 
 " added by SGK 20211225
@@ -203,65 +207,25 @@ set wildmenu
 set wildmode=list
 let g:snipMate = { 'snippet_version' : 1 }
 
-" added by SGK 20230429
-set  splitbelow splitright
-
-let g:python_highlight_all = 1
-
-set guioptions-=m "remove menu bar
-set guioptions-=T "remove toolbar
-set guioptions-=r "remove right-hand scroll bar
-set guioptions-=L "remove left-hand scroll bar
-
-" fzf layout
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
-
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
-" let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
-
-" Customize fzf colors to match your color scheme
-" - fzf#wrap translates this to a set of `--color` options
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-
-" Get text in files with Rg
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   "rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/**' ".shellescape(<q-args>), 1,
-
- " " Make Ripgrep ONLY search file contents and not filenames
-" command! -bang -nargs=* Rg
- "  \ call fzf#vim#grep(
- "  \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
- "  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
- "  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
- "  \   <bang>0)
-
-" " Ripgrep advanced
-" function! RipgrepFzf(query, fullscreen)
- "  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
- "  let initial_command = printf(command_fmt, shellescape(a:query))
- "  let reload_command = printf(command_fmt, '{q}')
- "  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
- "  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-" endfunction
-
-" command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
 set termguicolors
 colorscheme darkblue
 colorscheme gruvbox
+
+let g:cmake_root_markers = ['.project']
+let g:cmake_build_dir_location = 'build'
+
+let g:fzf_layout = { 'down': '~40%' }
+
+let g:wintabs_powerline_arrow_left = " \u25c0 "
+let g:wintabs_powerline_arrow_right = " \u25b6 "
+let g:wintabs_powerline_sep_buffer_transition = "\ue0b0"
+let g:wintabs_powerline_sep_buffer = "\ue0b1"
+let g:wintabs_powerline_sep_tab_transition = "\ue0b2"
+let g:wintabs_powerline_sep_tab = "\ue0b3"
+highlight link WintabsEmpty TabLineFill
+highlight link WintabsActive TabLineSel
+highlight link WintabsInactive TabLine
+highlight link WintabsArrow TabLine
+highlight link WintabsActiveNC TabLine
+highlight link WintabsInactiveNC TabLine
 

@@ -255,6 +255,7 @@ map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
 
 " added by SGK 20230429
+<<<<<<< HEAD
 noremap <silent> <C-Left> :vertical resize +3<CR>
 noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
@@ -262,3 +263,17 @@ noremap <silent> <C-Down> :vertical resize -3<CR>
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
+=======
+nnoremap <slient> <C-Left> :vertical resize +3<CR>
+nnoremap <slient> <C-Right> :vertical resize -3<CR>
+nnoremap <slient> <C-Up> :resize +3<CR>
+nnoremap <slient> <C-Down> :vertical resize -3<CR>
+
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
+
+nnoremap <C-P> :Files<CR>
+nnoremap <Leader>bb :Buffers<CR>
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>r :Rg <C-R><C-W><CR>
+>>>>>>> f241978fd860def8b8a119d3bdffc8ba3fafeeac
