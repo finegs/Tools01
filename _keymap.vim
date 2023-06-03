@@ -71,12 +71,12 @@ map <C-8> <Esc>:term<CR>
 " xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 " xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
-nnoremap <A-k> :m .-2<CR>==
-nnoremap <A-j> :m .+1<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <C-k> :m .-2<CR>==
+nnoremap <C-j> :m .+1<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 
 " in diff mode we use the spell check keys for merging
@@ -255,19 +255,10 @@ map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
 
 " added by SGK 20230429
-<<<<<<< HEAD
 noremap <silent> <C-Left> :vertical resize +3<CR>
 noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :vertical resize -3<CR>
-
-map <Leader>th <C-w>t<C-w>H
-map <Leader>tk <C-w>t<C-w>K
-=======
-nnoremap <slient> <C-Left> :vertical resize +3<CR>
-nnoremap <slient> <C-Right> :vertical resize -3<CR>
-nnoremap <slient> <C-Up> :resize +3<CR>
-nnoremap <slient> <C-Down> :vertical resize -3<CR>
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
@@ -276,4 +267,3 @@ nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>r :Rg <C-R><C-W><CR>
->>>>>>> f241978fd860def8b8a119d3bdffc8ba3fafeeac
