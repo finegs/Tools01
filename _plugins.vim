@@ -65,6 +65,10 @@ Plug 'cdelledonne/vim-cmake'
 "
 Plug 'tpope/vim-fugitive'
 " Initialize plugin system
+
+Plug 'zefei/vim-wintabs'
+Plug 'zefei/vim-wintabs-powerline'
+Plug 'mhinz/vim-grepper'
 call plug#end()
 
 filetype plugin indent on

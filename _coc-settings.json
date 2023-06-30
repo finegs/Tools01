@@ -1,8 +1,32 @@
 {
-"python.pythonPath": "python",
-"python.jediEnabled": true,
-"python.jediPath": "D:/Programs/python/Python/lib/site-packages",
-"python.linting.pylintEnabled": true,
-"python.linting.pylintPath": "D:/Programs/Python/Python/Scripts/pylint",
-"python.linting.flake8Enabled": false
+	"suggest.noselect":true,
+	"codeLens.enable":true,
+	"python.pythonPath": "D:/Programs/Python/Python311/python.exe",
+	"python.linting.enabled": true,
+	"python.linting.pylintEnabled": true,
+	"python.linting.pylintPath": "D:/Programs/Python/Python311/Scripts/pylint.exe",
+	"python.linting.flake8Enabled": false,
+	"python.linting.pylintArgs": [
+		"--load-plugins", "pylint_django", 
+		"--extension-pkg-whitelist=wx, time, pygame",
+		"--disable=C0114,C0115,C0116,C0103",
+		"--disable=django-not-configured"
+	],
+	"python.analysis.autoImportCompletions": true,
+	"python.analysis.diagnosticSeverityOverrides": {
+		"reportMissingImports": "none"
+	},
+	"pyright.enable": true,
+	"python.analysis.autoSearchPaths": true,
+	"python.analysis.logLevel": "Information",
+	"python.analysis.typeCheckingMode": "off",
+	"java.configuration.runtimes": [
+		{
+			"name":"JavaSE-11",
+			"path":"D:/Programs/Java/openjdk-14_windows-x64/jdk-14"
+		}
+	],
+	"rust-analyzer.enable": true,
+	"rust-analyzer.server.path": "D:/Programs/Rust/rustup/toolchains/stable-x86_64-pc-windows-msvc/bin/rust-analyzer.exe",
+	"rust-analyzer.workspace.symbol.search.scope": "workspace_and_dependencies"
 }
