@@ -53,9 +53,15 @@ map <C-F7> <Esc>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
-map <C-0> <Esc>:NERDTreeToggle<CR>
-map <C-9> <Esc>:TagbarToggle<CR>
-map <C-8> <Esc>:term<CR>
+if has('gui_running')
+	map <C-0> <Esc>:NERDTreeToggle<CR>
+	map <C-9> <Esc>:TagbarToggle<CR>
+	map <C-8> <Esc>:term<CR>
+else
+	map <Space>0 <Esc>:NERDTreeToggle<CR>
+	map <Space>9 <Esc>:TagbarToggle<CR>
+	map <Space>8 <Esc>:term<CR>
+endif
 
 " nnoremap <C-p> :Files<Cr>
 
@@ -243,7 +249,7 @@ nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 
 " Toggle Comment  
-map <C-/> gcc
+map  <C-/> gcc
 vmap <C-/> gc
 imap <C-/> <C-o>gc
 
@@ -261,4 +267,10 @@ map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bb :Buffers<CR>
+
+" Toggle terminal - bottom
+nnoremap <silent> yot :call <SID>ToggleTerminal('J', 6)<CR>
+
+" Toggle terminal - right
+nnoremap <silent> yo<c-t> :call <SID>ToggleTerminal('L', 60)<CR>
 

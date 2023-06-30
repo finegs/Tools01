@@ -62,6 +62,8 @@ Plug 'puremourning/vimspector'
 
 Plug 'cdelledonne/vim-cmake'
 "Plug '~/my-prototype-plugin'
+"
+Plug 'tpope/vim-fugitive'
 " Initialize plugin system
 call plug#end()
 
