@@ -77,7 +77,7 @@ xnoremap <C-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 " in diff mode we use the spell check keys for merging
 if &diff
-  ” diff settings
+	" diff settings
   syntax off
   map <M-Down> ]c
   map <M-Up> [c
@@ -255,10 +255,18 @@ imap <C-/> <C-o>gc
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
 
 " added by SGK 20230429
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
+if has('gui_running')
+	noremap <silent> <C-Left> :vertical resize +3<CR>
+	noremap <silent> <C-Right> :vertical resize -3<CR>
+	noremap <silent> <C-Up> :resize +3<CR>
+	noremap <silent> <C-Down> :resize -3<CR>
+else
+	" TODO : can't make keymap for resize panel on non-gui
+	" noremap <silent> <C-Left> 	:vertical resize -3<CR>
+	" noremap <silent> <C-Right>	:vertical resize +3<CR>
+	" noremap <silent> <C-Up> 	:resize +3<CR>
+	" noremap <silent> <C-Down> 	:resize -3<CR>
+endif
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
@@ -274,4 +282,3 @@ nnoremap <silent> yo<c-t> :call <SID>ToggleTerminal('L', 60)<CR>
 
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>r :Rg <C-R><C-W><CR>
-
