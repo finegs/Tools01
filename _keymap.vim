@@ -30,7 +30,6 @@ imap <F2> <Esc> :w<CR><Esc>
 "map <F3> <Esc><C-]>
 map <S-F3> <Esc><C-t>
 map <C-F3> :ts<CR>
-"map <F3> :YcmCompleter GoTo<CR>
 
 map <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
 
@@ -63,31 +62,22 @@ else
 	map <Space>8 <Esc>:term<CR>
 endif
 
-" nnoremap <C-p> :Files<Cr>
+"map for move lines
+map <S-Down> :m+1<CR>
+map <S-Up> :m-2<CR>
+vnoremap <C-k> :m-2<CR>
+vnoremap <C-j> :m+1<CR>
+imap <C-k> <Esc>:m-2<CR>
+imap <C-j> <Esc>:m+1<CR>
 
-"map <S-Down> :m+1<CR>
-"map <S-Up> :m-2<CR>
-""map for move lines
-"vnoremap <S-Up> :m-2<CR>
-"vnoremap <S-Down> :m+1<CR>
-"imap <S-Up> <Esc>:m-2<CR>
-"imap <S-Down> <Esc>:m+1<CR>
-" nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
-" nnoremap ,<Down> :<C-u>silent! move+<CR>==
-" xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-" xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
-
-nnoremap <C-k> :m .-2<CR>==
-nnoremap <C-j> :m .+1<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
-
+nnoremap <C-k>   :<C-u>silent! move-2<CR>==
+nnoremap <C-j>	 :<C-u>silent! move+<CR>==
+xnoremap <C-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+xnoremap <C-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 " in diff mode we use the spell check keys for merging
 if &diff
-  ” diff settings
+	" diff settings
   syntax off
   map <M-Down> ]c
   map <M-Up> [c
@@ -181,9 +171,8 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-" nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
-nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
+nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
+" nnoremap <space>e <Cmd>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
@@ -254,11 +243,11 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
-" Toogle Menubar/Toolbar
+" Toggle menu bar/tool bar
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 
 " Toggle Comment  
-map  <C-/> gcc
+map <C-/> gcc
 vmap <C-/> gc
 imap <C-/> <C-o>gc
 
@@ -266,10 +255,18 @@ imap <C-/> <C-o>gc
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
 
 " added by SGK 20230429
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
+if has('gui_running')
+	noremap <silent> <C-Left> :vertical resize +3<CR>
+	noremap <silent> <C-Right> :vertical resize -3<CR>
+	noremap <silent> <C-Up> :resize +3<CR>
+	noremap <silent> <C-Down> :resize -3<CR>
+else
+	" TODO : can't make keymap for resize panel on non-gui
+	" noremap <silent> <C-Left> 	:vertical resize -3<CR>
+	" noremap <silent> <C-Right>	:vertical resize +3<CR>
+	" noremap <silent> <C-Up> 	:resize +3<CR>
+	" noremap <silent> <C-Down> 	:resize -3<CR>
+endif
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
