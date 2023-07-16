@@ -77,7 +77,7 @@ xnoremap <C-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 " in diff mode we use the spell check keys for merging
 if &diff
-	" diff settings
+" diff settings
   syntax off
   map <M-Down> ]c
   map <M-Up> [c
@@ -112,8 +112,7 @@ map gx :bd<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-nnoremap <silent> K :call Show_documentation()<CR>
+nnoremap <silent> K :call Show_documentation_My()<CR>
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -251,22 +250,11 @@ map <C-/> gcc
 vmap <C-/> gc
 imap <C-/> <C-o>gc
 
-" Help of Document 
-nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
-
 " added by SGK 20230429
-if has('gui_running')
-	noremap <silent> <C-Left> :vertical resize +3<CR>
-	noremap <silent> <C-Right> :vertical resize -3<CR>
-	noremap <silent> <C-Up> :resize +3<CR>
-	noremap <silent> <C-Down> :resize -3<CR>
-else
-	" TODO : can't make keymap for resize panel on non-gui
-	" noremap <silent> <C-Left> 	:vertical resize -3<CR>
-	" noremap <silent> <C-Right>	:vertical resize +3<CR>
-	" noremap <silent> <C-Up> 	:resize +3<CR>
-	" noremap <silent> <C-Down> 	:resize -3<CR>
-endif
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
