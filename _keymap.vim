@@ -53,13 +53,34 @@ map <C-F7> <Esc>:make release<CR>
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
 if has('gui_running')
-	map <C-0> <Esc>:NERDTreeToggle<CR>
-	map <C-9> <Esc>:TagbarToggle<CR>
-	map <C-8> <Esc>:term<CR>
-else
 	map <Space>0 <Esc>:NERDTreeToggle<CR>
 	map <Space>9 <Esc>:TagbarToggle<CR>
 	map <Space>8 <Esc>:term<CR>
+
+	"map for move lines
+	map <S-Down> :m+1<CR>
+	map <S-Up> :m-2<CR>
+	imap <C-k> <Esc>:m-2<CR>
+	imap <C-j> <Esc>:m+1<CR>
+
+	nnoremap <S-k>   :<C-u>silent! move-2<CR>==
+	nnoremap <S-j>	 :<C-u>silent! move+<CR>==
+	vnoremap <S-k>	 :<C-u>silent! m-2<CR>
+	vnoremap <S-j>	 :<C-u>silent! m+1<CR>
+	xnoremap <S-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap <S-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
+
+else
+	nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
+	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
+	nnoremap <Space>8 <Esc>:term<CR>
+
+	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+	nnoremap ,<Down>	 :<C-u>silent! move+<CR>==
+	vnoremap ,<Up>	 :<C-u>silent! m-2<CR>
+	vnoremap ,<Down>	 :<C-u>silent! m+1<CR>
+	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap ,<Down>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 endif
 
 " nnoremap <C-p> :Files<Cr>
@@ -175,7 +196,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
+nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
