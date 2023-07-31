@@ -58,17 +58,17 @@ if has('gui_running')
 	map <Space>8 <Esc>:term<CR>
 
 	"map for move lines
-	map <S-Down> :m+1<CR>
-	map <S-Up> :m-2<CR>
-	imap <C-k> <Esc>:m-2<CR>
-	imap <C-j> <Esc>:m+1<CR>
+	map <M-Down> :m+1<CR>
+	map <M-Up> :m-2<CR>
+	imap <M-k> <Esc>:m-2<CR>
+	imap <M-j> <Esc>:m+1<CR>
 
-	nnoremap <S-k>   :<C-u>silent! move-2<CR>==
-	nnoremap <S-j>	 :<C-u>silent! move+<CR>==
-	vnoremap <S-k>	 :<C-u>silent! m-2<CR>
-	vnoremap <S-j>	 :<C-u>silent! m+1<CR>
-	xnoremap <S-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-	xnoremap <S-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
+	nnoremap <M-k>   :<C-u>silent! move-2<CR>==
+	nnoremap <M-j>	 :<C-u>silent! move+<CR>==
+	vnoremap <M-k>	 :<C-u>silent! m-2<CR>
+	vnoremap <M-j>	 :<C-u>silent! m+1<CR>
+	xnoremap <M-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 else
 	nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
@@ -86,13 +86,13 @@ endif
 " nnoremap <C-p> :Files<Cr>
 
 if has('gui_running')
-	map <S-Down> :m+1<CR>
-	map <S-Up> :m-2<CR>
+	map <M-Down> :m+1<CR>
+	map <M-Up> :m-2<CR>
 	"map for move lines
-	vnoremap <S-Up> :m-2<CR>
-	vnoremap <S-Down> :m+1<CR>
-	imap <S-Up> <Esc>:m-2<CR>
-	imap <S-Down> <Esc>:m+1<CR>
+	vnoremap <M-Up> :m-2<CR>
+	vnoremap <M-Down> :m+1<CR>
+	imap <M-Up> <Esc>:m-2<CR>
+	imap <M-Down> <Esc>:m+1<CR>
 else
 	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
 	nnoremap ,<Down> :<C-u>silent! move+<CR>==
@@ -286,10 +286,10 @@ if has('gui_running')
 	nnoremap <slient> <C-Up> :resize +3<CR>
 	nnoremap <slient> <C-Down> :vertical resize -3<CR>
 else
-	" nnoremap <slient> <C-Left> :vertical resize +3<CR>
-	" nnoremap <slient> <C-Right> :vertical resize -3<CR>
-	" nnoremap <slient> <C-Up> :resize +3<CR>
-	" nnoremap <slient> <C-Down> :vertical resize -3<CR>
+	nnoremap <Leader><Left> 	:vertical resize -3<CR>
+	nnoremap <Leader><Right> 	:vertical resize +3<CR>
+	nnoremap <Leader><Up> 		:resize -3<CR>
+	nnoremap <Leader><Down> 	:resize +3<CR>
 endif
 
 map <Leader>th <C-w>t<C-w>H
@@ -297,12 +297,16 @@ map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bb :Buffers<CR>
+nnoremap <Leader><Tab> :Maps<CR>
+nnoremap <Leader>cmd :Commands<CR>
+nnoremap <Leader>mks :Marks<CR>
+nnoremap <Leader>ts :Tags<CR>
 
 " Toggle terminal - bottom
-nnoremap <silent> yot :call <SID>ToggleTerminal('J', 6)<CR>
+nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
 
 " Toggle terminal - right
-nnoremap <silent> yo<c-t> :call <SID>ToggleTerminal('L', 60)<CR>
+nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>r :Rg <C-R><C-W><CR>
+nnoremap <silent> <Leader>r  :Rg <C-R><C-W><CR>
