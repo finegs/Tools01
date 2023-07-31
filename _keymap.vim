@@ -310,3 +310,10 @@ nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>r  :Rg <C-R><C-W><CR>
+
+nmap <leader>cg <Plug>(CMakeGenerate)
+nmap <leader>cb <Plug>(CMakeBuild)
+nmap <leader>ci <Plug>(CMakeInstall)
+nmap <leader>cs <Plug>(CMakeSwitch)
+nmap <leader>cq <Plug>(CMakeClose)
+
