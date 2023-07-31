@@ -62,20 +62,25 @@ else
 	map <Space>8 <Esc>:term<CR>
 endif
 
-"map for move lines
-map <S-Down> :m+1<CR>
-map <S-Up> :m-2<CR>
-vnoremap <C-k> :m-2<CR>
-vnoremap <C-j> :m+1<CR>
-imap <C-k> <Esc>:m-2<CR>
-imap <C-j> <Esc>:m+1<CR>
+" nnoremap <C-p> :Files<Cr>
 
-nnoremap <C-k>   :<C-u>silent! move-2<CR>==
-nnoremap <C-j>	 :<C-u>silent! move+<CR>==
-xnoremap <C-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-xnoremap <C-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
+if has('gui_running')
+	map <S-Down> :m+1<CR>
+	map <S-Up> :m-2<CR>
+	"map for move lines
+	vnoremap <S-Up> :m-2<CR>
+	vnoremap <S-Down> :m+1<CR>
+	imap <S-Up> <Esc>:m-2<CR>
+	imap <S-Down> <Esc>:m+1<CR>
+else
+	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+	nnoremap ,<Down> :<C-u>silent! move+<CR>==
+	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
+endif
 
 " in diff mode we use the spell check keys for merging
+" diff setting
 if &diff
 " diff settings
   syntax off
@@ -112,7 +117,7 @@ map gx :bd<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call Show_documentation_My()<CR>
+nnoremap <silent> K :call Show_documentation()<CR>
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -170,8 +175,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
-" nnoremap <space>e <Cmd>CocCommand explorer<CR>
+nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
@@ -250,11 +254,22 @@ map <C-/> gcc
 vmap <C-/> gc
 imap <C-/> <C-o>gc
 
+" Help of Document 
+nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : ':call Show_documentation()' . "\n")
+"
 " added by SGK 20230429
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
+
+if has('gui_running')
+	nnoremap <slient> <C-Left> :vertical resize +3<CR>
+	nnoremap <slient> <C-Right> :vertical resize -3<CR>
+	nnoremap <slient> <C-Up> :resize +3<CR>
+	nnoremap <slient> <C-Down> :vertical resize -3<CR>
+else
+	" nnoremap <slient> <C-Left> :vertical resize +3<CR>
+	" nnoremap <slient> <C-Right> :vertical resize -3<CR>
+	" nnoremap <slient> <C-Up> :resize +3<CR>
+	" nnoremap <slient> <C-Down> :vertical resize -3<CR>
+endif
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
