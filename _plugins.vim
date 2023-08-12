@@ -74,6 +74,7 @@ Plug 'zefei/vim-wintabs-powerline'
 Plug 'mhinz/vim-grepper'
 
 Plug 'tpope/vim-fugitive'
+Plug 'github/copilot.vim'
 
 call plug#end()
 

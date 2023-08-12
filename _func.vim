@@ -118,7 +118,7 @@ function MyDiff()
   endif
 endfunction
 
-function! Show_documentation_My()
+function! Show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   elseif (coc#rpc#ready())
