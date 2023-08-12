@@ -38,8 +38,8 @@ Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
 Plug 'frazrepo/vim-rainbow'
 "{{ File management }}
 Plug 'vifm/vifm.vim'                               " Vifm
-Plug 'scrooloose/nerdtree'                         " Nerdtree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
+" Plug 'scrooloose/nerdtree'                         " Nerdtree
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
 Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 "{{ Productivity }}
 Plug 'vimwiki/vimwiki'                             " VimWiki 
@@ -67,6 +67,9 @@ Plug 'cdelledonne/vim-cmake'
 Plug 'zefei/vim-wintabs'
 Plug 'zefei/vim-wintabs-powerline'
 Plug 'mhinz/vim-grepper'
+
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 
 filetype plugin indent on

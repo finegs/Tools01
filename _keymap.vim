@@ -53,9 +53,10 @@ map <C-F7> <Esc>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
-map <C-0> <Esc>:NERDTreeToggle<CR>
-map <C-9> <Esc>:TagbarToggle<CR>
-map <C-8> <Esc>:term<CR>
+" map <C-0> <Esc>:NERDTreeToggle<CR>
+map <Space>9 <Esc>:TagbarToggle<CR>
+map <Space>8 <Esc>:vertical :botright :term<CR>
+
 
 " nnoremap <C-p> :Files<Cr>
 
@@ -250,6 +251,7 @@ nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
 " Toogle Menubar/Toolbar
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
+map <C-F2> <Esc>:ALEToggle<CR>
 
 " Help of Document 
 nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
@@ -264,6 +266,14 @@ map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
-nnoremap <Leader>bb :Buffers<CR>
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>r :Rg <C-R><C-W><CR>
+nnoremap <Space>bb :Buffers<CR>
+nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
+nnoremap <silent> <Space>bm :Marks    <CR>
+nnoremap <silent> <Space><Tab> :Maps  <CR>
+nnoremap <silent> <Space><Tab> :Maps  <CR>
+nnoremap <silent> <Space>hc :History: <CR>
+nnoremap <silent> <Space>hs :History/ <CR>
+
+nmap <Leader>cg :CMakeGenerate<cr>
+nmap <Leader>cb :CMakeBuild<cr>
