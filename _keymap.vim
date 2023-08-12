@@ -30,7 +30,6 @@ imap <F2> <Esc> :w<CR><Esc>
 "map <F3> <Esc><C-]>
 map <S-F3> <Esc><C-t>
 map <C-F3> :ts<CR>
-"map <F3> :YcmCompleter GoTo<CR>
 
 map <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
 
@@ -53,36 +52,59 @@ map <C-F7> <Esc>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
-" map <C-0> <Esc>:NERDTreeToggle<CR>
-map <Space>9 <Esc>:TagbarToggle<CR>
-map <Space>8 <Esc>:vertical :botright :term<CR>
 
+if has('gui_running')
+	" map <Space>0 <Esc>:NERDTreeToggle<CR>
+	map <Space>9 <Esc>:TagbarToggle<CR>
+	map <Space>8 <Esc>:vertial :botright :term<CR>
+
+	"map for move lines
+	map <M-Down> :m+1<CR>
+	map <M-Up> :m-2<CR>
+	imap <M-k> <Esc>:m-2<CR>
+	imap <M-j> <Esc>:m+1<CR>
+
+	nnoremap <M-k>   :<C-u>silent! move-2<CR>==
+	nnoremap <M-j>	 :<C-u>silent! move+<CR>==
+	vnoremap <M-k>	 :<C-u>silent! m-2<CR>
+	vnoremap <M-j>	 :<C-u>silent! m+1<CR>
+	xnoremap <M-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
+
+else
+	" nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
+	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
+	nnoremap <Space>8 <Esc>:term<CR>
+
+	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+	nnoremap ,<Down>	 :<C-u>silent! move+<CR>==
+	vnoremap ,<Up>	 :<C-u>silent! m-2<CR>
+	vnoremap ,<Down>	 :<C-u>silent! m+1<CR>
+	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap ,<Down>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
+endif
 
 " nnoremap <C-p> :Files<Cr>
 
-"map <S-Down> :m+1<CR>
-"map <S-Up> :m-2<CR>
-""map for move lines
-"vnoremap <S-Up> :m-2<CR>
-"vnoremap <S-Down> :m+1<CR>
-"imap <S-Up> <Esc>:m-2<CR>
-"imap <S-Down> <Esc>:m+1<CR>
-" nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
-" nnoremap ,<Down> :<C-u>silent! move+<CR>==
-" xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-" xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
-
-nnoremap <C-k> :m .-2<CR>==
-nnoremap <C-j> :m .+1<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
-
+if has('gui_running')
+	map <M-Down> :m+1<CR>
+	map <M-Up> :m-2<CR>
+	"map for move lines
+	vnoremap <M-Up> :m-2<CR>
+	vnoremap <M-Down> :m+1<CR>
+	imap <M-Up> <Esc>:m-2<CR>
+	imap <M-Down> <Esc>:m+1<CR>
+else
+	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+	nnoremap ,<Down> :<C-u>silent! move+<CR>==
+	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
+endif
 
 " in diff mode we use the spell check keys for merging
+" diff setting
 if &diff
-  ” diff settings
+" diff settings
   syntax off
   map <M-Down> ]c
   map <M-Up> [c
@@ -117,7 +139,6 @@ map gx :bd<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> K :call Show_documentation()<CR>
 
 " Symbol renaming.
@@ -176,9 +197,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-" nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
-nnoremap <silent><nowait> <space>e <Cmd>CocCommand explorer<CR>
+nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
@@ -249,31 +268,59 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
-" Toogle Menubar/Toolbar
+" Toggle menu bar/tool bar
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 map <C-F2> <Esc>:ALEToggle<CR>
 
-" Help of Document 
-nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : 'K')
+" Toggle Comment  
+map <C-/> gcc
+vmap <C-/> gc
+imap <C-/> <C-o>gc
 
+" Help of Document 
+nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>')) . "\n") : ':call Show_documentation()' . "\n")
+"
 " added by SGK 20230429
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :vertical resize -3<CR>
+
+if has('gui_running')
+	nnoremap <slient> <C-Left> :vertical resize +3<CR>
+	nnoremap <slient> <C-Right> :vertical resize -3<CR>
+	nnoremap <slient> <C-Up> :resize +3<CR>
+	nnoremap <slient> <C-Down> :vertical resize -3<CR>
+else
+	nnoremap <Leader><Left> 	:vertical resize -3<CR>
+	nnoremap <Leader><Right> 	:vertical resize +3<CR>
+	nnoremap <Leader><Up> 		:resize -3<CR>
+	nnoremap <Leader><Down> 	:resize +3<CR>
+endif
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
-nnoremap <Space>bb :Buffers<CR>
+
+nnoremap <silent> <Space>bb :Buffers<CR>
 nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
-nnoremap <silent> <Space>bm :Marks    <CR>
-nnoremap <silent> <Space><Tab> :Maps  <CR>
+nnoremap <silent> <Space>cmd :Commands<CR>
+nnoremap <silent> <Space>mks :Marks    <CR>
 nnoremap <silent> <Space><Tab> :Maps  <CR>
 nnoremap <silent> <Space>hc :History: <CR>
 nnoremap <silent> <Space>hs :History/ <CR>
+nnoremap <silent> <Space>ts :Tags<CR>
 
 nmap <Leader>cg :CMakeGenerate<cr>
 nmap <Leader>cb :CMakeBuild<cr>
+
+" " Toggle terminal - bottom
+" nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
+
+" " Toggle terminal - right
+" nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
+
+nmap <leader>cg <Plug>(CMakeGenerate)
+nmap <leader>cb <Plug>(CMakeBuild)
+nmap <leader>ci <Plug>(CMakeInstall)
+nmap <leader>cs <Plug>(CMakeSwitch)
+nmap <leader>cq <Plug>(CMakeClose)
+

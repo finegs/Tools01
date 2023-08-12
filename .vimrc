@@ -215,3 +215,8 @@ let g:cmake_root_markers = ['.project']
 let g:cmake_build_dir_location = 'build'
 
 let g:fzf_layout = { 'down': '~40%' }
+
+set splitright
+set splitbelow
+
+set ignorecase
