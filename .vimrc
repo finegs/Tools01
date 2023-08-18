@@ -207,7 +207,7 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ]
 
 " added by SGK 20211225
 set wildmenu
-set wildmode=list
+set wildmode=list,longest
 let g:snipMate = { 'snippet_version' : 1 }
 
 set termguicolors
@@ -217,11 +217,11 @@ colorscheme gruvbox
 let g:cmake_root_markers = ['.project']
 let g:cmake_build_dir_location = 'build'
 
-let g:fzf_layout = { 'down': '~40%' }
+" let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 set splitright
 set splitbelow
 
 set ignorecase
-
-let g:plug_url_format='https://{personal access token}@github.com/%s.git'
+:cabbrev h vert help

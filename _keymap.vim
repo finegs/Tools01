@@ -72,7 +72,7 @@ if has('gui_running')
 	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 else
-	" nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
+	nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
 	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
 	nnoremap <Space>8 <Esc>:term<CR>
 
@@ -255,7 +255,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 if has('nvim')
 	inoremap <silent><expr> <c-space> coc#refresh()
 else
-	inoremap <silent><expr> <c-@> coc#refresh()
+	" inoremap <silent><expr> <c-@> coc#refresh()
+	inoremap <silent><expr> <c-space> coc#refresh()
 endif
 
 " < Use <CR> to confirm completion, use: >
@@ -298,25 +299,20 @@ map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
+nnoremap <Leader>bb :Buffers<CR>
+nnoremap <Leader><Tab> :Maps<CR>
+nnoremap <Leader>cmd :Commands<CR>
+nnoremap <Leader>mks :Marks<CR>
+nnoremap <Leader>ts :Tags<CR>
 
-nnoremap <silent> <Space>bb :Buffers<CR>
-nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
-nnoremap <silent> <Space>cmd :Commands<CR>
-nnoremap <silent> <Space>mks :Marks    <CR>
-nnoremap <silent> <Space><Tab> :Maps  <CR>
-nnoremap <silent> <Space>hc :History: <CR>
-nnoremap <silent> <Space>hs :History/ <CR>
-nnoremap <silent> <Space>ts :Tags<CR>
+" Toggle terminal - bottom
+nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
 
-nmap <Leader>cg :CMakeGenerate<cr>
-nmap <Leader>cb :CMakeBuild<cr>
+" Toggle terminal - right
+nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
-" " Toggle terminal - bottom
-" nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
-
-" " Toggle terminal - right
-" nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>r  :Rg <C-R><C-W><CR>
 
 nmap <leader>cg <Plug>(CMakeGenerate)
 nmap <leader>cb <Plug>(CMakeBuild)
