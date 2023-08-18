@@ -3,6 +3,9 @@
 set nocompatible
 filetype off
 
+
+let g:plug_url_format='https://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@github.com/%s.git'
+
 source $VIM/vim90/defaults.vim
 source $HOME/.vim/_cscope_maps.vim
 source $HOME/.vim/_func.vim
@@ -220,3 +223,5 @@ set splitright
 set splitbelow
 
 set ignorecase
+
+let g:plug_url_format='https://{personal access token}@github.com/%s.git'

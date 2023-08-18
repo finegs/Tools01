@@ -52,10 +52,11 @@ map <C-F7> <Esc>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
+
 if has('gui_running')
-	map <Space>0 <Esc>:NERDTreeToggle<CR>
+	" map <Space>0 <Esc>:NERDTreeToggle<CR>
 	map <Space>9 <Esc>:TagbarToggle<CR>
-	map <Space>8 <Esc>:term<CR>
+	map <Space>8 <Esc>:vertial :botright :term<CR>
 
 	"map for move lines
 	map <M-Down> :m+1<CR>
@@ -71,7 +72,7 @@ if has('gui_running')
 	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 else
-	nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
+	" nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
 	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
 	nnoremap <Space>8 <Esc>:term<CR>
 
@@ -269,6 +270,7 @@ nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
 " Toggle menu bar/tool bar
 map <C-F1> <Esc>:call ToggleGUICruft()<CR>
+map <C-F2> <Esc>:ALEToggle<CR>
 
 " Toggle Comment  
 map <C-/> gcc
@@ -296,20 +298,25 @@ map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
-nnoremap <Leader>bb :Buffers<CR>
-nnoremap <Leader><Tab> :Maps<CR>
-nnoremap <Leader>cmd :Commands<CR>
-nnoremap <Leader>mks :Marks<CR>
-nnoremap <Leader>ts :Tags<CR>
 
-" Toggle terminal - bottom
-nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
+nnoremap <silent> <Space>bb :Buffers<CR>
+nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
+nnoremap <silent> <Space>cmd :Commands<CR>
+nnoremap <silent> <Space>mks :Marks    <CR>
+nnoremap <silent> <Space><Tab> :Maps  <CR>
+nnoremap <silent> <Space>hc :History: <CR>
+nnoremap <silent> <Space>hs :History/ <CR>
+nnoremap <silent> <Space>ts :Tags<CR>
 
-" Toggle terminal - right
-nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
+nmap <Leader>cg :CMakeGenerate<cr>
+nmap <Leader>cb :CMakeBuild<cr>
 
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>r  :Rg <C-R><C-W><CR>
+" " Toggle terminal - bottom
+" nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
+
+" " Toggle terminal - right
+" nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
 nmap <leader>cg <Plug>(CMakeGenerate)
 nmap <leader>cb <Plug>(CMakeBuild)
