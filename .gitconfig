@@ -1,0 +1,9 @@
+[user]
+	email = finegs@gmail.com
+	name = S.G
+[core]
+	editor = vim
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[alias]
+	lg = log --graph --decorate -30 --all --topo-order --date=format-local:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(cyan)%h%Creset %C(black bold)%ad%Creset%C(auto)%d %s'
