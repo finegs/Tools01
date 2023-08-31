@@ -298,8 +298,8 @@ endif
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
-nnoremap <C-P> :Files<CR>
-nnoremap <Leader>bb :Buffers<CR>
+nnoremap <C-P> :Buffers<CR>
+nnoremap <Space>ff :Files<CR>
 nnoremap <Leader><Tab> :Maps<CR>
 nnoremap <Leader>cmd :Commands<CR>
 nnoremap <Leader>mks :Marks<CR>
