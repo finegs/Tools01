@@ -187,7 +187,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Powerline-font 활성화
 let g:airline_powerline_fonts = 1 
 
-execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+" execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 
 "added by SGK 20210508
 if &term == "screen"
