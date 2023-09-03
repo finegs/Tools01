@@ -3,6 +3,9 @@
 set nocompatible
 filetype off
 
+
+let g:plug_url_format='https://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@github.com/%s.git'
+
 source $VIM/vim90/defaults.vim
 source $HOME/.vim/_cscope_maps.vim
 source $HOME/.vim/_func.vim
@@ -169,7 +172,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " ############# air-line ##############
 " Smarter tab line 활성화: 모든 파일 버퍼 출력
 let g:airline#extensions#tabline#enabled = 1
@@ -204,7 +207,7 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ]
 
 " added by SGK 20211225
 set wildmenu
-set wildmode=list
+set wildmode=list,longest
 let g:snipMate = { 'snippet_version' : 1 }
 
 set termguicolors
@@ -214,18 +217,11 @@ colorscheme gruvbox
 let g:cmake_root_markers = ['.project']
 let g:cmake_build_dir_location = 'build'
 
-let g:fzf_layout = { 'down': '~40%' }
+" let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
-let g:wintabs_powerline_arrow_left = " \u25c0 "
-let g:wintabs_powerline_arrow_right = " \u25b6 "
-let g:wintabs_powerline_sep_buffer_transition = "\ue0b0"
-let g:wintabs_powerline_sep_buffer = "\ue0b1"
-let g:wintabs_powerline_sep_tab_transition = "\ue0b2"
-let g:wintabs_powerline_sep_tab = "\ue0b3"
-highlight link WintabsEmpty TabLineFill
-highlight link WintabsActive TabLineSel
-highlight link WintabsInactive TabLine
-highlight link WintabsArrow TabLine
-highlight link WintabsActiveNC TabLine
-highlight link WintabsInactiveNC TabLine
+set splitright
+set splitbelow
 
+set ignorecase
+:cabbrev h vert help
