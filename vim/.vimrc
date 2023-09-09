@@ -46,8 +46,8 @@ set termencoding=utf-8
 "set langmenu=cp949
 
 syntax on
-set ts=4
-set sw=4
+set ts=2
+set sw=2
 set hlsearch
 set nu
 set relativenumber
@@ -187,7 +187,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Powerline-font 활성화
 let g:airline_powerline_fonts = 1 
 
-" execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 
 "added by SGK 20210508
 if &term == "screen"
@@ -225,3 +225,7 @@ set splitbelow
 
 set ignorecase
 :cabbrev h vert help
+
+let g:dbs = {
+\  'db01': 'mysql://user01:user01@localhost:3306/db01'
+\ }
