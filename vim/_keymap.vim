@@ -197,7 +197,7 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
 nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>m  :<C-u>CocList commands<CR>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
@@ -282,15 +282,15 @@ nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>
 " added by SGK 20230429
 
 if has('gui_running')
-	nnoremap <slient> <C-Left> :vertical resize +3<CR>
-	nnoremap <slient> <C-Right> :vertical resize -3<CR>
-	nnoremap <slient> <C-Up> :resize +3<CR>
-	nnoremap <slient> <C-Down> :vertical resize -3<CR>
+	nnoremap <slient> <C-Left> :vertical resize +10<CR>
+	nnoremap <slient> <C-Right> :vertical resize -10<CR>
+	nnoremap <slient> <C-Up> :resize +10<CR>
+	nnoremap <slient> <C-Down> :vertical resize -10<CR>
 else
-	nnoremap <Leader><Left> 	:vertical resize -3<CR>
-	nnoremap <Leader><Right> 	:vertical resize +3<CR>
-	nnoremap <Leader><Up> 		:resize -3<CR>
-	nnoremap <Leader><Down> 	:resize +3<CR>
+	nnoremap <Leader><Left> 	:vertical resize -10<CR>
+	nnoremap <Leader><Right> 	:vertical resize +10<CR>
+	nnoremap <Leader><Up> 		:resize -10<CR>
+	nnoremap <Leader><Down> 	:resize +10<CR>
 endif
 
 map <Leader>th <C-w>t<C-w>H
@@ -303,9 +303,13 @@ nnoremap <Leader>cmd :Commands<CR>
 nnoremap <Leader>mks :Marks<CR>
 nnoremap <Leader>ts :Tags<CR>
 
-nnoremap <silent> <Space>bb :Buffers<CR>
-nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
+nnoremap <silent> <Space>bb  :Buffers<CR>
+" nnoremap <silent> <Space>ag  <esc>:Ag <C-R><C-W><CR>
+nnoremap <silent> <Space>tt  :Rg -q <C-R><C-W><CR>
+" nnoremap <silent> <Space>tt  :Rg -q <C-R>=expand("<cword>")<CR><CR>
+" vnoremap <silent> <Space>ft <esc>:FZF -q <C-R>=GetVisualSelection()<CR><CR>
+" vnoremap <silent> <Space>ag :Ag -q <C-R>=GetVisualSelection()<CR><CR>
+" vnoremap <silent> <Space>tt :Rg -q <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <Space>cmd :Commands<CR>
 nnoremap <silent> <Space>mks :Marks    <CR>
 nnoremap <silent> <Space><Tab> :Maps  <CR>
