@@ -252,10 +252,11 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 " Use <c-space> to trigger completion: >
 if has('nvim')
 	inoremap <silent><expr> <c-space> coc#refresh()
-else
+else 
 	" inoremap <silent><expr> <c-@> coc#refresh()
 	inoremap <silent><expr> <c-space> coc#refresh()
-endif
+endif  
+
 
 " < Use <CR> to confirm completion, use: >
 inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
@@ -285,7 +286,7 @@ if has('gui_running')
 	nnoremap <slient> <C-Left> :vertical resize +10<CR>
 	nnoremap <slient> <C-Right> :vertical resize -10<CR>
 	nnoremap <slient> <C-Up> :resize +10<CR>
-	nnoremap <slient> <C-Down> :vertical resize -10<CR>
+	nnoremap <slient> <C-Down> :resize -10<CR>
 else
 	nnoremap <Leader><Left> 	:vertical resize -10<CR>
 	nnoremap <Leader><Right> 	:vertical resize +10<CR>
@@ -298,24 +299,24 @@ map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Buffers<CR>
 nnoremap <Space>ff :Files<CR>
+nnoremap <Space>bl :BLines<CR>
+nnoremap <Space>ll :Lines<CR>
 nnoremap <Leader><Tab> :Maps<CR>
 nnoremap <Leader>cmd :Commands<CR>
 nnoremap <Leader>mks :Marks<CR>
 nnoremap <Leader>ts :Tags<CR>
-
-nnoremap <silent> <Space>bb  :Buffers<CR>
-" nnoremap <silent> <Space>ag  <esc>:Ag <C-R><C-W><CR>
-nnoremap <silent> <Space>tt  :Rg -q <C-R><C-W><CR>
-" nnoremap <silent> <Space>tt  :Rg -q <C-R>=expand("<cword>")<CR><CR>
-" vnoremap <silent> <Space>ft <esc>:FZF -q <C-R>=GetVisualSelection()<CR><CR>
-" vnoremap <silent> <Space>ag :Ag -q <C-R>=GetVisualSelection()<CR><CR>
-" vnoremap <silent> <Space>tt :Rg -q <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <Space>cmd :Commands<CR>
-nnoremap <silent> <Space>mks :Marks    <CR>
-nnoremap <silent> <Space><Tab> :Maps  <CR>
 nnoremap <silent> <Space>hc :History: <CR>
 nnoremap <silent> <Space>hs :History/ <CR>
 nnoremap <silent> <Space>ts :Tags<CR>
+
+nnoremap <silent> <Space>agc :Ag!<C-r>=Escape(expand('<cword>'))<CR><CR>
+nnoremap <silent> <Space>rgc :Rg!<C-r>=Escape(expand('<cword>'))<CR><CR>
+nnoremap <silent> <Space>ag  :Ag -q<CR>
+nnoremap <silent> <Space>rg  :Rg -q<CR>
+" noremap <silent> <Space>ft :FZF -q <C-R>=GetVisualSelection()<CR><CR>
+" vnoremap <silent> <Space>ft :FZF -q <C-R>=GetVisualSelection()<CR><CR>
+" vnoremap <silent> <Space>ag :Ag -q <C-R>=GetVisualSelection()<CR><CR>
+" vnoremap <silent> <Space>tt :Rg -q <C-R>=expand("<cword>")<CR><CR>
 
 nmap <Leader>cg :CMakeGenerate<cr>
 nmap <Leader>cb :CMakeBuild<cr>

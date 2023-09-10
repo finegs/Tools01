@@ -279,3 +279,9 @@ function! GetVisualSelection()
 
     return join(lines, "\n")
 endfunction
+
+" for Ag, Rg for searching word under cursor
+function! Escape(stuff)
+    return substitute(escape(a:stuff, '\/.*$^~[]'), "\n", '\\n', "g")
+endfunction
+
