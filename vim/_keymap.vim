@@ -118,10 +118,10 @@ else
   map <M-Up> [s
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `<Space><Left>` and `<Space><Right>` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <Space><Left> <Plug>(coc-diagnostic-prev)
+nmap <silent> <Space><Right> <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -134,7 +134,7 @@ map gn :bn<CR>
 map gp :bp<CR>
 map gx :bd<CR>
 " GoTo buffer with buffer number
-nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>bb :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
@@ -197,7 +197,7 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
 nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
-nnoremap <silent><nowait> <space>m  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
@@ -252,11 +252,10 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 " Use <c-space> to trigger completion: >
 if has('nvim')
 	inoremap <silent><expr> <c-space> coc#refresh()
-else 
+else
 	" inoremap <silent><expr> <c-@> coc#refresh()
 	inoremap <silent><expr> <c-space> coc#refresh()
-endif  
-
+endif
 
 " < Use <CR> to confirm completion, use: >
 inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
@@ -283,40 +282,36 @@ nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>
 " added by SGK 20230429
 
 if has('gui_running')
-	nnoremap <slient> <C-Left> :vertical resize +10<CR>
-	nnoremap <slient> <C-Right> :vertical resize -10<CR>
-	nnoremap <slient> <C-Up> :resize +10<CR>
-	nnoremap <slient> <C-Down> :resize -10<CR>
+	nnoremap <slient> <C-Left> :vertical resize +3<CR>
+	nnoremap <slient> <C-Right> :vertical resize -3<CR>
+	nnoremap <slient> <C-Up> :resize +3<CR>
+	nnoremap <slient> <C-Down> :vertical resize -3<CR>
 else
-	nnoremap <Leader><Left> 	:vertical resize -10<CR>
-	nnoremap <Leader><Right> 	:vertical resize +10<CR>
-	nnoremap <Leader><Up> 		:resize -10<CR>
-	nnoremap <Leader><Down> 	:resize +10<CR>
+	nnoremap <Leader><Left> 	:vertical resize -3<CR>
+	nnoremap <Leader><Right> 	:vertical resize +3<CR>
+	nnoremap <Leader><Up> 		:resize -3<CR>
+	nnoremap <Leader><Down> 	:resize +3<CR>
 endif
 
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
-nnoremap <C-P> :Buffers<CR>
-nnoremap <Space>ff :Files<CR>
-nnoremap <Space>bl :BLines<CR>
-nnoremap <Space>ll :Lines<CR>
+nnoremap <C-P> :Files<CR>
+nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader><Tab> :Maps<CR>
-nnoremap <Leader>cmd :Commands<CR>
 nnoremap <Leader>mks :Marks<CR>
 nnoremap <Leader>ts :Tags<CR>
+
+nnoremap <silent> <Space>bb :Buffers<CR>
+nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
+nnoremap <silent> <Space>gcmd :Commands<CR>
+nnoremap <silent> <Space>lcmd :CocCommand<CR>
+nnoremap <silent> <Space>mks :Marks    <CR>
+nnoremap <silent> <Space><Tab> :Maps  <CR>
 nnoremap <silent> <Space>hc :History: <CR>
 nnoremap <silent> <Space>hs :History/ <CR>
 nnoremap <silent> <Space>ts :Tags<CR>
-
-nnoremap <silent> <Space>agc :Ag!<C-r>=Escape(expand('<cword>'))<CR><CR>
-nnoremap <silent> <Space>rgc :Rg!<C-r>=Escape(expand('<cword>'))<CR><CR>
-nnoremap <silent> <Space>ag  :Ag -q<CR>
-nnoremap <silent> <Space>rg  :Rg -q<CR>
-" noremap <silent> <Space>ft :FZF -q <C-R>=GetVisualSelection()<CR><CR>
-" vnoremap <silent> <Space>ft :FZF -q <C-R>=GetVisualSelection()<CR><CR>
-" vnoremap <silent> <Space>ag :Ag -q <C-R>=GetVisualSelection()<CR><CR>
-" vnoremap <silent> <Space>tt :Rg -q <C-R>=expand("<cword>")<CR><CR>
 
 nmap <Leader>cg :CMakeGenerate<cr>
 nmap <Leader>cb :CMakeBuild<cr>

@@ -1,0 +1,19 @@
+{
+	"rust-analyzer.server.path": "/home/user01/.cargo/bin/rust-analyzer",
+	"rust-analyzer.workspace.symbol.search.kind": "all_symbols",
+	"rust-analyzer.workspace.symbol.search.scope": "workspace_and_dependencies",
+	"java.enabled": true,
+	"java.jdt.ls.directory": "D:/Dev/temp/jdtls/eclipse.jdt.ls-1.27.1/org.eclipse.jdt.ls.product/target/repository",
+	"java.jdt.ls.lombokSupport.enabled": true,
+	"java.configuration.runtimes": [
+		{
+			"name": "JavaSE-17",
+			"path": "D:/Programs/Java/jdk17",
+			"default": true
+		},
+		{
+			"name": "JavaSE-11",
+			"path": "D:/ Programs/Java/jdk11"
+		}
+	]
+}

@@ -76,12 +76,6 @@ Plug 'mhinz/vim-grepper'
 Plug 'tpope/vim-fugitive'
 Plug 'github/copilot.vim'
 
-" added by finegs 20230909
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-Plug 'leafgarland/typescript-vim'
-
-
 call plug#end()
 
 filetype plugin indent on

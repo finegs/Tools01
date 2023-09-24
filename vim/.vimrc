@@ -3,6 +3,9 @@
 set nocompatible
 filetype off
 
+let g:coc_config_home="$HOME/.vim"
+let g:coc_data_home="$HOME/.vim/nvim"
+
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color=never --glob "!.git/*"'

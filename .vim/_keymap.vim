@@ -118,10 +118,10 @@ else
   map <M-Up> [s
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `<Space><Left>` and `<Space><Right>` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <Space><Left> <Plug>(coc-diagnostic-prev)
+nmap <silent> <Space><Right> <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -134,7 +134,7 @@ map gn :bn<CR>
 map gp :bp<CR>
 map gx :bd<CR>
 " GoTo buffer with buffer number
-nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>bb :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
@@ -299,14 +299,14 @@ map <Leader>tk <C-w>t<C-w>K
 nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader><Tab> :Maps<CR>
-nnoremap <Leader>cmd :Commands<CR>
 nnoremap <Leader>mks :Marks<CR>
 nnoremap <Leader>ts :Tags<CR>
 
 nnoremap <silent> <Space>bb :Buffers<CR>
 nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
-nnoremap <silent> <Space>cmd :Commands<CR>
+nnoremap <silent> <Space>gcmd :Commands<CR>
+nnoremap <silent> <Space>lcmd :CocCommand<CR>
 nnoremap <silent> <Space>mks :Marks    <CR>
 nnoremap <silent> <Space><Tab> :Maps  <CR>
 nnoremap <silent> <Space>hc :History: <CR>
