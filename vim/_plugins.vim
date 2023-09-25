@@ -82,6 +82,9 @@ Plug 'mhinz/vim-grepper'
 Plug 'tpope/vim-fugitive'
 Plug 'github/copilot.vim'
 
+
+Plug 'mikelue/vim-maven-plugin'
+
 call plug#end()
 
 filetype plugin indent on

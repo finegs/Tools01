@@ -5,6 +5,7 @@
 	"java.enabled": true,
 	"java.jdt.ls.java.home": "D:/Programs/Java/jdk17",
 	"java.jdt.ls.directory": "D:/Dev/temp/jdtls/eclipse.jdt.ls-1.27.1/org.eclipse.jdt.ls.product/target/repository",
+	"java.jdt.ls.vmargs":  "-javaagent:D:/Programs/lombok/lombok-1.18.30.jar -Xbootclasspath/a:D:/Programs/lombok/lombok-1.18.30.jar -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -Xlog:disable",
 	"java.jdt.ls.lombokSupport.enabled": true,
 	"java.maven.downloadSources": true,
 	"java.eclipse.downloadSources": true,
