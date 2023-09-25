@@ -3,8 +3,12 @@
 	"rust-analyzer.workspace.symbol.search.kind": "all_symbols",
 	"rust-analyzer.workspace.symbol.search.scope": "workspace_and_dependencies",
 	"java.enabled": true,
+	"java.jdt.ls.java.home": "D:/Programs/Java/jdk17",
 	"java.jdt.ls.directory": "D:/Dev/temp/jdtls/eclipse.jdt.ls-1.27.1/org.eclipse.jdt.ls.product/target/repository",
 	"java.jdt.ls.lombokSupport.enabled": true,
+	"java.maven.downloadSources": true,
+	"java.eclipse.downloadSources": true,
+	"java.completion.guessMethodArguments": true,
 	"java.configuration.runtimes": [
 		{
 			"name": "JavaSE-17",
@@ -13,7 +17,7 @@
 		},
 		{
 			"name": "JavaSE-11",
-			"path": "D:/ Programs/Java/jdk11"
+			"path": "D:/Programs/Java/jdk11"
 		}
 	]
 }

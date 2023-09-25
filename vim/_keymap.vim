@@ -52,18 +52,15 @@ map <C-F7> <Esc>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
+nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
+nnoremap <Space>9 <Esc>:TagbarToggle<CR>
+nnoremap <Space>v8 <Esc>:vertial :botright :term<CR>
+nnoremap <Space>8 <Esc>:term<CR>
+
 
 if has('gui_running')
-	" map <Space>0 <Esc>:NERDTreeToggle<CR>
-	map <Space>9 <Esc>:TagbarToggle<CR>
-	map <Space>8 <Esc>:vertial :botright :term<CR>
 
 	"map for move lines
-	map <M-Down> :m+1<CR>
-	map <M-Up> :m-2<CR>
-	imap <M-k> <Esc>:m-2<CR>
-	imap <M-j> <Esc>:m+1<CR>
-
 	nnoremap <M-k>   :<C-u>silent! move-2<CR>==
 	nnoremap <M-j>	 :<C-u>silent! move+<CR>==
 	vnoremap <M-k>	 :<C-u>silent! m-2<CR>
@@ -71,32 +68,14 @@ if has('gui_running')
 	xnoremap <M-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
-	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
-	nnoremap <Space>8 <Esc>:term<CR>
-
+else
 	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
 	nnoremap ,<Down>	 :<C-u>silent! move+<CR>==
 	vnoremap ,<Up>	 :<C-u>silent! m-2<CR>
 	vnoremap ,<Down>	 :<C-u>silent! m+1<CR>
 	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 	xnoremap ,<Down>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
-endif
 
-" nnoremap <C-p> :Files<Cr>
-
-if has('gui_running')
-	map <M-Down> :m+1<CR>
-	map <M-Up> :m-2<CR>
-	"map for move lines
-	vnoremap <M-Up> :m-2<CR>
-	vnoremap <M-Down> :m+1<CR>
-	imap <M-Up> <Esc>:m-2<CR>
-	imap <M-Down> <Esc>:m+1<CR>
-else
-	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
-	nnoremap ,<Down> :<C-u>silent! move+<CR>==
-	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-	xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
 endif
 
 " in diff mode we use the spell check keys for merging
@@ -143,8 +122,8 @@ nnoremap <silent> K :call Show_documentation()<CR>
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>fm  <Plug>(coc-format-selected)
+nmap <leader>fm  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -156,8 +135,8 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>cas  <Plug>(coc-codeaction-selected)
+nmap <leader>cas  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -197,7 +176,7 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
 nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>m  :<C-u>CocList commands<CR>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
@@ -297,34 +276,43 @@ map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
 nnoremap <C-P> :Files<CR>
+
 nnoremap <Leader>bb :Buffers<CR>
-nnoremap <Leader><Tab> :Maps<CR>
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
 nnoremap <Leader>mks :Marks<CR>
 nnoremap <Leader>ts :Tags<CR>
 
 nnoremap <silent> <Space>bb :Buffers<CR>
-nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
-nnoremap <silent> <Space>gcmd :Commands<CR>
-nnoremap <silent> <Space>lcmd :CocCommand<CR>
+nnoremap <silent> <Space>ff :Files <C-R><C-W><CR>
+nnoremap <silent> <Space>fa :Ag <C-R><C-W><CR>
+nnoremap <silent> <Space>fr :Rg <C-R><C-W><CR>
+nnoremap <silent> <Space>cmd :Commands<CR>
 nnoremap <silent> <Space>mks :Marks    <CR>
 nnoremap <silent> <Space><Tab> :Maps  <CR>
 nnoremap <silent> <Space>hc :History: <CR>
 nnoremap <silent> <Space>hs :History/ <CR>
 nnoremap <silent> <Space>ts :Tags<CR>
 
-nmap <Leader>cg :CMakeGenerate<cr>
-nmap <Leader>cb :CMakeBuild<cr>
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " " Toggle terminal - bottom
-" nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
+nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
 
 " " Toggle terminal - right
-" nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
+nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
-nmap <leader>cg <Plug>(CMakeGenerate)
-nmap <leader>cb <Plug>(CMakeBuild)
-nmap <leader>ci <Plug>(CMakeInstall)
-nmap <leader>cs <Plug>(CMakeSwitch)
-nmap <leader>cq <Plug>(CMakeClose)
-
+if !(has('win32') || has('win64'))
+	nmap <leader>cg <Plug>(CMakeGenerate)
+	nmap <leader>cb <Plug>(CMakeBuild)
+	nmap <leader>ci <Plug>(CMakeInstall)
+	nmap <leader>cs <Plug>(CMakeSwitch)
+	nmap <leader>cq <Plug>(CMakeClose)
+endif
