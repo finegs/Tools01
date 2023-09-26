@@ -1,5 +1,0 @@
-{
-	"rust-analyzer.server.path": "/home/user01/.cargo/bin/rust-analyzer",
-	"rust-analyzer.workspace.symbol.search.kind": "all_symbols",
-	"rust-analyzer.workspace.symbol.search.scope": "workspace_and_dependencies"
-}

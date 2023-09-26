@@ -219,3 +219,11 @@ function! s:ToggleTerminal(side, size) abort
   " open new terminal
   call PutTermPanel(0, a:side, a:size)
 endfunction
+
+" An action can be a reference to a function that processes selected lines
+function! MyBuild_quickfix_list(lines)
+	call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
+	copen
+	cc
+endfunction
+

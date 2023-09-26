@@ -6,8 +6,7 @@ filetype off
 let g:coc_config_home="$HOME/.vim"
 let g:coc_data_home="$HOME/.vim/nvim"
 
-
-set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+set grepprg="rg\ --vimgrep\ --smart-case\ --hidden\ --follow"
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color=never --glob "!.git/*"'
 let g:plug_url_format='https://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@github.com/%s.git'
 
@@ -23,8 +22,8 @@ source $HOME/.vim/_keymap.vim
 if has("gui_running")
 "set enc=cp949 
   set enc=utf-8
-  if has("gui_gtk2")
-    set guifont=Inconsolata\ 12
+  if has("gui_gtk2") || has('gui_gtk3')
+    set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
     set guifont=Menlo\ Regular:h14
   elseif has("gui_win32")
@@ -37,7 +36,7 @@ if has("gui_running")
     set guifont=Consolas:h12:cANSI
     set guifontwide=Dotumche:h12:cDEFAULT
   endif
-  lang mes en_US
+  " lang mes en_US
   set lines=50 columns=125 " initial windows size
 else
   set enc=utf-8

@@ -63,7 +63,13 @@ Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 Plug 'honza/vim-snippets'
 Plug 'puremourning/vimspector'
 
-Plug 'cdelledonne/vim-cmake'
+if has('win32')|| has('win64')
+
+elseif has('mingw32') || has('mingw64')
+	Plug 'cdelledonne/vim-cmake'
+else
+	Plug 'cdelledonne/vim-cmake'
+endif
 "Plug '~/my-prototype-plugin'
 "
 Plug 'tpope/vim-fugitive'
@@ -75,6 +81,10 @@ Plug 'mhinz/vim-grepper'
 
 Plug 'tpope/vim-fugitive'
 Plug 'github/copilot.vim'
+
+Plug 'mikelue/vim-maven-plugin'
+
+Plug 'will133/vim-dirdiff'
 
 call plug#end()
 
