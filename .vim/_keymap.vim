@@ -235,7 +235,6 @@ else
 	" inoremap <silent><expr> <c-@> coc#refresh()
 	inoremap <silent><expr> <c-space> coc#refresh()
 endif
-
 " < Use <CR> to confirm completion, use: >
 inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
@@ -261,10 +260,10 @@ nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>
 " added by SGK 20230429
 
 if has('gui_running')
-	nnoremap <silent> <C-Left> :vertical resize +3<CR>
+	nnoremap <silent> <C-Left> 	:vertical resize +3<CR>
 	nnoremap <silent> <C-Right> :vertical resize -3<CR>
-	nnoremap <silent> <C-Up> :resize +3<CR>
-	nnoremap <silent> <C-Down> :vertical resize -3<CR>
+	nnoremap <silent> <C-Up> 		:resize +3<CR>
+	nnoremap <silent> <C-Down> 	:vertical resize -3<CR>
 else
 	nnoremap <Leader><Left> 	:vertical resize -3<CR>
 	nnoremap <Leader><Right> 	:vertical resize +3<CR>
@@ -294,9 +293,10 @@ nnoremap <Leader>mks :Marks<CR>
 nnoremap <Leader>ts :Tags<CR>
 
 nnoremap <silent> <Space>bb :Buffers<CR>
-nnoremap <silent> <Space>ff :Files <C-R><C-W><CR>
+nnoremap <silent> <Space>ff :Files<CR>
 nnoremap <silent> <Space>fa :Ag <C-R><C-W><CR>
-nnoremap <silent> <Space>fr :Rg <C-R><C-W><CR>
+nnoremap <silent> <Space>fr :Rg <CR>
+nnoremap <silent> <Space>fcr :Rg <C-R><C-W><CR>
 nnoremap <silent> <Space>cmd :Commands<CR>
 nnoremap <silent> <Space>mks :Marks    <CR>
 nnoremap <silent> <Space><Tab> :Maps  <CR>
