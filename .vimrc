@@ -243,3 +243,25 @@ if executable("rg")
 endif
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color=never --glob "!.git/*"'
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+au FocusGained,BufEnter * silent! checktime
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+

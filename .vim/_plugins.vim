@@ -10,9 +10,12 @@ call plug#begin('$HOME/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-github-dashboard'
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
+Plug 'Xuyuanp/nerdtree-git-plugin' " nerd tree git plugin
+
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'tag': '*' }
@@ -20,13 +23,14 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'do': {->fzf#install()}}
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
 Plug 'rust-lang/rust.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
-Plug 'dmerejkowsky/vim-ale'
+Plug 'dense-analysis/ale'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -41,12 +45,11 @@ Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
 Plug 'frazrepo/vim-rainbow'
 "{{ File management }}
 Plug 'vifm/vifm.vim'                               " Vifm
-" Plug 'scrooloose/nerdtree'                         " Nerdtree
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
+
 Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 "{{ Productivity }}
 Plug 'vimwiki/vimwiki'                             " VimWiki 
-Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
+" Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
 "{{ Tim Pope Plugins }}
 Plug 'tpope/vim-surround'                          " Change surrounding marks
 "{{ Syntax Highlighting and Colors }}
@@ -85,6 +88,13 @@ Plug 'github/copilot.vim'
 Plug 'mikelue/vim-maven-plugin'
 
 Plug 'will133/vim-dirdiff'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+
+Plug 'jiangmiao/auto-pairs'        " pairs quotes or braket
+
+Plug 'itchyny/vim-gitbranch' 
 
 call plug#end()
 
