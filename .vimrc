@@ -10,6 +10,20 @@ set grepprg="rg\ --vimgrep\ --smart-case\ --hidden\ --follow"
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color=never --glob "!.git/*"'
 let g:plug_url_format='https://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@github.com/%s.git'
 
+if has("mac")
+	let g:os=mac
+elseif has("win32")
+	let g:os="win"
+elseif has("win32unix")
+    let g:os="cygwin"
+elseif has("mingw32")
+    let g:os="mingw"
+elseif has("bsd")
+    let g:os="bsd"
+elseif has("linux")
+    let g:os="linux"
+end
+
 source $VIM/vim90/defaults.vim
 source $HOME/.vim/_cscope_maps.vim
 source $HOME/.vim/_func.vim
@@ -22,8 +36,8 @@ source $HOME/.vim/_keymap.vim
 if has("gui_running")
 "set enc=cp949 
   set enc=utf-8
-  if has("gui_gtk2") || has('gui_gtk3')
-    set guifont=Inconsolata\ 14
+  if has("gui_gtk2") || has("gui_gtk3")
+    set guifont=Inconsolata\ 11
   elseif has("gui_macvim")
     set guifont=Menlo\ Regular:h14
   elseif has("gui_win32")
@@ -56,6 +70,8 @@ set hlsearch
 set nu
 set relativenumber
 
+set termguicolors
+colorscheme gruvbox
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -191,7 +207,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Powerline-font 활성화
 let g:airline_powerline_fonts = 1 
 
-" execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+if g:os == "mingw"
+execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+endif
 
 "added by SGK 20210508
 if &term == "screen"
@@ -211,7 +229,8 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ]
 
 " added by SGK 20211225
 set wildmenu
-set wildmode=list,longest
+set wildmode=full
+set wildoptions=pum
 let g:snipMate = { 'snippet_version' : 1 }
 
 set termguicolors
@@ -242,7 +261,7 @@ if executable("rg")
   set grepprg=rg\ --vimgrep
 endif
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color=never --glob "!.git/*"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color never --glob "!.git/*"'
 
 """"""""""""""""""""""""""""""
 " => Status line
@@ -264,4 +283,3 @@ set autoread
 au FocusGained,BufEnter * silent! checktime
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-

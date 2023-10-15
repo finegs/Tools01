@@ -21,9 +21,7 @@ map <C-l> <C-W>l
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
 
-map <F2> :w<CR><Esc>
-nmap <F2> :w<CR><Esc>
-imap <F2> <Esc> :w<CR><Esc>
+nmap <space>w :w<CR><Esc>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
@@ -59,8 +57,18 @@ nnoremap <Space>8 <Esc>:term<CR>
 
 
 if has('gui_running')
+	" map <Space>0 <Esc>:NERDTreeToggle<CR>
+	map <Space>9 <Esc>:TagbarToggle<CR>
+	" OpenTerminal below
+	map <Space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
+	map <Space>* <Esc>:call ToggleTerminal('L', 50)<CR>
 
 	"map for move lines
+	map <M-Down> :m+1<CR>
+	map <M-Up> :m-2<CR>
+	imap <M-k> <Esc>:m-2<CR>
+	imap <M-j> <Esc>:m+1<CR>
+
 	nnoremap <M-k>   :<C-u>silent! move-2<CR>==
 	nnoremap <M-j>	 :<C-u>silent! move+<CR>==
 	vnoremap <M-k>	 :<C-u>silent! m-2<CR>
@@ -69,35 +77,54 @@ if has('gui_running')
 	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 else
+	nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
+	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
+	" nnoremap <Space>8 <Esc>:term<CR>
+	nnoremap <Space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
+	nnoremap <Space>* <Esc>:call ToggleTerminal('L', 50)<CR>
+
 	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
 	nnoremap ,<Down>	 :<C-u>silent! move+<CR>==
 	vnoremap ,<Up>	 :<C-u>silent! m-2<CR>
 	vnoremap ,<Down>	 :<C-u>silent! m+1<CR>
 	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 	xnoremap ,<Down>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
+endif
 
+if has('gui_running')
+	map <M-Down> :m+1<CR>
+	map <M-Up> :m-2<CR>
+	"map for move lines
+	vnoremap <M-Up> :m-2<CR>
+	vnoremap <M-Down> :m+1<CR>
+	imap <M-Up> <Esc>:m-2<CR>
+	imap <M-Down> <Esc>:m+1<CR>
+else
+	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+	nnoremap ,<Down> :<C-u>silent! move+<CR>==
+	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+	xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
 endif
 
 " in diff mode we use the spell check keys for merging
-" diff setting
 if &diff
 " diff settings
-  syntax off
-  map <M-Down> ]c
-  map <M-Up> [c
-  map <M-Left> do
-  map <M-Right> dp
-  map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
+	syntax off
+	map <M-Down> ]c
+	map <M-Up> [c
+	map <M-Left> do
+	map <M-Right> dp
+	map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
 else
-  " spell settings
-  :setlocal spell spelllang=en
-  " set the spellfile - folders must exist
-  set spellfile=$VIM/spellfile.add
-  map <M-Down> ]s
-  map <M-Up> [s
+	" spell settings
+	:setlocal spell spelllang=en
+	" set the spellfile - folders must exist
+	set spellfile=$VIM/spellfile.add
+	map <M-Down> ]s
+	map <M-Up> [s
 endif
 
-" Use `<Space><Left>` and `<Space><Right>` to navigate diagnostics
+" Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> <Space><Left> <Plug>(coc-diagnostic-prev)
 nmap <silent> <Space><Right> <Plug>(coc-diagnostic-next)
@@ -113,7 +140,7 @@ map gn :bn<CR>
 map gp :bp<CR>
 map gx :bd<CR>
 " GoTo buffer with buffer number
-nnoremap <Leader>bb :ls<CR>:b<Space>
+nnoremap <Leader>b :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
@@ -122,15 +149,17 @@ nnoremap <silent> K :call Show_documentation()<CR>
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>fm  <Plug>(coc-format-selected)
-nmap <leader>fm  <Plug>(coc-format-selected)
+xmap <leader>ft  <Plug>(coc-format-selected)
+nmap <leader>ft  <Plug>(coc-format-selected)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+	autocmd!
+	" Setup formatexpr specified filetype(s).
+	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+	" Update signature help on jump placeholder.
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -156,12 +185,12 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
+	inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
+	vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -235,6 +264,7 @@ else
 	" inoremap <silent><expr> <c-@> coc#refresh()
 	inoremap <silent><expr> <c-space> coc#refresh()
 endif
+
 " < Use <CR> to confirm completion, use: >
 inoremap <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
@@ -250,7 +280,7 @@ map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 map <C-F2> <Esc>:ALEToggle<CR>
 
 " Toggle Comment  
-map <C-/> gcc
+map  <C-/> gcc
 vmap <C-/> gc
 imap <C-/> <C-o>gc
 
@@ -260,10 +290,10 @@ nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>
 " added by SGK 20230429
 
 if has('gui_running')
-	nnoremap <silent> <C-Left> 	:vertical resize +3<CR>
+	nnoremap <silent> <C-Left> :vertical resize +3<CR>
 	nnoremap <silent> <C-Right> :vertical resize -3<CR>
-	nnoremap <silent> <C-Up> 		:resize +3<CR>
-	nnoremap <silent> <C-Down> 	:vertical resize -3<CR>
+	nnoremap <silent> <C-Up> :resize +3<CR>
+	nnoremap <silent> <C-Down> :vertical resize -3<CR>
 else
 	nnoremap <Leader><Left> 	:vertical resize -3<CR>
 	nnoremap <Leader><Right> 	:vertical resize +3<CR>
@@ -271,29 +301,30 @@ else
 	nnoremap <Leader><Down> 	:resize +3<CR>
 endif
 
+nnoremap <Leader>q" ciw""<Esc>P
+nnoremap <Leader>q' ciw''<Esc>P
+nnoremap <Leader>qd da\"=substitute(@@,"'\\\|\"", "","g")<CR>P
+
+nmap <Leader><TAB> <Plug>(fzf-maps-n)
+xmap <Leader><TAB> <Plug>(fzf-maps-x)
+omap <Leader><TAB> <Plug>(fzf-maps-o)
+
+imap <C-x><C-k> <Plug>(fzf-complete-word)
+imap <C-x><C-f> <Plug>(fzf-complete-path)
+imap <C-x><C-l> <Plug>(fzf-complete-line)
+
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
+" Toggle terminal - bottom
+nnoremap <silent> yot :call ToggleTerminal('J', 20)<CR>
+
+" Toggle terminal - right
+nnoremap <silent> yo<c-t> :call ToggleTerminal('L', 60)<CR>
+
 nnoremap <C-P> :Files<CR>
-
-nnoremap <Leader>bb :Buffers<CR>
-
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-let g:fzf_action = {
-	\ 'ctrl-q': function('MyBuild_quickfix_list'),
-	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-x': 'split',
-	\ 'ctrl-v': 'vsplit' }
-
-nnoremap <Leader>mks :Marks<CR>
-nnoremap <Leader>ts :Tags<CR>
-
-nnoremap <silent> <Space>bb :Buffers<CR>
-nnoremap <silent> <Space>ff :Files<CR>
+nnoremap <Space>ff :Files<CR>
+nnoremap <Space>bb :Buffers<CR>
 nnoremap <silent> <Space>fa :Ag <C-R><C-W><CR>
 nnoremap <silent> <Space>fr :Rg <CR>
 nnoremap <silent> <Space>fcr :Rg <C-R><C-W><CR>
@@ -352,5 +383,4 @@ map <silent> <leader><cr> :noh<cr>
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
 

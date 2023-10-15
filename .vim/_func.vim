@@ -195,7 +195,7 @@ function! PutTermPanel(buf, side, size) abort
   endif
 endfunction
 
-function! s:ToggleTerminal(side, size) abort
+function! ToggleTerminal(side, size) abort
   let tpbl=[]
   let closed = 0
   let tpbl = tabpagebuflist()

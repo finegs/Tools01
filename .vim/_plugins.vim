@@ -46,6 +46,8 @@ Plug 'frazrepo/vim-rainbow'
 "{{ File management }}
 Plug 'vifm/vifm.vim'                               " Vifm
 
+Plug 'scrooloose/nerdtree'                         " Nerdtree
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
 Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 "{{ Productivity }}
 Plug 'vimwiki/vimwiki'                             " VimWiki 
@@ -66,11 +68,7 @@ Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 Plug 'honza/vim-snippets'
 Plug 'puremourning/vimspector'
 
-if has('win32')|| has('win64')
-
-elseif has('mingw32') || has('mingw64')
-	Plug 'cdelledonne/vim-cmake'
-else
+if g:os == "linux"
 	Plug 'cdelledonne/vim-cmake'
 endif
 "Plug '~/my-prototype-plugin'
@@ -81,9 +79,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'zefei/vim-wintabs'
 Plug 'zefei/vim-wintabs-powerline'
 Plug 'mhinz/vim-grepper'
-
+Plug 'mikelue/vim-maven-plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'github/copilot.vim'
+Plug 'uzxmx/vim-widgets'
 
 Plug 'mikelue/vim-maven-plugin'
 
