@@ -205,7 +205,7 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
 nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
-nnoremap <silent><nowait> <space>m  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
@@ -327,6 +327,7 @@ nnoremap <Space>ff :Files<CR>
 nnoremap <Space>bb :Buffers<CR>
 nnoremap <silent> <Space>fa :Ag <C-R><C-W><CR>
 nnoremap <silent> <Space>fr :Rg <CR>
+nnoremap <silent> <Space>tt :Rg <CR>
 nnoremap <silent> <Space>fcr :Rg <C-R><C-W><CR>
 nnoremap <silent> <Space>cmd :Commands<CR>
 nnoremap <silent> <Space>mks :Marks    <CR>

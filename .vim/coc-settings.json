@@ -1,6 +1,10 @@
 {
 	"suggest.noselect":true,
 	"codeLens.enable":true,
+	"workspace.rootPatterns": [
+		".pjt.vim",
+		".projections.json"
+	],
 	"python.pythonPath": "/usr/bin/python3",
 	"python.linting.enabled": true,
 	"python.linting.pylintEnabled": true,
@@ -31,8 +35,12 @@
 			"default":true
 		}
 	],
-	"java.jdt.ls.directory": "/home/user/.vim/jdt.ls/jdt.ls-1.27.1",
-	"java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.30.jar -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms512m -Xlog:disable",
+	"java.jdt.ls.directory": "/home/user/.vim/jdt.ls/jdt.ls-1.27.1/",
+	"java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.30.jar -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms1G -Xlog:disable",
+	"java.maven.downloadSources": true,
+	"java.enabled": true,
+	"java.jdt.ls.lombokSupport.enabled": false,
+	"java.import.gradle.enabled": true,
 	"rust-analyzer.enable": true,
 	"rust-analyzer.server.path": "/home/user/.cargo/bin/rust-analyzer",
 	"rust-analyzer.workspace.symbol.search.scope": "workspace_and_dependencies"

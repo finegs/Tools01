@@ -68,7 +68,11 @@ Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 Plug 'honza/vim-snippets'
 Plug 'puremourning/vimspector'
 
-if g:os == "linux"
+if has('win32')|| has('win64')
+
+elseif has('mingw32') || has('mingw64')
+	Plug 'cdelledonne/vim-cmake'
+else
 	Plug 'cdelledonne/vim-cmake'
 endif
 "Plug '~/my-prototype-plugin'
@@ -94,6 +98,8 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'        " pairs quotes or braket
 
 Plug 'itchyny/vim-gitbranch' 
+
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
