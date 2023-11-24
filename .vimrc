@@ -229,8 +229,8 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ]
 
 " added by SGK 20211225
 set wildmenu
-set wildmode=full
 set wildoptions=pum
+set wildmode=full
 let g:snipMate = { 'snippet_version' : 1 }
 
 set termguicolors
@@ -283,3 +283,4 @@ set autoread
 au FocusGained,BufEnter * silent! checktime
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
