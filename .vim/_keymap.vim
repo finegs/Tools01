@@ -124,7 +124,7 @@ else
 	map <M-Up> [s
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `<Space><Left>` and `<Space><Right>` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> <Space><Left> <Plug>(coc-diagnostic-prev)
 nmap <silent> <Space><Right> <Plug>(coc-diagnostic-next)
@@ -140,7 +140,7 @@ map gn :bn<CR>
 map gp :bp<CR>
 map gx :bd<CR>
 " GoTo buffer with buffer number
-nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>bb :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>

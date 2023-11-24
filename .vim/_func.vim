@@ -227,3 +227,9 @@ function! MyBuild_quickfix_list(lines)
 	cc
 endfunction
 
+" alias for vertical diffsplit
+function! AliasVerticalDiffSplit(filepath)
+	execute "vertical diffsplit ".fnameescape(a:filepath)
+endfunction
+
+command! -nargs=1 -complete=file Avd call AliasVerticalDiffSplit(<q-args>)

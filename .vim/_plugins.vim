@@ -45,14 +45,8 @@ Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
 Plug 'frazrepo/vim-rainbow'
 "{{ File management }}
 Plug 'vifm/vifm.vim'                               " Vifm
-<<<<<<< HEAD
-
-Plug 'scrooloose/nerdtree'                         " Nerdtree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
-=======
 " Plug 'scrooloose/nerdtree'                         " Nerdtree
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
->>>>>>> 446c3f5 (<space>cl for CocList)
 Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 "{{ Productivity }}
 Plug 'vimwiki/vimwiki'                             " VimWiki 
