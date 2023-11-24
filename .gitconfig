@@ -15,7 +15,7 @@
 	insteadOf = https://github.com/
 [pull]
 	ff = only
-	rebase = true
+	rebase = false
 [user]
 	email = finegs@gmail.com
 	name = finegs

@@ -23,8 +23,6 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'do': {->fzf#install()}}
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
 Plug 'rust-lang/rust.vim'
@@ -84,7 +82,6 @@ Plug 'zefei/vim-wintabs-powerline'
 Plug 'mhinz/vim-grepper'
 Plug 'mikelue/vim-maven-plugin'
 Plug 'tpope/vim-fugitive'
-Plug 'github/copilot.vim'
 Plug 'uzxmx/vim-widgets'
 
 Plug 'mikelue/vim-maven-plugin'
