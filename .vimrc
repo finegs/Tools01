@@ -253,7 +253,7 @@ set ignorecase
 " added by finegs 230905
 " This is just an example. Keep this out of version control. Check for more examples below.
 let g:dbs = {
-\  'user01': 'mysql://user01:user01@localhost:3306/user01'
+\  'db01': 'mysql://user01:user01@localhost:3306/db01'
 \ }
 
 

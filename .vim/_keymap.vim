@@ -202,7 +202,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+nnoremap <silent><nowait> <space>cl  :<C-u>CocList<CR>
 nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
