@@ -195,7 +195,7 @@ function! PutTermPanel(buf, side, size) abort
   endif
 endfunction
 
-function! s:ToggleTerminal(side, size) abort
+function! ToggleTerminal(side, size) abort
   let tpbl=[]
   let closed = 0
   let tpbl = tabpagebuflist()
@@ -219,3 +219,17 @@ function! s:ToggleTerminal(side, size) abort
   " open new terminal
   call PutTermPanel(0, a:side, a:size)
 endfunction
+
+" An action can be a reference to a function that processes selected lines
+function! MyBuild_quickfix_list(lines)
+	call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
+	copen
+	cc
+endfunction
+
+" alias for vertical diffsplit
+function! AliasVerticalDiffSplit(filepath)
+	execute "vertical diffsplit ".fnameescape(a:filepath)
+endfunction
+
+command! -nargs=1 -complete=file Avd call AliasVerticalDiffSplit(<q-args>)

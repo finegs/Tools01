@@ -21,7 +21,6 @@ if executable('sed')
 "============= path =====================================
       execute 'set path+=' . fnameescape(s:line)
 "============= tags =====================================
-"
 "	  let s:tagfile = s:line.'\tags'
 "	  if filereadable(s:tagfile)
 "		  execute 'set tags+='.s:tagfile

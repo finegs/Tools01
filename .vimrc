@@ -3,8 +3,26 @@
 set nocompatible
 filetype off
 
+let g:coc_config_home="$HOME/.vim"
+let g:coc_data_home="$HOME/.vim/nvim"
 
+set grepprg="rg\ --vimgrep\ --smart-case\ --hidden\ --follow"
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color=never --glob "!.git/*"'
 let g:plug_url_format='https://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@github.com/%s.git'
+
+if has("mac")
+	let g:os=mac
+elseif has("win32")
+	let g:os="win"
+elseif has("win32unix")
+    let g:os="cygwin"
+elseif has("mingw32")
+    let g:os="mingw"
+elseif has("bsd")
+    let g:os="bsd"
+elseif has("linux")
+    let g:os="linux"
+end
 
 source $VIM/vim90/defaults.vim
 source $HOME/.vim/_cscope_maps.vim
@@ -18,8 +36,8 @@ source $HOME/.vim/_keymap.vim
 if has("gui_running")
 "set enc=cp949 
   set enc=utf-8
-  if has("gui_gtk2")
-    set guifont=Inconsolata\ 12
+  if has("gui_gtk2") || has("gui_gtk3")
+    set guifont=Inconsolata\ 11
   elseif has("gui_macvim")
     set guifont=Menlo\ Regular:h14
   elseif has("gui_win32")
@@ -32,7 +50,7 @@ if has("gui_running")
     set guifont=Consolas:h12:cANSI
     set guifontwide=Dotumche:h12:cDEFAULT
   endif
-  lang mes en_US
+  " lang mes en_US
   set lines=50 columns=125 " initial windows size
 else
   set enc=utf-8
@@ -46,12 +64,14 @@ set termencoding=utf-8
 "set langmenu=cp949
 
 syntax on
-set ts=4
-set sw=4
+set ts=2
+set sw=2
 set hlsearch
 set nu
 set relativenumber
 
+set termguicolors
+colorscheme gruvbox
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -187,7 +207,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Powerline-font 활성화
 let g:airline_powerline_fonts = 1 
 
-" execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+if g:os == "mingw"
+execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+endif
 
 "added by SGK 20210508
 if &term == "screen"
@@ -207,7 +229,8 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ]
 
 " added by SGK 20211225
 set wildmenu
-set wildmode=list,longest
+set wildoptions=pum
+set wildmode=full
 let g:snipMate = { 'snippet_version' : 1 }
 
 set termguicolors
@@ -230,5 +253,34 @@ set ignorecase
 " added by finegs 230905
 " This is just an example. Keep this out of version control. Check for more examples below.
 let g:dbs = {
-\  'user01': 'mysql://user01:user01@localhost:3306/user01'
+\  'db01': 'mysql://user01:user01@localhost:3306/db01'
 \ }
+
+
+if executable("rg")
+  set grepprg=rg\ --vimgrep
+endif
+
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color never --glob "!.git/*"'
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+au FocusGained,BufEnter * silent! checktime
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+

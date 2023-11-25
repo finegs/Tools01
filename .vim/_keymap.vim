@@ -21,9 +21,7 @@ map <C-l> <C-W>l
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
 
-map <F2> :w<CR><Esc>
-nmap <F2> :w<CR><Esc>
-imap <F2> <Esc> :w<CR><Esc>
+nmap <space>w :w<CR><Esc>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
@@ -52,11 +50,18 @@ map <C-F7> <Esc>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
+nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
+nnoremap <Space>9 <Esc>:TagbarToggle<CR>
+nnoremap <Space>v8 <Esc>:vertial :botright :term<CR>
+nnoremap <Space>8 <Esc>:term<CR>
+
 
 if has('gui_running')
 	" map <Space>0 <Esc>:NERDTreeToggle<CR>
 	map <Space>9 <Esc>:TagbarToggle<CR>
-	map <Space>8 <Esc>:vertial :botright :term<CR>
+	" OpenTerminal below
+	map <Space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
+	map <Space>* <Esc>:call ToggleTerminal('L', 50)<CR>
 
 	"map for move lines
 	map <M-Down> :m+1<CR>
@@ -71,8 +76,12 @@ if has('gui_running')
 	xnoremap <M-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
+else
+	nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
 	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
-	nnoremap <Space>8 <Esc>:term<CR>
+	" nnoremap <Space>8 <Esc>:term<CR>
+	nnoremap <Space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
+	nnoremap <Space>* <Esc>:call ToggleTerminal('L', 50)<CR>
 
 	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
 	nnoremap ,<Down>	 :<C-u>silent! move+<CR>==
@@ -81,8 +90,6 @@ if has('gui_running')
 	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 	xnoremap ,<Down>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 endif
-
-" nnoremap <C-p> :Files<Cr>
 
 if has('gui_running')
 	map <M-Down> :m+1<CR>
@@ -100,28 +107,27 @@ else
 endif
 
 " in diff mode we use the spell check keys for merging
-" diff setting
 if &diff
 " diff settings
-  syntax off
-  map <M-Down> ]c
-  map <M-Up> [c
-  map <M-Left> do
-  map <M-Right> dp
-  map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
+	syntax off
+	map <M-Down> ]c
+	map <M-Up> [c
+	map <M-Left> do
+	map <M-Right> dp
+	map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
 else
-  " spell settings
-  :setlocal spell spelllang=en
-  " set the spellfile - folders must exist
-  set spellfile=$VIM/spellfile.add
-  map <M-Down> ]s
-  map <M-Up> [s
+	" spell settings
+	:setlocal spell spelllang=en
+	" set the spellfile - folders must exist
+	set spellfile=$VIM/spellfile.add
+	map <M-Down> ]s
+	map <M-Up> [s
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `<Space><Left>` and `<Space><Right>` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <Space><Left> <Plug>(coc-diagnostic-prev)
+nmap <silent> <Space><Right> <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -134,7 +140,7 @@ map gn :bn<CR>
 map gp :bp<CR>
 map gx :bd<CR>
 " GoTo buffer with buffer number
-nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>bb :ls<CR>:b<Space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
@@ -143,21 +149,23 @@ nnoremap <silent> K :call Show_documentation()<CR>
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>ft  <Plug>(coc-format-selected)
+nmap <leader>ft  <Plug>(coc-format-selected)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+	autocmd!
+	" Setup formatexpr specified filetype(s).
+	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+	" Update signature help on jump placeholder.
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>cas  <Plug>(coc-codeaction-selected)
+nmap <leader>cas  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -177,12 +185,12 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
+	inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
+	vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -194,10 +202,10 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+nnoremap <silent><nowait> <space>cl  :<C-u>CocList<CR>
 nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
@@ -272,7 +280,7 @@ map <C-F1> <Esc>:call ToggleGUICruft()<CR>
 map <C-F2> <Esc>:ALEToggle<CR>
 
 " Toggle Comment  
-map <C-/> gcc
+map  <C-/> gcc
 vmap <C-/> gc
 imap <C-/> <C-o>gc
 
@@ -282,10 +290,10 @@ nnoremap <expr> K (&filetype is# 'vim' ? (':help ' . fnameescape(expand('<cword>
 " added by SGK 20230429
 
 if has('gui_running')
-	nnoremap <slient> <C-Left> :vertical resize +3<CR>
-	nnoremap <slient> <C-Right> :vertical resize -3<CR>
-	nnoremap <slient> <C-Up> :resize +3<CR>
-	nnoremap <slient> <C-Down> :vertical resize -3<CR>
+	nnoremap <silent> <C-Left> :vertical resize +3<CR>
+	nnoremap <silent> <C-Right> :vertical resize -3<CR>
+	nnoremap <silent> <C-Up> :resize +3<CR>
+	nnoremap <silent> <C-Down> :vertical resize -3<CR>
 else
 	nnoremap <Leader><Left> 	:vertical resize -3<CR>
 	nnoremap <Leader><Right> 	:vertical resize +3<CR>
@@ -293,19 +301,34 @@ else
 	nnoremap <Leader><Down> 	:resize +3<CR>
 endif
 
+nnoremap <Leader>q" ciw""<Esc>P
+nnoremap <Leader>q' ciw''<Esc>P
+nnoremap <Leader>qd da\"=substitute(@@,"'\\\|\"", "","g")<CR>P
+
+nmap <Leader><TAB> <Plug>(fzf-maps-n)
+xmap <Leader><TAB> <Plug>(fzf-maps-x)
+omap <Leader><TAB> <Plug>(fzf-maps-o)
+
+imap <C-x><C-k> <Plug>(fzf-complete-word)
+imap <C-x><C-f> <Plug>(fzf-complete-path)
+imap <C-x><C-l> <Plug>(fzf-complete-line)
+
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
-nnoremap <C-P> :Files<CR>
-nnoremap <Leader>bb :Buffers<CR>
-nnoremap <Leader><Tab> :Maps<CR>
-nnoremap <Leader>cmd :Commands<CR>
-nnoremap <Leader>mks :Marks<CR>
-nnoremap <Leader>ts :Tags<CR>
+" Toggle terminal - bottom
+nnoremap <silent> yot :call ToggleTerminal('J', 20)<CR>
 
-nnoremap <silent> <Space>bb :Buffers<CR>
-nnoremap <silent> <Space>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Space>r :Rg <C-R><C-W><CR>
+" Toggle terminal - right
+nnoremap <silent> yo<c-t> :call ToggleTerminal('L', 60)<CR>
+
+nnoremap <C-P> :Files<CR>
+nnoremap <Space>ff :Files<CR>
+nnoremap <Space>bb :Buffers<CR>
+nnoremap <silent> <Space>fa :Ag <C-R><C-W><CR>
+nnoremap <silent> <Space>fr :Rg <CR>
+nnoremap <silent> <Space>tt :Rg <CR>
+nnoremap <silent> <Space>fcr :Rg <C-R><C-W><CR>
 nnoremap <silent> <Space>cmd :Commands<CR>
 nnoremap <silent> <Space>mks :Marks    <CR>
 nnoremap <silent> <Space><Tab> :Maps  <CR>
@@ -313,18 +336,52 @@ nnoremap <silent> <Space>hc :History: <CR>
 nnoremap <silent> <Space>hs :History/ <CR>
 nnoremap <silent> <Space>ts :Tags<CR>
 
-nmap <Leader>cg :CMakeGenerate<cr>
-nmap <Leader>cb :CMakeBuild<cr>
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " " Toggle terminal - bottom
-" nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
+nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
 
 " " Toggle terminal - right
-" nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
+nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
-nmap <leader>cg <Plug>(CMakeGenerate)
-nmap <leader>cb <Plug>(CMakeBuild)
-nmap <leader>ci <Plug>(CMakeInstall)
-nmap <leader>cs <Plug>(CMakeSwitch)
-nmap <leader>cq <Plug>(CMakeClose)
+if !(has('win32') || has('win64'))
+	nmap <leader>cg <Plug>(CMakeGenerate)
+	nmap <leader>cb <Plug>(CMakeBuild)
+	nmap <leader>ci <Plug>(CMakeInstall)
+	nmap <leader>cs <Plug>(CMakeSwitch)
+	nmap <leader>cq <Plug>(CMakeClose)
+endif
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 

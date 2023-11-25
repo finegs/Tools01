@@ -1,0 +1,47 @@
+[user]
+	email = finegs@gmail.com
+	name = S.G
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	editor = vim
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+
+; [url "git@github.com:"]
+; 	insteadOf = https://github.com/
+[pull]
+	ff = only
+	rebase = false
+[user]
+	email = finegs@gmail.com
+	name = finegs
+	password = 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
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+	
+
+[mergetool "mvimdiff"]
+  # Like "nvimdiff", but always ignore $BASE.
+  cmd = vim -f -d -c '$wincmd w' -c 'wincmd J' $LOCAL $REMOTE $MERGED
+[mergetool]
+	prompt = false
+[difftool]
+	prompt = false
+[alias]
+	lg = log --graph --decorate -30 --all --topo-order --date=format-local:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(cyan)%h%Creset %C(black bold)%ad%Creset%C(auto)%d %s'
+	d = diff
+	last = log -1 HEAD --stat
+	ll = log --oneline
+	st = status -sb
+	cm = commit -m
+	rv = remote -v
+	dv = difftool -t vimdiff -y
+	gl = config --global -l
+	se = !git rev-list --all | xargs git grep -F
