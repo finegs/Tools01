@@ -223,8 +223,7 @@ highlight CocErrorFloat ctermfg=Yellow
 
 " vimspector for gdb plugin
 let g:vimspector_enable_mappings = 'HUMAN'
-" let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
-let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ]
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools' ,  'CodeLLDB', 'vscode-java-debug']
 "packadd! vimspector
 
 " added by SGK 20211225

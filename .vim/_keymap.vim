@@ -200,23 +200,24 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <space>aa  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 nnoremap <silent><nowait> <space>cl  :<C-u>CocList<CR>
-nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
+nnoremap <silent><nowait> <space>ee  :<C-u>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
+nnoremap <silent><nowait> <space>oo  :<C-u>CocList outline<CR>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
+nnoremap <silent><nowait> <space>ss  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <space>jj  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <space>pp  :<C-u>CocListResume<CR>
 
+nnoremap <silent><nowait> <space>sth :<C-u>CocCommand  java.action.showTypeHierarchy<CR>
 nnoremap q <c-v>
 
 " Debugger remaps
