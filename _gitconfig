@@ -7,6 +7,9 @@
 	bare = false
 	logallrefupdates = true
 	editor = vim
+[credential]
+	helper = store
+
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
