@@ -1,4 +1,5 @@
 {
+	"suggest.noselect":true,
 	"codeLens.enable":false,
 	"workspace.rootPatterns": [
 		".pjt.vim",
@@ -28,7 +29,8 @@
 	"rust-analyzer.enable": true,
 	"rust-analyzer.server.path": "/home/user01/.cargo/bin/rust-analyzer",
 	"rust-analyzer.workspace.symbol.search.scope": "workspace_and_dependencies",
-	"java.jdt.ls.java.home": "/usr/lib/jvm/java-1.17.0-openjdk-amd64",
+
+	"java.enabled": true,
 	"java.trace.server": "verbose",
 	"java.import.gradle.wrapper.enabled": false,
 	"java.showBuildStatusOnStart.enabled": "notification",
@@ -43,8 +45,11 @@
 			"default":true
 		}
 	],
+	"java.jdt.ls.java.home": "/usr/lib/jvm/java-1.17.0-openjdk-amd64",
 	"java.jdt.ls.lombokSupport.enabled": false,
 	"java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok-1.18.30.jar -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms2G -Xlog:disable",
+	"java.maven.downloadSources": true,
+	"java.import.gradle.enabled": true,
 	"java.quickfix.showAt": "line",
 	"java.completion.enabled": true,
 	"java.typeHierarchy.lazyLoad": true,
