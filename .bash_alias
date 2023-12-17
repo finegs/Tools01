@@ -1,0 +1,4 @@
+# alias for gradle
+alias g1='gradle clean build --parallel' 
+alias g00='gradle clean build --parallel --info' 
+alias g0='gradle clean test --parallel --info'

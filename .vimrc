@@ -7,7 +7,7 @@ let g:coc_config_home="$HOME/.vim"
 let g:coc_data_home="$HOME/.vim/nvim"
 
 set grepprg="rg\ --vimgrep\ --smart-case\ --hidden\ --follow"
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color=never --glob "!.git/*"'
+" let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color never --glob "!.git/*"'
 let g:plug_url_format='https://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@github.com/%s.git'
 
 if has("mac")
@@ -32,12 +32,16 @@ source $HOME/.vim/_myenv.vim
 source $HOME/.vim/_coc.vim
 source $HOME/.vim/_keymap.vim
 
+if exists(expand('./.pjt.vim'))
+	source expand('./.pjt.vim')
+endif
+
 "encoding
 if has("gui_running")
 "set enc=cp949 
   set enc=utf-8
-  if has("gui_gtk2") || has("gui_gtk3")
-    set guifont=Inconsolata\ 11
+  if has("gui_gtk2") || has('gui_gtk3')
+    set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
     set guifont=Menlo\ Regular:h14
   elseif has("gui_win32")
@@ -180,6 +184,11 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-p>", "&omnifunc:<c-x
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+autocmd FileType python let b:coc_root_patterns = ['.pjt.vim']
+autocmd FileType java let b:coc_root_patterns = ['.pjt.vim', '.classpath', '.project']
+autocmd FileType c let b:coc_root_patterns = ['.pjt.vim', '.classpath', '.project']
+autocmd FileType cpp let b:coc_root_patterns = ['.pjt.vim', '.classpath', '.project', 'CMakeLists']
+
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -208,7 +217,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1 
 
 if g:os == "mingw"
-execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
+	execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 endif
 
 "added by SGK 20210508
@@ -282,4 +291,6 @@ set autoread
 au FocusGained,BufEnter * silent! checktime
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+let g:indentLine_enabled = 1
 
