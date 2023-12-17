@@ -215,7 +215,14 @@ nnoremap <silent><nowait> <space>jj  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
+<<<<<<< HEAD
 nnoremap <silent><nowait> <space>pp  :<C-u>CocListResume<CR>
+||||||| parent of bef3a72 (remove unused plugins)
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+=======
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <space>rs  :<C-u>CocRestart<CR>
+>>>>>>> bef3a72 (remove unused plugins)
 
 nnoremap <silent><nowait> <space>sth :<C-u>CocCommand  java.action.showTypeHierarchy<CR>
 nnoremap q <c-v>
@@ -246,7 +253,7 @@ nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
 " VimspectorInstall
-let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB', 'vscode-java-debug' ]
 
 " Insert <tab> when previous text is space, refresh completion if not.
 inoremap <silent><expr> <Tab>
@@ -386,3 +393,6 @@ map <silent> <leader><cr> :noh<cr>
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
+" For JavaDebugger attach to defualt java debugger server port(5005 or set
+" with user input)
+nmap <LocalLeader>jds :call JavaStartDebug()<CR>
