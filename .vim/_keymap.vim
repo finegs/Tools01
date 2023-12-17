@@ -21,7 +21,8 @@ map <C-l> <C-W>l
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
 
-nmap <space>w :w<CR><Esc>
+nmap <Space>ww :w<CR><Esc>
+nmap <Space>wa :wa<CR><Esc>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
@@ -200,25 +201,25 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <Space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-nnoremap <silent><nowait> <space>cl  :<C-u>CocList<CR>
-nnoremap <silent><nowait> <space>e  :<C-u>CocCommand explorer<CR>
+nnoremap <silent><nowait> <Space>cl  :<C-u>CocList<CR>
+nnoremap <silent><nowait> <Space>e  :<C-u>CocCommand explorer<CR>
 " Show commands.
-nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <Space>mm  :<C-u>CocList commands<CR>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
+nnoremap <silent><nowait> <Space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>ss  :<C-u>CocList -I symbols<CR>
+nnoremap <silent><nowait> <Space>ss  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>jj  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <Space>jj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <Space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>pp  :<C-u>CocListResume<CR>
-nnoremap <silent><nowait> <space>rs  :<C-u>CocRestart<CR>
+nnoremap <silent><nowait> <Space>pp  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <Space>rs  :<C-u>CocRestart<CR>
 
-nnoremap <silent><nowait> <space>sth :<C-u>CocCommand  java.action.showTypeHierarchy<CR>
+nnoremap <silent><nowait> <Space>sth :<C-u>CocCommand  java.action.showTypeHierarchy<CR>
 nnoremap q <c-v>
 
 " Debugger remaps
@@ -240,7 +241,7 @@ nmap <leader>dl <Plug>VimspectorStepInto
 nmap <leader>dj <Plug>VimspectorStepOver
 nmap <leader>dk <Plug>VimspectorStepOut
 nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+nnoremap <leader>d<Space> :call vimspector#Continue()<CR>
 
 nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
@@ -259,12 +260,12 @@ inoremap <expr><S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " added by SGK 20211224
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
-" Use <c-space> to trigger completion: >
+" Use <c-Space> to trigger completion: >
 if has('nvim')
-	inoremap <silent><expr> <c-space> coc#refresh()
+	inoremap <silent><expr> <c-Space> coc#refresh()
 else
 	" inoremap <silent><expr> <c-@> coc#refresh()
-	inoremap <silent><expr> <c-space> coc#refresh()
+	inoremap <silent><expr> <c-Space> coc#refresh()
 endif
 
 " < Use <CR> to confirm completion, use: >
