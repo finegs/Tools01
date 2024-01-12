@@ -21,8 +21,8 @@ map <C-l> <C-W>l
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
 
-nmap <Space>ww :w<CR><Esc>
-nmap <Space>wa :wa<CR><Esc>
+nmap <space>ww :w<CR><Esc>
+nmap <space>wa :wa<CR><Esc>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
@@ -51,18 +51,18 @@ map <C-F7> <Esc>:make release<CR>
 " goto definition with F12
 map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
-nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
-nnoremap <Space>9 <Esc>:TagbarToggle<CR>
-nnoremap <Space>v8 <Esc>:vertial :botright :term<CR>
-nnoremap <Space>8 <Esc>:term<CR>
+nnoremap <space>0 <Esc>:NERDTreeToggle<CR>
+nnoremap <space>9 <Esc>:TagbarToggle<CR>
+nnoremap <space>v8 <Esc>:vertial :botright :term<CR>
+nnoremap <space>8 <Esc>:term<CR>
 
 
 if has('gui_running')
-	" map <Space>0 <Esc>:NERDTreeToggle<CR>
-	map <Space>9 <Esc>:TagbarToggle<CR>
+	" map <space>0 <Esc>:NERDTreeToggle<CR>
+	map <space>9 <Esc>:TagbarToggle<CR>
 	" OpenTerminal below
-	map <Space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
-	map <Space>* <Esc>:call ToggleTerminal('L', 50)<CR>
+	map <space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
+	map <space>* <Esc>:call ToggleTerminal('L', 50)<CR>
 
 	"map for move lines
 	map <M-Down> :m+1<CR>
@@ -78,11 +78,11 @@ if has('gui_running')
 	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 else
-	nnoremap <Space>0 <Esc>:NERDTreeToggle<CR>
-	nnoremap <Space>9 <Esc>:TagbarToggle<CR>
-	" nnoremap <Space>8 <Esc>:term<CR>
-	nnoremap <Space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
-	nnoremap <Space>* <Esc>:call ToggleTerminal('L', 50)<CR>
+	nnoremap <space>0 <Esc>:NERDTreeToggle<CR>
+	nnoremap <space>9 <Esc>:TagbarToggle<CR>
+	" nnoremap <space>8 <Esc>:term<CR>
+	nnoremap <space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
+	nnoremap <space>* <Esc>:call ToggleTerminal('L', 50)<CR>
 
 	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
 	nnoremap ,<Down>	 :<C-u>silent! move+<CR>==
@@ -125,10 +125,10 @@ else
 	map <M-Up> [s
 endif
 
-" Use `<Space><Left>` and `<Space><Right>` to navigate diagnostics
+" Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> <Space><Left> <Plug>(coc-diagnostic-prev)
-nmap <silent> <Space><Right> <Plug>(coc-diagnostic-next)
+nmap <silent> <space><Left> <Plug>(coc-diagnostic-prev)
+nmap <silent> <space><Right> <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -137,21 +137,17 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Buffer Switch
-map gn :bn<CR>
-map gp :bp<CR>
-map gx :bd<CR>
+map bn :bn<CR>
+map bp :bp<CR>
+map bd :bd<CR>
 " GoTo buffer with buffer number
-nnoremap <Leader>bb :ls<CR>:b<Space>
+nnoremap <Leader>bb :ls<CR>:b<space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>ft  <Plug>(coc-format-selected)
-nmap <leader>ft  <Plug>(coc-format-selected)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -163,10 +159,19 @@ augroup mygroup
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
+" Formatting selected code.
+xmap <leader>ft  <Plug>(coc-format-selected)
+nmap <leader>ft  <Plug>(coc-format-selected)
+
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>cas  <Plug>(coc-codeaction-selected)
 nmap <leader>cas  <Plug>(coc-codeaction-selected)
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -194,32 +199,28 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
 	vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <Space>a  :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-nnoremap <silent><nowait> <Space>cl  :<C-u>CocList<CR>
-nnoremap <silent><nowait> <Space>e  :<C-u>CocCommand explorer<CR>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+nnoremap <silent><nowait> <space>ee  :<C-u>CocCommand explorer<CR>
 " Show commands.
-nnoremap <silent><nowait> <Space>mm  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
 " Find symbol of current document.
-nnoremap <silent><nowait> <Space>o  :<C-u>CocList outline<CR>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
-nnoremap <silent><nowait> <Space>ss  :<C-u>CocList -I symbols<CR>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
-nnoremap <silent><nowait> <Space>jj  :<C-u>CocNext<CR>
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <Space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <Space>pp  :<C-u>CocListResume<CR>
-nnoremap <silent><nowait> <Space>rs  :<C-u>CocRestart<CR>
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-nnoremap <silent><nowait> <Space>sth :<C-u>CocCommand  java.action.showTypeHierarchy<CR>
+nnoremap <silent><nowait> <space>rs  :<C-u>CocRestart<CR>
+
+nnoremap <silent><nowait> <space>st :<C-u>CocCommand  java.action.showTypeHierarchy<CR>
 nnoremap q <c-v>
 
 " Debugger remaps
@@ -241,7 +242,7 @@ nmap <leader>dl <Plug>VimspectorStepInto
 nmap <leader>dj <Plug>VimspectorStepOver
 nmap <leader>dk <Plug>VimspectorStepOut
 nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<Space> :call vimspector#Continue()<CR>
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 
 nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
@@ -260,12 +261,12 @@ inoremap <expr><S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " added by SGK 20211224
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
-" Use <c-Space> to trigger completion: >
+" Use <c-space> to trigger completion: >
 if has('nvim')
-	inoremap <silent><expr> <c-Space> coc#refresh()
+	inoremap <silent><expr> <c-space> coc#refresh()
 else
 	" inoremap <silent><expr> <c-@> coc#refresh()
-	inoremap <silent><expr> <c-Space> coc#refresh()
+	inoremap <silent><expr> <c-space> coc#refresh()
 endif
 
 " < Use <CR> to confirm completion, use: >
@@ -326,18 +327,17 @@ nnoremap <silent> yot :call ToggleTerminal('J', 20)<CR>
 nnoremap <silent> yo<c-t> :call ToggleTerminal('L', 60)<CR>
 
 nnoremap <C-P> :Files<CR>
-nnoremap <Space>ff :Files<CR>
-nnoremap <Space>bb :Buffers<CR>
-nnoremap <silent> <Space>fa :Ag <C-R><C-W><CR>
-nnoremap <silent> <Space>fr :Rg <CR>
-nnoremap <silent> <Space>tt :Rg <CR>
-nnoremap <silent> <Space>fcr :Rg <C-R><C-W><CR>
-nnoremap <silent> <Space>cmd :Commands<CR>
-nnoremap <silent> <Space>mks :Marks    <CR>
-nnoremap <silent> <Space><Tab> :Maps  <CR>
-nnoremap <silent> <Space>hc :History: <CR>
-nnoremap <silent> <Space>hs :History/ <CR>
-nnoremap <silent> <Space>ts :Tags<CR>
+nnoremap <space>ff :Files<CR>
+nnoremap <space>bb :Buffers<CR>
+nnoremap <silent> <space>tat :Ag <C-R><C-W><CR>
+nnoremap <silent> <space>tt :Rg <CR>
+nnoremap <silent> <space>tw :Rg <C-R><C-W><CR>
+nnoremap <silent> <space>cmd :Commands<CR>
+nnoremap <silent> <space>mks :Marks    <CR>
+nnoremap <silent> <space><Tab> :Maps  <CR>
+nnoremap <silent> <space>hc :History: <CR>
+nnoremap <silent> <space>hs :History/ <CR>
+nnoremap <silent> <space>ts :Tags<CR>
 
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
