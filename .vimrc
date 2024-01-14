@@ -292,5 +292,6 @@ au FocusGained,BufEnter * silent! checktime
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+set belloff=all
 let g:indentLine_enabled = 1
 

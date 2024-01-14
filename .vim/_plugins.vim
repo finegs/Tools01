@@ -30,6 +30,18 @@ Plug 'rust-lang/rust.vim'
 Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
+Plug 'tpope/vim-fugitive'
+Plug 'uzxmx/vim-widgets'
+
+Plug 'mikelue/vim-maven-plugin'
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'chrisbra/csv.vim'
+
+Plug 'kristijanhusak/vim-packager', { 'type': 'opt' }
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'will133/vim-dirdiff'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
 Plug 'tomtom/tlib_vim'
@@ -38,7 +50,7 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'uzxmx/vim-widgets'
-Plug 'vim-python/python-syntax'                    " Python highlighting
+gjlug 'vim-python/python-syntax'                    " Python highlighting
 Plug 'vimwiki/vimwiki'                             " VimWiki 
 Plug 'will133/vim-dirdiff'
 
