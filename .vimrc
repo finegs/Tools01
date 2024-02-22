@@ -24,7 +24,7 @@ elseif has("linux")
     let g:os="linux"
 end
 
-source $VIM/vim90/defaults.vim
+source $VIMRUNTIME/defaults.vim
 source $HOME/.vim/_cscope_maps.vim
 source $HOME/.vim/_func.vim
 source $HOME/.vim/_plugins.vim
@@ -140,7 +140,26 @@ augroup filetype
   autocmd BufNewFile,BufRead Makefile set filetype=make noexpandtab
   autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
   autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
+  autocmd BufNewFile,BufRead *.md set conceallevel=0
+  autocmd BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
 augroup END
+
+" Only enable autocommands when Vim supports them
+if has("autocmd")
+	""
+	" Markdown Configuration
+	""
+	" Spellcheck in British English
+	autocmd FileType markdown setlocal spell spelllang=en_gb
+	" Automatically open Goyo
+	" autocmd FileType markdown Goyo
+	" Hide plaintext formatting and use color instead
+	"autocmd FileType markdown set conceallevel=3
+	autocmd FileType markdown set conceallevel=0
+	" Disable cursor line and column highlight
+	autocmd FileType markdown set nocursorline
+	autocmd FileType markdown set nocursorcolumn
+endif
 
 let NERDChistmasTree=0
 let NERDTreeWinSize=35
@@ -295,3 +314,18 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 set belloff=all
 let g:indentLine_enabled = 1
 
+let g:copilot_filetypes = {'markdown': v:true}
+
+let b:ale_linters = ['markdownlint', 'vale']
+let b:ale_fixers = ['prettier']
+
+" Configuration for vim-markdown
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_math = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_autowrite = 1
+" let g:vim_markdown_edit_url_in = 'tab'
+let g:vim_markdown_follow_anchor = 1

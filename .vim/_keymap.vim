@@ -143,6 +143,13 @@ map bd :bd<CR>
 " GoTo buffer with buffer number
 nnoremap <Leader>bb :ls<CR>:b<space>
 
+" Tab Switch
+map gtn :tabnext<CR>
+map gtp :tabprevious<CR>
+map gtd :tabclose<CR>
+" GoTo Tab with Tab number
+nnoremap <Leader>gtt :tabs<CR>:b<space>
+
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
 
@@ -312,6 +319,7 @@ nnoremap <Leader>qd da\"=substitute(@@,"'\\\|\"", "","g")<CR>P
 nmap <Leader><TAB> <Plug>(fzf-maps-n)
 xmap <Leader><TAB> <Plug>(fzf-maps-x)
 omap <Leader><TAB> <Plug>(fzf-maps-o)
+imap <Leader><TAB> <Plug>(fzf-maps-i)
 
 imap <C-x><C-k> <Plug>(fzf-complete-word)
 imap <C-x><C-f> <Plug>(fzf-complete-path)

@@ -29,6 +29,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'rust-lang/rust.vim'
 Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'sheerun/vim-polyglot'
 Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
 Plug 'tpope/vim-fugitive'
 Plug 'uzxmx/vim-widgets'
@@ -50,9 +51,15 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'uzxmx/vim-widgets'
-gjlug 'vim-python/python-syntax'                    " Python highlighting
+Plug 'vim-python/python-syntax'                    " Python highlighting
 Plug 'vimwiki/vimwiki'                             " VimWiki 
 Plug 'will133/vim-dirdiff'
+
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
+
+Plug 'github/copilot.vim'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
