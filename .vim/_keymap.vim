@@ -13,10 +13,10 @@ map <leader><S>q <Esc><Esc>:q<CR>
 """"""""""""""""""""""""""
 "   Moving tab Setting
 """"""""""""""""""""""""""
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
@@ -147,8 +147,14 @@ nnoremap <Leader>bb :ls<CR>:b<space>
 map gtn :tabnext<CR>
 map gtp :tabprevious<CR>
 map gtd :tabclose<CR>
+<<<<<<< Updated upstream
 " GoTo Tab with Tab number
 nnoremap <Leader>gtt :tabs<CR>:b<space>
+=======
+" GoTo buffer with buffer number
+nnoremap gtl :tabs<CR>
+" nnoremap gtl :tabs<CR>:b<space>
+>>>>>>> Stashed changes
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
@@ -399,3 +405,14 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " For JavaDebugger attach to defualt java debugger server port(5005 or set
 " with user input)
 nmap <LocalLeader>jds :call JavaStartDebug()<CR>
+
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
