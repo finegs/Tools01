@@ -147,14 +147,10 @@ nnoremap <Leader>bb :ls<CR>:b<space>
 map gtn :tabnext<CR>
 map gtp :tabprevious<CR>
 map gtd :tabclose<CR>
-<<<<<<< Updated upstream
 " GoTo Tab with Tab number
 nnoremap <Leader>gtt :tabs<CR>:b<space>
-=======
 " GoTo buffer with buffer number
 nnoremap gtl :tabs<CR>
-" nnoremap gtl :tabs<CR>:b<space>
->>>>>>> Stashed changes
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>

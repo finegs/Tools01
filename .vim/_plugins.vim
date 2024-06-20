@@ -13,7 +13,6 @@ endif
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'        " pairs quotes or braket
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'junegunn/fzf', { 'do': {->fzf#install()}}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
 Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
