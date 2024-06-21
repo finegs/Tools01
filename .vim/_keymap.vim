@@ -5,7 +5,8 @@ nnoremap <leader>mvrc :e $MYVIMRC<CR>
 nnoremap <leader>src :source $MYVIMRC<CR>
 
 ",q => Quit
-map <leader><S>q <Esc><Esc>:q<CR>
+map <leader>qq <Esc><Esc>:q!<CR>
+map <leader>qa <Esc><Esc>:qa!<CR>
 
 "jk => esc, Escape insert mode
 "inoremap jk <Esc>
@@ -210,16 +211,16 @@ endif
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <space>aa  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
 " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
 nnoremap <silent><nowait> <space>ee  :<C-u>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
+nnoremap <silent><nowait> <space>oo  :<C-u>CocList outline<CR>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
+nnoremap <silent><nowait> <space>ss  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
 " nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
