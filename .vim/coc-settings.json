@@ -7,10 +7,10 @@
 	],
 	"clangd.path": "C:/Users/fineg/scoop/shims/clangd.exe",
 	"clangd.fallbackFlags": ["-std=c++20"],
-	"python.pythonPath": "D:/Programs/Python/Python311/python.exe",
+	"python.pythonPath": "${cwd}/.venv/bin/python",
 	"python.linting.enabled": true,
 	"python.linting.pylintEnabled": true,
-	"python.linting.pylintPath": "D:/Programs/Python/Python311/Scripts/pylint.exe",
+	"python.linting.pylintPath": "{$cwd}/bin/pylint",
 	"python.linting.flake8Enabled": false,
 	"python.linting.pylintArgs": [
 		"--load-plugins", "pylint_django", 
