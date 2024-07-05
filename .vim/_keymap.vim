@@ -213,7 +213,7 @@ endif
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>aa  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-nnoremap <silent><nowait> <space>ll  :<C-u>CocList<CR>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
 nnoremap <silent><nowait> <space>ee  :<C-u>CocCommand explorer<CR>
 " Show commands.
 nnoremap <silent><nowait> <space>mm  :<C-u>CocList commands<CR>
