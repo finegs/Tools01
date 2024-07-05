@@ -4,7 +4,6 @@ filetype off
 call plug#begin('$HOME/.vim/plugged')
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'                " i3 config highlighting
-Plug 'Yggdroot/indentLine'
 
 Plug 'airblade/vim-gitgutter'
 if g:os == "linux"
@@ -74,6 +73,9 @@ Plug 'hdiniz/vim-gradle'
 Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'tyru/open-browser.vim'
+
+Plug 'nathanaelkane/vim-indent-guides'
+
 
 call plug#end()
 
