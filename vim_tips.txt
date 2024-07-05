@@ -1,0 +1,331 @@
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+"Turn on syntax (I guess)
+syntax on
+
+" Needed for Syntax Highlighting and stuff
+filetype on
+filetype plugin on
+syntax enable
+set grepprg=grep\ -nH\ $*
+
+" Tell vim to remember certain things when we exit
+"  '10  :  marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+"  n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+"Restore cursor position
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Fast editing of the .vimrc
+map <leader>e :e! ~/.vimrc<cr>
+
+" When vimrc is edited, reload it
+autocmd! bufwritepost vimrc source ~/.vim_runtime/vimrc
+
+"Latex Suite
+"This specifies what I want folded. I have included the defaults as well as
+"some of my own as well
+" let g:Tex_FoldedSections=',test'
+" let g:Tex_FoldedCommands=',lstset'
+" let g:Tex_FoldedEnvironments=',itemize'
+" let g:Tex_FoldedMiscl=',comments'
+
+"These two lines display the file name at the bottom
+set modeline                        
+set ls=2
+
+"Default for checking marks is 4 seconds, make it faster
+set updatetime=100          
+
+"Persistent Undo
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=10000    "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
+"Use GUndo to better view undo tree
+"http://sjl.bitbucket.org/gundo.vim/
+nnoremap <F5> :GundoToggle<CR>
+
+"Keep undo history when switching buffers
+set hidden
+
+"Don't use vi-compatibility mode
+set nocompatible                    
+
+"Use the smart version of backspace (jumps over tabs apparently instead of
+"spaces 
+set backspace=2                     
+
+"Use spaces instead of tabs
+set expandtab                       
+
+"Line Numbers
+set number                                              
+
+"Makes unnamed clipboard accesible to X window
+set clipboard=unnamedplus
+
+"Number of spaces to use for each step of (auto)indent.
+set shiftwidth=4
+
+"This shows what you are typing as a command
+set showcmd
+
+"Not too sure what this does
+set smarttab
+
+"Indent every time you press enter
+set autoindent
+set smartindent                                          
+
+"Use C style indent instead (note this causes problems with non C code)
+" set cindent
+
+"Cursor Always in middle
+"NOTE This causes problems with word wrap of long lines as they are not
+"displayed correctly
+set scrolloff=999                       
+
+"Always display row/column info 
+set ruler                           
+
+"Set a red ruler at some point for comment blocks
+"But only for php and js files as they make heavy use of comments
+au BufNewFile,BufRead *.php,*.js set cc=80
+
+"turn on spell check for tex files
+au BufNewFile,BufRead *.tex set spell spelllang=en_gb
+
+set tags=tags;/
+
+"make word wrap wrap words, not character
+set formatoptions=l
+set lbr
+
+"Use ... when word wrapping
+set showbreak=...
+
+"enable status line always
+set laststatus=2
+
+"
+" statusline
+" cf the default statusline: %<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+" format markers:
+"   %< truncation point
+"   %n buffer number
+"   %f relative path to file
+"   %m modified flag [+] (modified), [-] (unmodifiable) or nothing
+"   %r readonly flag [RO]
+"   %y filetype [ruby]
+"   %= split point for left and right justification
+"   %-35. width specification
+"   %l current line number
+"   %L number of lines in buffer
+"   %c current column number
+"   %V current virtual column number (-n), if different from %c
+"   %P percentage through buffer
+"   %) end of width specification
+set statusline=%f%m%r%h%w[%n]\ [F=%{&ff}][T=%Y]\ %=[LINE=%l][%p%%]
+
+"set it up to change the status line based on mode
+if version >= 700
+  au InsertEnter * hi StatusLine term=reverse ctermbg=4
+  au InsertLeave * hi StatusLine term=reverse ctermbg=2
+endif
+
+autocmd FileType tex setlocal makeprg=pdflatex\ --shell-escape\ '%'     "Compile tex files with :make
+
+"start searching as you type
+set incsearch
+
+"Map jj to escape
+imap jj <Esc>                       
+
+map <F2> :NERDTreeToggle<CR>    "Toggle Nerd Tree on/off
+
+"Highlight search strings
+set hlsearch 
+
+" Set off the other paren
+highlight MatchParen ctermbg=4
+
+"Ignore case when searching
+set ignorecase 
+
+"But remember case when capitals used
+set smartcase
+
+" Use english for spellchecking, but don't spellcheck by default
+if version >= 700
+   set spl=en spell
+   set nospell
+endif
+
+" Cool tab completion stuff
+" Is irritating and I hardly ever use it
+" set wildmenu
+" set wildmode=list:longest,full
+
+"Show matching bracets when text indicator is over them
+set showmatch 
+
+"How many tenths of a second to blink
+"Does not seem to change anything
+set mat=2 
+
+" Swap ; and :  Convenient.
+nnoremap ; :
+nnoremap : ;
+
+" Create Blank Newlines and stay in Normal mode
+nnoremap <silent> zj o<Esc>
+nnoremap <silent> zk O<Esc>
+
+"Highlight current line
+set cul
+
+"adjust highlight color
+hi CursorLine term=none cterm=none ctermbg=232
+
+"Make cursor move as expected with wrapped lines:
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
+
+"Map Shift+ J to previous buffer
+map <S-J> :bp<CR>           
+
+"Map Shift + K to next buffer
+map <S-k> :bn<CR>               
+
+"enable 256 color
+set t_Co=256
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+"Do not want spell checking in my commented blocks
+let g:tex_comment_nospell= 1
+
+if &t_Co == 256
+    colorscheme xoria256
+else
+    colorscheme peachpuff
+endif
+
+" Restore cursor position to where it was before
+augroup JumpCursorOnEdit
+   au!
+   autocmd BufReadPost *
+            \ if expand("<afile>:p:h") !=? $TEMP |
+            \   if line("'\"") > 1 && line("'\"") <= line("$") |
+            \     let JumpCursorOnEdit_foo = line("'\"") |
+            \     let b:doopenfold = 1 |
+            \     if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
+            \        let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
+            \        let b:doopenfold = 2 |
+            \     endif |
+            \     exe JumpCursorOnEdit_foo |
+            \   endif |
+            \ endif
+   " Need to postpone using "zv" until after reading the modelines.
+   autocmd BufWinEnter *
+            \ if exists("b:doopenfold") |
+            \   exe "normal zv" |
+            \   if(b:doopenfold > 1) |
+            \       exe  "+".1 |
+            \   endif |
+            \   unlet b:doopenfold |
+            \ endif
+augroup END
+
+"for Syntastic
+function! BufSel(pattern)
+  let bufcount = bufnr("$")
+  let currbufnr = 1
+  let nummatches = 0
+  let firstmatchingbufnr = 0
+  while currbufnr <= bufcount
+    if(bufexists(currbufnr))
+      let currbufname = bufname(currbufnr)
+      if(match(currbufname, a:pattern) > -1)
+        echo currbufnr . ": ". bufname(currbufnr)
+        let nummatches += 1
+        let firstmatchingbufnr = currbufnr
+      endif
+    endif
+    let currbufnr = currbufnr + 1
+  endwhile
+  if(nummatches == 1)
+    execute ":buffer ". firstmatchingbufnr
+  elseif(nummatches > 1)
+    let desiredbufnr = input("Enter buffer number: ")
+    if(strlen(desiredbufnr) != 0)
+      execute ":buffer ". desiredbufnr
+    endif
+  else
+    echo "No matching buffers"
+  endif
+endfunction
+
+"Bind the BufSel() function to a user-command
+command! -nargs=1 Bs :call BufSel("<args>")
+
+call pathogen#infect() 
+
+"For syntax checking (syntastic)
+let g:syntastic_auto_loc_list=1
+let g:syntastic_disabled_filetypes=['html']
+let g:syntastic_enable_signs=1
+
+function! Time()
+  return strftime("%c", getftime(bufname("%")))
+endfunction
+
+"For jsbeautify
+map <F9> :call g:Jsbeautify()<CR> 
+
+"Check PHP Syntax
+:autocmd FileType php noremap <C-L> :!php -l %<CR>
+
+"Beautify PHP Syntax In 4 steps
+"1) reduce all multiple blank lines to a single blank line
+"2) change all blank lines to something unique like 'if(true)echo('it puts the lotion on the skin');'
+"3) apply beautifier 
+"4) change unique quote back to new line
+func! ParsePHP()
+    :exe 'g/^\_$\n\_^$/d'
+    :%s/^[\ \t]*\n/$x = 'It puts the lotion on the skin';\r/ge
+    :exe '%!php_beautifier --filters "ArrayNested() IndentStyles(style=k&r)"'
+    :%s/$x = 'It puts the lotion on the skin';//ge
+endfunc
+
+map <F8> :call ParsePHP()<CR>
