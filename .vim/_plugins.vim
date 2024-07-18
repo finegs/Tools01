@@ -6,9 +6,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'                " i3 config highlighting
 
 Plug 'airblade/vim-gitgutter'
-if g:os == "linux"
-	Plug 'cdelledonne/vim-cmake'
-endif
+Plug 'cdelledonne/vim-cmake'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'        " pairs quotes or braket
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -66,7 +64,6 @@ Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
 Plug 'ap/vim-css-color'                            " Color previews for CSS
 Plug 'zefei/vim-wintabs'
 Plug 'zefei/vim-wintabs-powerline'
-Plug 'github/copilot.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'itchyny/vim-gitbranch' 
 Plug 'hdiniz/vim-gradle'

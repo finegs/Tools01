@@ -80,5 +80,6 @@
 	"java.completion.enabled": true,
 	"java.typeHierarchy.lazyLoad": true,
 	"java.sharedIndexes.enabled": "off",
-	"java.inlayHints.parameterNames.enabled": "all"
+	"java.inlayHints.parameterNames.enabled": "all",
+	"diagnostic.checkCurrentLine": true
 }

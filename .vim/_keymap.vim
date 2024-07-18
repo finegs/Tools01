@@ -5,9 +5,15 @@ nnoremap <leader>mvrc :e $MYVIMRC<CR>
 nnoremap <leader>src :source $MYVIMRC<CR>
 
 ",q => Quit
-map <leader>qq <Esc><Esc>:q!<CR>
-map <leader>qa <Esc><Esc>:qa!<CR>
+map <leader>qq <Esc><Esc>:q<CR>
+map <leader>qa <Esc><Esc>:qa<CR>
+map <leader>ww :w<CR><Esc>
+map <leader>wa :wa<CR><Esc>
 
+map <leader>QQ <Esc><Esc>:q!<CR>
+map <leader>QA <Esc><Esc>:qa!<CR>
+map <leader>WW :w<CR><Esc>
+map <leader>WA :wa<CR><Esc>
 "jk => esc, Escape insert mode
 "inoremap jk <Esc>
 
@@ -22,8 +28,6 @@ map <leader>qa <Esc><Esc>:qa!<CR>
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
 
-nmap <space>ww :w<CR><Esc>
-nmap <space>wa :wa<CR><Esc>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
@@ -54,49 +58,14 @@ map <S-F12> :setlocal spell! spelllang=en_us<CR>
 
 nnoremap <space>0 <Esc>:NERDTreeToggle<CR>
 nnoremap <space>9 <Esc>:TagbarToggle<CR>
+nnoremap <space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
+nnoremap <space>* <Esc>:call ToggleTerminal('L', 50)<CR>
 nnoremap <space>v8 <Esc>:vertial :botright :term<CR>
 nnoremap <space>8 <Esc>:term<CR>
 
-
-if has('gui_running')
-	" map <space>0 <Esc>:NERDTreeToggle<CR>
-	map <space>9 <Esc>:TagbarToggle<CR>
-	" OpenTerminal below
-	map <space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
-	map <space>* <Esc>:call ToggleTerminal('L', 50)<CR>
-
-	"map for move lines
-	map <M-Down> :m+1<CR>
-	map <M-Up> :m-2<CR>
-	imap <M-k> <Esc>:m-2<CR>
-	imap <M-j> <Esc>:m+1<CR>
-
-	nnoremap <M-k>   :<C-u>silent! move-2<CR>==
-	nnoremap <M-j>	 :<C-u>silent! move+<CR>==
-	vnoremap <M-k>	 :<C-u>silent! m-2<CR>
-	vnoremap <M-j>	 :<C-u>silent! m+1<CR>
-	xnoremap <M-k>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-	xnoremap <M-j>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
-
-else
-	nnoremap <space>0 <Esc>:NERDTreeToggle<CR>
-	nnoremap <space>9 <Esc>:TagbarToggle<CR>
-	" nnoremap <space>8 <Esc>:term<CR>
-	nnoremap <space>8 <Esc>:call ToggleTerminal('J', 30)<CR>
-	nnoremap <space>* <Esc>:call ToggleTerminal('L', 50)<CR>
-
-	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
-	nnoremap ,<Down>	 :<C-u>silent! move+<CR>==
-	vnoremap ,<Up>	 :<C-u>silent! m-2<CR>
-	vnoremap ,<Down>	 :<C-u>silent! m+1<CR>
-	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
-	xnoremap ,<Down>	 :<C-u>silent! '<,'>move'>+<CR>gv=gv
-endif
-
 if has('gui_running')
 	map <M-Down> :m+1<CR>
 	map <M-Up> :m-2<CR>
-	"map for move lines
 	vnoremap <M-Up> :m-2<CR>
 	vnoremap <M-Down> :m+1<CR>
 	imap <M-Up> <Esc>:m-2<CR>
@@ -104,6 +73,8 @@ if has('gui_running')
 else
 	nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
 	nnoremap ,<Down> :<C-u>silent! move+<CR>==
+	vnoremap ,<Up>	 :<C-u>silent! m-2<CR>
+	vnoremap ,<Down> :<C-u>silent! m+1<CR>
 	xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
 	xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
 endif
@@ -145,9 +116,9 @@ map bd :bd<CR>
 nnoremap <Leader>bb :ls<CR>:b<space>
 
 " Tab Switch
-map gtn :tabnext<CR>
-map gtp :tabprevious<CR>
-map gtd :tabclose<CR>
+map tn :tabnext<CR>
+map tp :tabprevious<CR>
+map td :tabclose<CR>
 " GoTo Tab with Tab number
 nnoremap <Leader>gtt :tabs<CR>:b<space>
 " GoTo buffer with buffer number
@@ -244,18 +215,19 @@ nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
 nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
 nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
 nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
-nnoremap <leader>de :call vimspector#Reset()<CR>
+nnoremap <leader>dq :call vimspector#Reset()<CR>
 
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+nmap <F11> <Plug>VimspectorStepInto
+nmap <F10> <Plug>VimspectorStepOver
+nmap <S-F11> <Plug>VimspectorStepOut
+nmap <C-F5> <Plug>VimspectorRestart
+nmap <S-F5> <Plug>VimspectorStop
+nnoremap <F5> :call vimspector#Continue()<CR>
 
-nmap <leader>drc <Plug>VimspectorRunToCursor
-nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <S-F10> <Plug>VimspectorRunToCursor
+nmap <F9> <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
 " VimspectorInstall
@@ -349,6 +321,7 @@ nnoremap <silent> <space><Tab> :Maps  <CR>
 nnoremap <silent> <space>hc :History: <CR>
 nnoremap <silent> <space>hs :History/ <CR>
 nnoremap <silent> <space>ts :Tags<CR>
+nnoremap <silent> <space>ll :Lines<CR>
 
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -362,11 +335,13 @@ nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
 nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
 if !(has('win32') || has('win64'))
-	nmap <leader>cg <Plug>(CMakeGenerate)
-	nmap <leader>cb <Plug>(CMakeBuild)
-	nmap <leader>ci <Plug>(CMakeInstall)
-	nmap <leader>cs <Plug>(CMakeSwitch)
-	nmap <leader>cq <Plug>(CMakeClose)
+	nmap <leader>cmg <Plug>(CMakeGenerate)
+	nmap <leader>cmc <Plug>(CMakeClean)
+	nmap <leader>cmb <Plug>(CMakeBuild)
+	nmap <leader>cmi <Plug>(CMakeInstall)
+	nmap <leader>cms <Plug>(CMakeSwitch)
+	nmap <leader>cmq <Plug>(CMakeClose)
+	nmap <leader>cmr <Plug>(CMakeRun)
 endif
 
 " Toggle paste mode on and off
