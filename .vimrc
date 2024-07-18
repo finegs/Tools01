@@ -206,7 +206,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType python let b:coc_root_patterns = ['.pjt.vim']
 autocmd FileType java let b:coc_root_patterns = ['.pjt.vim', '.classpath', '.project']
 autocmd FileType c let b:coc_root_patterns = ['.pjt.vim', '.classpath', '.project']
-autocmd FileType cpp let b:coc_root_patterns = ['.pjt.vim', '.classpath', '.project', 'CMakeLists']
+autocmd FileType cpp let b:coc_root_patterns = ['.pjt.vim', '.classpath', '.project' ]
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -313,8 +313,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 set belloff=all
 let g:indentLine_enabled = 1
-
-let g:copilot_filetypes = {'markdown': v:true}
 
 let b:ale_linters = ['markdownlint', 'vale']
 let b:ale_fixers = ['prettier']
