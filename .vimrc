@@ -8,7 +8,6 @@ let g:coc_data_home="$HOME/.vim/nvim"
 
 set grepprg="rg\ --vimgrep\ --smart-case\ --hidden\ --follow"
 " let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color never --glob "!.git/*"'
-let g:plug_url_format='https://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@github.com/%s.git'
 
 if has("mac")
 	let g:os=mac
