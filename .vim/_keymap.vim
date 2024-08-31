@@ -5,6 +5,7 @@ nnoremap <leader>mvrc :e $MYVIMRC<CR>
 nnoremap <leader>src :source $MYVIMRC<CR>
 
 ",q => Quit
+map <leader><S>q <Esc><Esc>:q<CR>
 map <leader>qq <Esc><Esc>:q<CR>
 map <leader>qa <Esc><Esc>:qa<CR>
 map <leader>ww :w<CR><Esc>
@@ -27,6 +28,8 @@ map <leader><S>qa <Esc><Esc>:qa!<CR>
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
 
+nmap <space>ww :w<CR><Esc>
+nmap <space>wa :wa<CR><Esc>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
