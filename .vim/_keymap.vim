@@ -9,11 +9,10 @@ map <leader>qq <Esc><Esc>:q<CR>
 map <leader>qa <Esc><Esc>:qa<CR>
 map <leader>ww :w<CR><Esc>
 map <leader>wa :wa<CR><Esc>
+map <leader><S>q <Esc><Esc>:q!<CR>
+map <leader>qa <Esc><Esc>:qa<CR>
+map <leader><S>qa <Esc><Esc>:qa!<CR>
 
-map <leader>QQ <Esc><Esc>:q!<CR>
-map <leader>QA <Esc><Esc>:qa!<CR>
-map <leader>WW :w<CR><Esc>
-map <leader>WA :wa<CR><Esc>
 "jk => esc, Escape insert mode
 "inoremap jk <Esc>
 
@@ -123,6 +122,7 @@ map td :tabclose<CR>
 nnoremap <Leader>gtt :tabs<CR>:b<space>
 " GoTo buffer with buffer number
 nnoremap gtl :tabs<CR>
+" nnoremap gtl :tabs<CR>:b<space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
