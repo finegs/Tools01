@@ -6,7 +6,9 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'                " i3 config highlighting
 
 Plug 'airblade/vim-gitgutter'
-Plug 'cdelledonne/vim-cmake'
+if g:os == "linux"
+	Plug 'cdelledonne/vim-cmake'
+endif
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'        " pairs quotes or braket
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

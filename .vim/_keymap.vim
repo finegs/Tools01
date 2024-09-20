@@ -5,8 +5,8 @@ nnoremap <leader>mvrc :e $MYVIMRC<CR>
 nnoremap <leader>src :source $MYVIMRC<CR>
 
 ",q => Quit
-map <leader><S>q <Esc><Esc>:q<CR>
-map <leader>qq <Esc><Esc>:q<CR>
+map <leader>qq <Esc><Esc>:q!<CR>
+map <leader>qa <Esc><Esc>:qa!<CR>
 map <leader>qa <Esc><Esc>:qa<CR>
 map <leader>ww :w<CR><Esc>
 map <leader>wa :wa<CR><Esc>
@@ -125,7 +125,6 @@ map td :tabclose<CR>
 nnoremap <Leader>gtt :tabs<CR>:b<space>
 " GoTo buffer with buffer number
 nnoremap gtl :tabs<CR>
-" nnoremap gtl :tabs<CR>:b<space>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call Show_documentation()<CR>
@@ -218,19 +217,18 @@ nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
 nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
 nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
 nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
-nnoremap <leader>dq :call vimspector#Reset()<CR>
+nnoremap <leader>dr :call vimspector#Reset()<CR>
 
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 
-nmap <F11> <Plug>VimspectorStepInto
-nmap <F10> <Plug>VimspectorStepOver
-nmap <S-F11> <Plug>VimspectorStepOut
-nmap <C-F5> <Plug>VimspectorRestart
-nmap <S-F5> <Plug>VimspectorStop
-nnoremap <F5> :call vimspector#Continue()<CR>
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 
-nmap <S-F10> <Plug>VimspectorRunToCursor
-nmap <F9> <Plug>VimspectorToggleBreakpoint
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
 " VimspectorInstall
