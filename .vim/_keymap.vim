@@ -28,6 +28,8 @@ map <leader><S>qa <Esc><Esc>:qa!<CR>
 nmap <Tab> <C-W>w
 nmap <S-Tab> <C-W><C-P>
 
+nmap <space>wq :wq<CR><Esc>
+nmap <space>wQ :wq!<CR><Esc>
 nmap <space>ww :w<CR><Esc>
 nmap <space>wa :wa<CR><Esc>
 " in normal mode F2 will save the file
