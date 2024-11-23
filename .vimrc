@@ -40,9 +40,9 @@ if has("gui_running")
 "set enc=cp949 
   set enc=utf-8
   if has("gui_gtk2") || has('gui_gtk3')
-    set guifont=Inconsolata\ 14
+    set guifont=Inconsolata\ 12
   elseif has("gui_macvim")
-    set guifont=Menlo\ Regular:h14
+    set guifont=Menlo\ Regular:h12
   elseif has("gui_win32")
 
 ""  language message ko_kr.utf-8
@@ -141,6 +141,7 @@ augroup filetype
   autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
   autocmd BufNewFile,BufRead *.md set conceallevel=0
   autocmd BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
+  autocmd BufNewFile,BufReadPost .gitalias*.inc set filetype=gitconfig
 augroup END
 
 " Only enable autocommands when Vim supports them
@@ -266,8 +267,13 @@ colorscheme gruvbox
 let g:cmake_root_markers = ['.project']
 let g:cmake_build_dir_location = 'build'
 
-" let g:fzf_layout = { 'down': '~40%' }
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" - Popup window (anchored to the bottom of the current window)
+"let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5, 'relative': v:true, 'yoffset': 1.0 } }
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.7, 'relative': v:true} }
+let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow'
+let $FZF_DEFAULT_COMMAND .= ' -g \".git\"'
+" let g:fzf_vim#preview_window = ['right,50%', 'ctrl-/']
+let g:fzf_vim#preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
 
 set splitright
 set splitbelow

@@ -294,6 +294,7 @@
   smuir = submodule update --init --recursive
 
   ### status ###
+  st = status
 
   # status with short format instead of full details
   ss = status --short
