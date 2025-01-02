@@ -141,7 +141,7 @@ augroup filetype
   autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
   autocmd BufNewFile,BufRead *.md set conceallevel=0
   autocmd BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
-  autocmd BufNewFile,BufReadPost .gitalias*.inc set filetype=gitconfig
+  autocmd BufNewFile,BufReadPost .gitalias*.* set filetype=gitconfig
 augroup END
 
 " Only enable autocommands when Vim supports them
@@ -239,10 +239,6 @@ if g:os == "mingw"
 	execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 endif
 
-"added by SGK 20210508
-if &term == "screen"
-  set t_Co=256
-endif
 
 highlight CursorLine ctermbg=Black guibg=#282828
 
@@ -337,3 +333,10 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 hi IndentGuideOdd guibg=red ctermbg=3
 hi IndentGuideEven guibg=green ctermbg=4
+
+
+"added by SGK 20210508
+if &term == "screen"
+  set t_Co=256
+endif
+
