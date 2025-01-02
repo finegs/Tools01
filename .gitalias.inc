@@ -15,15 +15,10 @@
 	email = finegs@gmail.com
 
 [difftool "vimdirdiff"]
-    cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+  prompt = false
+  cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
 
 [alias]
-  dirdiff = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
-
-  # one-line log
-  ll = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-  l3 = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short -n 3
-  l10 = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short -n 10
 
   ##
   # One letter alias for our most frequent commands.
@@ -36,15 +31,16 @@
   b = branch
   c = commit
   d = diff
-  dd = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
   f = fetch
   g = grep
   l = log
+
   m = merge
   o = checkout
   p = pull
   r = remote
   s = status
+  st = status
   w = whatchanged
 
   ##
@@ -150,7 +146,7 @@
   lk = log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'
 
   # log latest - show the 10 most recent lines using `lk`
-  ll = log -n 10 --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad'
+#  ll = log -n 10 --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad'
 
   ## ls-files ##
 
@@ -294,7 +290,6 @@
   smuir = submodule update --init --recursive
 
   ### status ###
-  st = status
 
   # status with short format instead of full details
   ss = status --short
@@ -837,3 +832,12 @@
 
   ull = pull
   ush = push
+
+# added by SGK 2024-12-29
+  dirdiff = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
+  dd = dirdiff
+	ll = log --graph --all --decorate -30 --topo-order --date=format-local:'%Y-%m-%d %H:%M (%a)' --pretty=format:'%Cgreen%ad%Creset %C(auto)%h%d %s %C(bold black)<%aN>%Creset'
+  l3 = ll -n 3
+  l10 = ll -n 10
+  l30 = ll -n 30
+

@@ -32,6 +32,8 @@ nmap <space>wq :wq<CR><Esc>
 nmap <space>wQ :wq!<CR><Esc>
 nmap <space>ww :w<CR><Esc>
 nmap <space>wa :wa<CR><Esc>
+nmap <space>qq :q<CR>
+imap <space>qq <ESC>:q<CR>
 " in normal mode F2 will save the file
 " in insert mode F2 will exit insert, save, enters insert again
 " switch between header/source with F4
