@@ -244,3 +244,37 @@ function! JavaStartDebug()
   call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
 endfunction
 
+function!_func#myrg(query, path, fullscreen=1)
+  let l:path = a:path
+  if empty(l:pat)
+    let l:path = getcwd()
+  endif
+
+  echo printf(" query : \%s, paht : \%s, fullscreen : \%d", a:query, l:path, l:fullscreen)
+
+  let command_fmt = 'rg -uu --column --line-number --no-heading --color=always --smart-case %s %s||true'
+  let initial_cmd = printf(command_fmt, shellescape(a:query), fnameescape(f:path))
+  let reload_cmd = printf(command_fmt, '{q}', fnameescape(f:path))
+  let spec = {'optionss': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command], '--preview-windows': 'hidden,right:95%,>150(up,95%)'}
+  call fzf#vim#grep(initial_cmd, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=+ -complete=dir -bang Mrg call _func#myrg(<f-args>, <bang>0)
+
+function GetVisualSelection()
+  let raw_search = @"
+  let @/=substitute(escape(raw_search, '\/.*$^~[]'), "\n", '\\n', "g")
+endfunction
+xnoremap // ""y:call GetVisualSelection()<bar>:set hls<cr>
+
+function! RgRunner(...)
+  let command = 'rg --column --line-number --no-heading --color=always --smart-case '
+  if a:0 >= 1
+    let command = command . '-g ' . a:1 . ' '
+  endif
+  return command
+endfunction
+
+command! -bang -nargs=* Rrg
+  \ call fzf#vim#grep(RgRunner(<f-args>).shellescape(""), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
