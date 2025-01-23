@@ -40,9 +40,9 @@ if has("gui_running")
 "set enc=cp949 
   set enc=utf-8
   if has("gui_gtk2") || has('gui_gtk3')
-    set guifont=Inconsolata\ 12
+    set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
-    set guifont=Menlo\ Regular:h12
+    set guifont=Menlo\ Regular:h14
   elseif has("gui_win32")
 
 ""  language message ko_kr.utf-8
@@ -132,16 +132,18 @@ filetype indent on " file type based indentation
 "" properly]:
 
 augroup filetype
-  autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
-  autocmd BufNewFile,BufRead *.txt set filetype=human
-  autocmd BufNewFile,BufRead *.mk set filetype=make noexpandtab
-  autocmd BufNewFile,BufRead makefile set filetype=make noexpandtab
-  autocmd BufNewFile,BufRead Makefile set filetype=make noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
-  autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
-  autocmd BufNewFile,BufRead *.md set conceallevel=0
-  autocmd BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
-  autocmd BufNewFile,BufReadPost .gitalias*.* set filetype=gitconfig
+  au BufNewFile,BufRead */.Postponed/* set filetype=mail
+  au BufNewFile,BufRead *.txt set filetype=human
+  au BufNewFile,BufRead *.mk set filetype=make noexpandtab
+  au BufNewFile,BufRead makefile set filetype=make noexpandtab
+  au BufNewFile,BufRead Makefile set filetype=make noexpandtab
+  au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
+  au BufNewFile,BufRead *.py set filetype=python noexpandtab
+  au BufNewFile,BufRead *.md set conceallevel=0
+  au BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
+
+	au BufWinLeave *.rs mkview
+	au BufWinEnter *.rs silent loadview
 augroup END
 
 " Only enable autocommands when Vim supports them
@@ -340,3 +342,4 @@ if &term == "screen"
   set t_Co=256
 endif
 
+let $RUST_BACKTRACE=1
