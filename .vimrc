@@ -132,18 +132,16 @@ filetype indent on " file type based indentation
 "" properly]:
 
 augroup filetype
-  au BufNewFile,BufRead */.Postponed/* set filetype=mail
-  au BufNewFile,BufRead *.txt set filetype=human
-  au BufNewFile,BufRead *.mk set filetype=make noexpandtab
-  au BufNewFile,BufRead makefile set filetype=make noexpandtab
-  au BufNewFile,BufRead Makefile set filetype=make noexpandtab
-  au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
-  au BufNewFile,BufRead *.py set filetype=python noexpandtab
-  au BufNewFile,BufRead *.md set conceallevel=0
-  au BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
-
-	au BufWinLeave *.rs mkview
-	au BufWinEnter *.rs silent loadview
+  autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
+  autocmd BufNewFile,BufRead *.txt set filetype=human
+  autocmd BufNewFile,BufRead *.mk set filetype=make noexpandtab
+  autocmd BufNewFile,BufRead makefile set filetype=make noexpandtab
+  autocmd BufNewFile,BufRead Makefile set filetype=make noexpandtab
+  autocmd BufNewFile,BufRead CMakeLists.txt set filetype=cmake
+  autocmd BufNewFile,BufRead *.py set filetype=python noexpandtab
+  autocmd BufNewFile,BufRead *.md set conceallevel=0
+  autocmd BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
+  autocmd BufNewFile,BufReadPost .gitalias*.inc set filetype=gitconfig
 augroup END
 
 " Only enable autocommands when Vim supports them
@@ -241,6 +239,10 @@ if g:os == "mingw"
 	execute 'let CMAKE_GENERATOR="MinGW Makefiles"'
 endif
 
+"added by SGK 20210508
+if &term == "screen"
+  set t_Co=256
+endif
 
 highlight CursorLine ctermbg=Black guibg=#282828
 

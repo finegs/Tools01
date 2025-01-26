@@ -244,7 +244,7 @@ function! JavaStartDebug()
   call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
 endfunction
 
-function! _func#myrg(query, path, fullscreen=1)
+function! MyRg(query, path, fullscreen=1)
   let l:path = a:path
   if empty(l:path)
     let l:path = getcwd()
@@ -259,7 +259,7 @@ function! _func#myrg(query, path, fullscreen=1)
   call fzf#vim#grep(initial_cmd, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-command! -nargs=+ -complete=dir -bang Mrg call _func#myrg(<f-args>, <bang>0)
+command! -nargs=+ -complete=dir -bang Mrg call MyRg(<f-args>, <bang>0)
 
 function GetVisualSelection()
   let raw_search = @"

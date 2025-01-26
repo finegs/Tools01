@@ -107,6 +107,7 @@ endif
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> <space><Left> <Plug>(coc-diagnostic-prev)
 nmap <silent> <space><Right> <Plug>(coc-diagnostic-next)
+nmap <silent> <space>ai <Plug>(coc-diagnostic-info)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -161,7 +162,9 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>cas	<Plug>(coc-codeaction)
+nmap <leader>cal	<Plug>(coc-codeaction-line)
+nmap <leader>car	<Plug>(coc-codeaction-refactor)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
