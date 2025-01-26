@@ -165,6 +165,8 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+nmap <Leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
@@ -318,11 +320,10 @@ nnoremap <C-P> :Files<CR>
 nnoremap <space>ff :Files<CR>
 nnoremap <space>bb :Buffers<CR>
 nnoremap <silent> <space>tat :Ag <C-R><C-W><CR>
-nnoremap <silent> <space>tt :Rg <CR>
-nnoremap <silent> <space>tw :Rg <C-R><C-W><CR>
+nnoremap <silent> <space>tt :Rg <C-R><C-W><CR>
 nnoremap <silent> <space>cmd :Commands<CR>
 nnoremap <silent> <space>mks :Marks    <CR>
-nnoremap <silent> <space><Tab> :Maps  <CR>
+" nnoremap <silent> <space><Tab> :Maps  <CR>
 nnoremap <silent> <space>hc :History: <CR>
 nnoremap <silent> <space>hs :History/ <CR>
 nnoremap <silent> <space>ts :Tags<CR>
@@ -339,7 +340,7 @@ nnoremap <silent> yot :call <Plug>ToggleTerminal('J', 6)<CR>
 " " Toggle terminal - right
 nnoremap <silent> yo<c-t> :call <Plug>ToggleTerminal('L', 60)<CR>
 
-if !(has('win32') || has('win64'))
+if executable('cmake')  && filereadable('CMakeLists.txt')
 	nmap <leader>cmg <Plug>(CMakeGenerate)
 	nmap <leader>cmc <Plug>(CMakeClean)
 	nmap <leader>cmb <Plug>(CMakeBuild)
@@ -347,6 +348,16 @@ if !(has('win32') || has('win64'))
 	nmap <leader>cms <Plug>(CMakeSwitch)
 	nmap <leader>cmq <Plug>(CMakeClose)
 	nmap <leader>cmr <Plug>(CMakeRun)
+endif
+
+
+if executable('cargo')  && filereadable('Cargo.toml')
+	nmap <leader>cn :Cargo init<CR>
+	nmap <leader>cc :Cargo clean<CR>
+	nmap <leader>cb :Cargo build<CR>
+	nmap <leader>ci :Cargo install<CR>
+	nmap <leader>cf :Cargo search 
+	nmap <leader>cr :Cargo run<CR>
 endif
 
 " Toggle paste mode on and off
@@ -393,3 +404,4 @@ omap <leader><tab> <plug>(fzf-maps-o)
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+

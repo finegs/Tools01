@@ -244,18 +244,18 @@ function! JavaStartDebug()
   call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
 endfunction
 
-function!_func#myrg(query, path, fullscreen=1)
+function! _func#myrg(query, path, fullscreen=1)
   let l:path = a:path
-  if empty(l:pat)
+  if empty(l:path)
     let l:path = getcwd()
   endif
 
-  echo printf(" query : \%s, paht : \%s, fullscreen : \%d", a:query, l:path, l:fullscreen)
+  echo printf(' ### query : %s, path : %s, fullscreen : %d ###', a:query, l:path, a:fullscreen)
 
   let command_fmt = 'rg -uu --column --line-number --no-heading --color=always --smart-case %s %s||true'
-  let initial_cmd = printf(command_fmt, shellescape(a:query), fnameescape(f:path))
-  let reload_cmd = printf(command_fmt, '{q}', fnameescape(f:path))
-  let spec = {'optionss': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command], '--preview-windows': 'hidden,right:95%,>150(up,95%)'}
+  let initial_cmd = printf(command_fmt, shellescape(a:query), fnameescape(l:path))
+  let reload_cmd = printf(command_fmt, '{q}', fnameescape(l:path))
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_cmd], '--preview-windows': 'hidden,right:95%,>150(up,95%)'}
   call fzf#vim#grep(initial_cmd, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
@@ -277,4 +277,5 @@ endfunction
 
 command! -bang -nargs=* Rrg
   \ call fzf#vim#grep(RgRunner(<f-args>).shellescape(""), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
 
