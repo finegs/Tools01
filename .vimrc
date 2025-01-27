@@ -7,7 +7,6 @@ let g:coc_config_home="$HOME/.vim"
 let g:coc_data_home="$HOME/.vim/nvim"
 
 set grepprg="rg\ --vimgrep\ --smart-case\ --hidden\ --follow"
-" let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --color never --glob "!.git/*"'
 
 if has("mac")
 	let g:os=mac
@@ -142,6 +141,8 @@ augroup filetype
   autocmd BufNewFile,BufRead *.md set conceallevel=0
   autocmd BufNewFile,BufReadPre *.md let g:indentLine_conceallevel=0
   autocmd BufNewFile,BufReadPost .gitalias*.inc set filetype=gitconfig
+  autocmd BufLeave           *.* :mkview
+  autocmd BufReadPost           *.* :loadview
 augroup END
 
 " Only enable autocommands when Vim supports them
@@ -270,8 +271,6 @@ let g:cmake_build_dir_location = 'build'
 " - Popup window (anchored to the bottom of the current window)
 "let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5, 'relative': v:true, 'yoffset': 1.0 } }
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.7, 'relative': v:true} }
-let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow'
-let $FZF_DEFAULT_COMMAND .= ' -g \".git\"'
 " let g:fzf_vim#preview_window = ['right,50%', 'ctrl-/']
 let g:fzf_vim#preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
 
