@@ -323,7 +323,8 @@ nnoremap <C-P> :Files<CR>
 nnoremap <space>ff :Files<CR>
 nnoremap <space>bb :Buffers<CR>
 nnoremap <silent> <space>tat :Ag <C-R><C-W><CR>
-nnoremap <silent> <space>tt :Rg <C-R><C-W><CR>
+nnoremap <silent> <space>tt :Rg <CR>
+nnoremap <silent> <space>tct :Rg <C-R><C-W><CR>
 nnoremap <silent> <space>cmd :Commands<CR>
 nnoremap <silent> <space>mks :Marks    <CR>
 " nnoremap <silent> <space><Tab> :Maps  <CR>
