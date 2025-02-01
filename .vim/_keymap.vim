@@ -153,8 +153,7 @@ nmap <leader>ft  <Plug>(coc-format-selected)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>cas  <Plug>(coc-codeaction-selected)
-nmap <leader>cas  <Plug>(coc-codeaction-selected)
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
@@ -162,9 +161,10 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>cas	<Plug>(coc-codeaction)
-nmap <leader>cal	<Plug>(coc-codeaction-line)
-nmap <leader>car	<Plug>(coc-codeaction-refactor)
+nmap <leader>ccs	<Plug>(coc-codeaction)
+nmap <leader>ccl	<Plug>(coc-codeaction-line)
+nmap <leader>ccr	<Plug>(coc-codeaction-refactor)
+nmap <leader>ca		<Plug>(coc-codeaction-cursor)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
