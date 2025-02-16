@@ -15,10 +15,19 @@
 	email = finegs@gmail.com
 
 [difftool]
-  tool = vimdirdiff
+# tool = vimdirdiff 
+   prompt = true
+
+[diff]
+# tool = vimdiff
+  tool = nvimdiff
+
 [difftool "vimdirdiff"]
   prompt = false
   cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\"  \"$REMOTE\""
 
 [alias]
 
