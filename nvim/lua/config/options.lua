@@ -4,7 +4,10 @@
 vim.g.root_spec = { "lsp", { ".pjt.vim", ".init.lua", "lua" }, "cwd" }
 
 vim.g.root_lsp_ignore = { ".gitignore" }
-vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
+
+-- vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
+
+vim.g.lazyvim_python_ruff = "ruff"
 
 -- Keymap
 vim.keymap.set("n", "<Leader>ww", "<Cmd>w<CR><ESC>", { remap = true, desc = "Save File" })

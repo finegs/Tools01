@@ -2,7 +2,7 @@ return {
   {
     "mason-org/mason.nvim",
     opts = {
-      ensure_installed = { "gitui" },
+      ensure_installed = { "gitui", "codelldb" },
     },
   },
 }
