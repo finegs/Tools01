@@ -66,6 +66,8 @@ ZSH_THEME="simple"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+export  FZF_BASE=/home/user01/.fzf
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -79,6 +81,7 @@ colored-man-pages
 zsh-syntax-highlighting
 zsh-autosuggestions
 fzf
+zsh-bat
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -111,10 +114,28 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+source /usr/share/fzf-help/fzf-help.zsh
+zle -N fzf-help-widget
+bindkey "^A" fzf-help-widget
+
+#export YSU_IGNORED_ALIASES=("g" "ll" "git")
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# added by SGK 2025-05-10
+export PATH=$PATH:/usr/local/go/bin
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # added by SGK 2024.06.21
 export DISPLAY=:0.0
 
-alias tmux="TERM=screen-256color-bce tmux"
+function gitpullr() {
+  for dir in */; do
+      if [ -d "$dir/.git" ]; then
+          echo "Pulling in $dir"
+          (cd "$dir" && git pull)
+      fi
+  done
+}
