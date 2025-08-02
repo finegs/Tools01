@@ -16,7 +16,6 @@
 
 [difftool]
 # tool = vimdirdiff 
-   prompt = true
 
 [diff]
 # tool = vimdiff
@@ -28,6 +27,7 @@
 
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\"  \"$REMOTE\""
+  prompt = false
 
 [alias]
 
