@@ -4,6 +4,7 @@
 vim.keymap.set("n", "<leader>ww", "<cmd>w<CR><ESC>", { remap = true, desc = "Save Current Buffer" })
 vim.keymap.set("n", "<leader>wa", "<cmd>wa<CR><ESC>", { remap = true, desc = "Save All Buffers" })
 vim.keymap.set("n", "<leader>qq", "<cmd>q<CR><ESC>", { remap = true, desc = "Close Current Buffer" })
+vim.keymap.set("n", "<leader>qa", "<cmd>qa<CR><ESC>", { remap = true, desc = "Close All Buffer" })
 
 -- buffers
 vim.api.nvim_set_keymap(
