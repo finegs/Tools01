@@ -8,8 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="simple"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -66,14 +65,13 @@ ZSH_THEME="simple"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export  FZF_BASE=/home/user01/.fzf
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(git)
+export FZF_BASE=~/.fzf
 plugins=(
 git
 sudo
@@ -97,11 +95,11 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
@@ -110,25 +108,23 @@ source $ZSH/oh-my-zsh.sh
 # - $ZSH_CUSTOM/aliases.zsh
 # - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
-#
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-source /usr/share/fzf-help/fzf-help.zsh
-zle -N fzf-help-widget
-bindkey "^A" fzf-help-widget
-
-#export YSU_IGNORED_ALIASES=("g" "ll" "git")
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # added by SGK 2025-05-10
 export PATH=$PATH:/usr/local/go/bin
 
+alias ll="ls -althr"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export TERM=xterm-256color
 
-# added by SGK 2024.06.21
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+set -o vi
+
+# added by SGK 2025-07-11
 export DISPLAY=:0.0
 
 function gitpullr() {
@@ -139,3 +135,5 @@ function gitpullr() {
       fi
   done
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
