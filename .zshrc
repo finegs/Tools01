@@ -118,6 +118,8 @@ export PATH=$PATH:/usr/local/go/bin
 
 alias ll="ls -althr"
 
+export MANPAGER="nvim +Man!"
+
 export TERM=xterm-256color
 
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
