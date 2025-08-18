@@ -16,10 +16,12 @@
 
 [difftool]
 # tool = vimdirdiff 
+  prompt = false
 
 [diff]
 # tool = vimdiff
   tool = nvimdiff
+  prompt = false
 
 [difftool "vimdirdiff"]
   prompt = false
