@@ -33,6 +33,11 @@
 
 [alias]
 
+  # one-line log
+  ll = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  l3 = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short -n 3
+  l10 = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short -n 10
+
   ##
   # One letter alias for our most frequent commands.
   #
@@ -847,7 +852,7 @@
   ush = push
 
 # added by SGK 2024-12-29
-  dirdiff = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
+  dirdiff = difftool --ignore-submodules --dir-diff --no-symlinks --tool=nvimdirdiff
   dd = dirdiff
 	ll = log --graph --all --decorate -30 --topo-order --date=format-local:'%Y-%m-%d %H:%M (%a)' --pretty=format:'%Cgreen%ad%Creset %C(auto)%h%d %s %C(bold black)<%aN>%Creset'
   l3 = ll -n 3
