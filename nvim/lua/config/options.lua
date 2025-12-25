@@ -37,4 +37,11 @@ vim.lsp.config["lua_ls"] = {
   },
 }
 
-vim.lsp.enable({ "lua_ls" })
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("pyright")
+vim.lsp.enable("clangd")
+vim.lsp.enable("tsserver")
+vim.lsp.enable("cssls")
+vim.lsp.enable("html")
+vim.lsp.enable("rust-analyzer")
+vim.lsp.enable("bashls")

@@ -1,6 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+vim.keymap.del("n", "L")
+vim.keymap.del("n", "H")
+
 vim.keymap.set("n", "<leader>ww", "<cmd>w<CR><ESC>", { remap = true, desc = "Save Current Buffer" })
 vim.keymap.set("n", "<leader>wa", "<cmd>wa<CR><ESC>", { remap = true, desc = "Save All Buffers" })
 vim.keymap.set("n", "<leader>qq", "<cmd>q<CR><ESC>", { remap = true, desc = "Close Current Buffer" })

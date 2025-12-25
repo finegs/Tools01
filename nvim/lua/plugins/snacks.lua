@@ -22,6 +22,15 @@ return {
               },
             },
           },
+          marks = {
+            win = {
+              list = {
+                keys = {
+                  ["<c-x>"] = "delmarks",
+                },
+              },
+            },
+          },
         },
       },
     },
