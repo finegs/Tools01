@@ -36,3 +36,19 @@ vim.keymap.set("n", "<leader>ml", function()
     vim.notify("No .session.vim file found", vim.log.levels.WARN)
   end
 end, { desc = "Load Session" })
+
+-- Navigate to next diff change
+vim.keymap.set("n", "]c", function()
+  if vim.wo.diff then
+    return "]c"
+  end
+  return "]]"
+end, { expr = true, desc = "Next diff change" })
+
+-- Navigate to previous diff change
+vim.keymap.set("n", "[c", function()
+  if vim.wo.diff then
+    return "[c"
+  end
+  return "[["
+end, { expr = true, desc = "Prev diff change" })

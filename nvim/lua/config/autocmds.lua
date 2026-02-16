@@ -65,3 +65,69 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- added on 2026-02-14
+-- lua/config/autocmds.lua
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "c", "cpp", "objc", "objcpp" },
+  callback = function()
+    -- ... (Clang detection code) ...
+    -- 1. DETECT CLANG PROJECT
+    -- Look for compile_commands.json or .clangd starting from the current file's dir
+    local root_markers = { "compile_commands.json", ".clangd" }
+    local matches = vim.fs.find(root_markers, {
+      upward = true,
+      stop = vim.env.HOME, -- Stop searching at home dir to be safe
+      path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+    })
+
+    -- If NO clang project is found, STOP here.
+    if #matches == 0 then
+      return
+    end
+
+    -- 2. Get Environment Variable
+    local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+    local env_separator = is_windows and ";" or ":"
+    local env_val = vim.env.EXTERNAL_INCLUDE or vim.env.INCLUDE
+
+    if not env_val or env_val == "" then
+      return
+    end
+
+    -- 3. Prepare Existing Paths (to prevent duplicates)
+    -- We create a "Set" of current paths for fast lookup
+    local current_paths = vim.opt_local.path:get()
+    local path_set = {}
+    for _, p in ipairs(current_paths) do
+      path_set[p] = true
+    end
+
+    local paths = vim.split(env_val, env_separator, { trimempty = true })
+
+    for _, raw_path in ipairs(paths) do
+      -- 1. Standard Sanitize (\ -> /)
+      local clean_path = raw_path:gsub("[\\/]+", "/"):gsub("/$", "")
+
+      if vim.fn.isdirectory(clean_path) == 1 then
+        -- 2. CRITICAL FIX: Escape spaces (" " -> "\ ")
+        -- This ensures Vim treats "Program Files" as one folder, not two.
+        local escaped_path = clean_path:gsub(" ", "\\ ")
+
+        -- 3. Add Recursive path
+        local recursive = escaped_path .. "/**"
+
+        -- Append
+        if not path_set[recursive] then
+          vim.opt_local.path:append(recursive)
+          path_set[recursive] = true
+        end
+
+        if not path_set[escaped_path] then
+          vim.opt_local.path:append(escaped_path)
+          path_set[escaped_path] = true
+        end
+      end
+    end
+  end,
+})

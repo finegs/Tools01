@@ -1,6 +1,8 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+local utils = require("mymodule.utils")
+
 vim.g.root_spec = { "lsp", { ".pjt.lua", ".init.lua", "lua" }, "cwd" }
 
 vim.g.root_lsp_ignore = { ".gitignore" }
@@ -17,6 +19,13 @@ vim.keymap.set("n", "<Leader>ww", "<Cmd>w<CR><ESC>", { remap = true, desc = "Sav
 vim.keymap.set("n", "<Tab>", "<C-W>k", { remap = true, desc = "Next Window" })
 vim.keymap.set("n", "<S-Tab>", "<C-W>k", { remap = true, desc = "Next Window" })
 
+-- Plantuml
+if utils.is.windows then
+  vim.g["plantuml_previewer#plantuml_jar_path"] = "C:/Programs/share/plantuml/plantuml-gplv2-1.2025.10.jar"
+  vim.g["plantuml_previewer#viewer_path"] = [[C:\Dev\temp\puml_viewer]]
+  vim.g["plantuml_previewer#debug_mode"] = 1
+end
+
 vim.lsp.config["lua_ls"] = {
   -- Command and arguments to start the server.
   cmd = { "lua-language-server" },
@@ -32,6 +41,14 @@ vim.lsp.config["lua_ls"] = {
     Lua = {
       runtime = {
         version = "LuaJIT",
+        path = { "lua/?.lua", "lua/?/init.lua" },
+      },
+      diagnostics = {
+        globals = { "vim", "Snacks" },
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = { vim.env.VIMRUNTIME },
       },
     },
   },
