@@ -88,6 +88,9 @@ return {
         -- "cssls",
       },
     },
-  },
-  { "will133/vim-dirdiff" },
+  }
+  -- {
+  --   -- "sindrets/diffview.nvim",
+  --   "will133/vim-dirdiff",
+  -- }
 }
