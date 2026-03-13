@@ -1,0 +1,75 @@
+# ==========================================
+# 1. fzf Base Commands (Using ripgrep)
+# ==========================================
+# Default command for finding files (ignores .git by default)
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob=\"!.git/*\""
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# ALT-C command (Directories only). rg doesn't natively filter by directories, 
+# so we pipe the file paths into dirname and filter duplicates with awk.
+export FZF_ALT_C_COMMAND="rg --files --null | xargs -0 dirname | awk '\!a[\$0]++'"
+
+
+# ==========================================
+# 2. Common fzf Options
+# ==========================================
+FZF_COMMON_OPTS="
+  --bind='ctrl-u:half-page-up'
+  --bind='ctrl-d:half-page-down'
+  --bind='ctrl-/:toggle-preview'
+  --header-lines=1
+  --walker-skip='.git,node_modules,target,build'
+"
+
+# ==========================================
+# 3. File Search Toggles (rg specific)
+# ==========================================
+# These transforms allow you to toggle hidden and ignored files dynamically.
+# We append --glob=\!.git/ to every reload so the .git folder is always hidden.
+FZF_FILE_OPTS="
+  --bind='ctrl-r:change-prompt(Default> )+reload(rg --files --glob=\"!.git/*\")'
+  --bind='ctrl-h:transform:[[ \"\$FZF_PROMPT\" =~ \"Hidden\" ]] && echo \"change-prompt(Default> )+reload(rg --files --glob=\"\!.git/*\")\" || echo \"change-prompt(Hidden> )+reload(rg --files --hidden --glob=\"\!.git/*\")\"'
+  --bind='ctrl-i:transform:[[ \"\$FZF_PROMPT\" =~ \"All\" ]] && echo \"change-prompt(Default> )+reload(rg --files --glob=\"\!.git/*\")\" || echo \"change-prompt(All> )+reload(rg --files --hidden --no-ignore --glob=\"\!.git/*\")\"'
+  --header='[fzf] ^R: Default | ^H: Toggle Hidden | ^I: Toggle Ignore'
+"
+
+
+# ==========================================
+# 4. FZF_DEFAULT_OPTS (Base + File Toggles + Preview)
+# ==========================================
+export FZF_DEFAULT_OPTS="$FZF_COMMON_OPTS $FZF_FILE_OPTS
+  --preview='bat --style=numbers --color=always {} 2>/dev/null || cat {} 2>/dev/null'
+  --preview-window='right:50%:border-left'
+"
+
+# ==========================================
+# 5. FZF_CTRL_T_OPTS (Triggered by CTRL-T)
+# ==========================================
+export FZF_CTRL_T_OPTS="
+  --prompt='Files> '
+"
+
+# ==========================================
+# 6. FZF_ALT_C_OPTS (Triggered by ALT-C)
+# ==========================================
+# Overrides the default file preview with a directory tree preview
+export FZF_ALT_C_OPTS="
+  --prompt='Dirs> '
+  --preview='eza --tree --level=2 --icons {} 2>/dev/null || ls -la {}'
+  --preview-window='right:50%:border-left'
+"
+
+# ==========================================
+# 7. FZF_CTRL_R_OPTS (Triggered by CTRL-R)
+# ==========================================
+# CRITICAL: Because FZF_DEFAULT_OPTS applies to everything, we MUST unbind 
+# the file toggles (CTRL-H, CTRL-I) here so they don't break your history search!
+export FZF_CTRL_R_OPTS="
+  --prompt='History> '
+  --header='[fzf] ^/ to toggle preview'
+  --preview='echo {}'
+  --preview-window='up:3:hidden:wrap'
+  --bind='ctrl-r:toggle-sort'
+  --bind='ctrl-h:unbind'
+  --bind='ctrl-i:unbind'
+"
