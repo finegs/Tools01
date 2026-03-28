@@ -8,6 +8,7 @@ return {
     -- From Github
     "finegs/dirdiff.nvim",
     -- branch = "main",
+    enabled = false,
     cmd = "DirDiff",
     lazy = true, -- Load immediately so the command is available
     opts = {
