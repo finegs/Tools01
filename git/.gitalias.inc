@@ -4,7 +4,7 @@
 ;    .  Windows : >copy {tools01 git path}/.gitalias.inc %USERPROFILE%/
 ;   2. add following text to ~/.gitconfig
 ;    ``` 
-;    [include]]
+;    [include]
 ;       path = ~/.gitalias.inc
 ;       
 ;    ```
