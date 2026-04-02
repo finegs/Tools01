@@ -26,6 +26,10 @@ if utils.is.windows then
   vim.g["plantuml_previewer#debug_mode"] = 1
 end
 
+vim.lsp.config("*", {
+  root_markers = { ".pjt.lua", "compile_commands.json", "package.json", ".luarc.json" },
+})
+
 vim.lsp.config["lua_ls"] = {
   -- Command and arguments to start the server.
   cmd = { "lua-language-server" },
