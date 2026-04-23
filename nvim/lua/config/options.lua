@@ -1,7 +1,20 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
-local utils = require("mymodule.utils")
+_G.myutils = require("mymodule.utils")
+
+-- added by SGk 2026-04-23
+-- ```shell > scoop bucket add nerd-fonts && soope install FiraCode-NF FiraCode-NF-Mono FiraCode`
+vim.opt.guifont = "FiraCode Nerd Font Mono:h12"
+-- vim.opt.guifont = "Fira_Code:h12"
+
+-- -- by SGK 2026-04-02
+-- utils.ensure_rtp(vim.fn.stdpath("data") .. "/site")
+
+-- added by SGK 2026-04-23
+if myutils.is.windows then
+  vim.opt.shellslash = true
+end
 
 vim.g.root_spec = { "lsp", { ".pjt.lua", ".init.lua", "lua" }, "cwd" }
 
@@ -20,7 +33,7 @@ vim.keymap.set("n", "<Tab>", "<C-W>k", { remap = true, desc = "Next Window" })
 vim.keymap.set("n", "<S-Tab>", "<C-W>k", { remap = true, desc = "Next Window" })
 
 -- Plantuml
-if utils.is.windows then
+if myutils.is.windows then
   vim.g["plantuml_previewer#plantuml_jar_path"] = "C:/Programs/share/plantuml/plantuml-gplv2-1.2025.10.jar"
   vim.g["plantuml_previewer#viewer_path"] = [[C:\Dev\temp\puml_viewer]]
   vim.g["plantuml_previewer#debug_mode"] = 1

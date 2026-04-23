@@ -131,3 +131,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+
+-- Map the function to 'gf' in normal mode
+vim.keymap.set("n", "gf", myutils.jump_and_create_file, { desc = "Jump or create file from wrappers" })
