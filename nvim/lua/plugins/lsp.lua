@@ -18,25 +18,28 @@ return {
     opts = {
       servers = {
         -- Ensure mason installs the server
-        -- rust_analyzer = { enabled = true },
+        rust_analyzer = {
+          enabled = true,
+        },
+        html = {
+          enabled = true,
+        },
+        gopls = {
+          -- Setting enabled to false stops LazyVim from setting it up
+          -- enabled = false,
+          -- Optional: prevents Mason from trying to auto-install it
+          mason = false,
+        },
+        fsautocomplete = {
+          -- Setting enabled to false stops LazyVim from setting it up
+          -- enabled = false,
+          -- Optional: prevents Mason from trying to auto-install it
+          mason = false,
+        },
         clangd = {
           keys = {
             { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
           },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "Makefile",
-              "configure.ac",
-              "configure.in",
-              "config.h.in",
-              "meson.build",
-              "meson_options.txt",
-              "build.ninja"
-            )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
-              fname
-            ) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
-            -- require("lspconfig.util").find_git_ancestor(fname)
-          end,
           capabilities = {
             offsetEncoding = { "utf-16" },
           },
@@ -94,45 +97,5 @@ return {
         -- end,
       },
     },
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      -- A tailored list of parsers to always keep installed and updated
-      ensure_installed = {
-        "c",
-        "cpp",
-        "lua",
-        "vim",
-        "vimdoc",
-        "query",
-        "markdown",
-        "markdown_inline",
-        "regex",
-        "rust",
-        "python",
-        "typescript",
-        "javascript",
-        "toml",
-        "yaml",
-        "sql",
-        "python",
-      },
-    },
-    config = function(opts)
-      -- 1. Define where you want the parsers to live
-      -- (Using stdpath("data") puts it in your AppData/Local/nvim-data folder)
-      -- local parser_dir = vim.fn.stdpath("data") .. "/treesitter-parsers"
-      local parser_dir = vim.fs.joinpath(vim.fn.stdpath("data"), "treesitter-parsers")
-
-      -- 2. Use the exact logic we built earlier to guarantee the folder exists
-      -- AND is added to Neovim's runtimepath so Neovim can actually read the .dll files!
-      if vim.fn.isdirectory(parser_dir) == 0 then
-        vim.fn.mkdir(parser_dir, "p")
-      end
-      vim.opt.rtp:append(parser_dir)
-
-      require("nvim-treesitter").setup(opts)
-    end,
   },
 }

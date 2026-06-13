@@ -52,3 +52,18 @@ vim.keymap.set("n", "[c", function()
   end
   return "[["
 end, { expr = true, desc = "Prev diff change" })
+
+-- keymap for open terminal on mac
+if vim.fn.has("mac") then
+  -- -- Open a horizontal terminal split at the bottom
+  -- vim.keymap.set("n", "<C-_>", ":botright split | terminal<CR>", { silent = true })
+
+  -- Easy exit: Press Esc to exit terminal mode back to normal mode
+  vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { silent = true })
+
+  -- Open terminal in a split window at the bottom
+  vim.keymap.set("n", "<leader>th", "<cmd>botright split | terminal<CR>", { desc = "Terminal (Horizontal)" })
+
+  -- Open terminal in a vertical split on the right
+  vim.keymap.set("n", "<leader>tv", "<cmd>botright vsplit | terminal<CR>", { desc = "Terminal (Vertical)" })
+end
