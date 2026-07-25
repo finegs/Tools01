@@ -32,13 +32,6 @@ vim.keymap.set("n", "<Leader>ww", "<Cmd>w<CR><ESC>", { remap = true, desc = "Sav
 vim.keymap.set("n", "<Tab>", "<C-W>k", { remap = true, desc = "Next Window" })
 vim.keymap.set("n", "<S-Tab>", "<C-W>k", { remap = true, desc = "Next Window" })
 
--- Plantuml
-if myutils.is.windows then
-  vim.g["plantuml_previewer#plantuml_jar_path"] = "C:/Programs/share/plantuml/plantuml-gplv2-1.2025.10.jar"
-  vim.g["plantuml_previewer#viewer_path"] = [[C:\Dev\temp\puml_viewer]]
-  vim.g["plantuml_previewer#debug_mode"] = 1
-end
-
 vim.lsp.config("*", {
   root_markers = { ".pjt.lua", "compile_commands.json", "package.json", ".luarc.json" },
 })
@@ -79,3 +72,6 @@ vim.lsp.enable("cssls")
 vim.lsp.enable("html")
 vim.lsp.enable("rust-analyzer")
 vim.lsp.enable("bashls")
+
+-- added by SGK 2026-07-25
+vim.opt.termguicolors = true

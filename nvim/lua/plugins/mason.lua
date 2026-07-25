@@ -1,22 +1,25 @@
 return {
-  -- add any tools you want to have installed below
   {
-    "mason-org/mason.nvim",
-    opts = {
-      ensure_installed = {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
         "gitui",
         "clangd",
         "codelldb",
+        "cmake-language-server",
         "stylua",
         "shellcheck",
         "shfmt",
         "flake8",
+        "basedpyright",
+        "ruff",
+        "vtsls",
         "lua-language-server",
         "typescript-language-server",
         "jdtls",
         "rust-analyzer",
-        -- "cssls",
-      },
-    },
+      })
+    end,
   },
 }

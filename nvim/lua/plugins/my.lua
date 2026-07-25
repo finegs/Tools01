@@ -69,8 +69,5 @@ return {
     opts = {},
   },
 
-  {
-    -- "sindrets/diffview.nvim",
-    "will133/vim-dirdiff",
-  }
+  { "will133/vim-dirdiff" },
 }

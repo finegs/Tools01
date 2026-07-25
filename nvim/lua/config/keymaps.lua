@@ -10,12 +10,9 @@ vim.keymap.set("n", "<leader>qq", "<cmd>q<CR><ESC>", { remap = true, desc = "Clo
 vim.keymap.set("n", "<leader>qa", "<cmd>qa<CR><ESC>", { remap = true, desc = "Close All Buffer" })
 
 -- buffers
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>bb",
-  "function() Snacks.picker.buffers() end",
-  { noremap = false, desc = "Open Buffer List" }
-)
+vim.keymap.set("n", "<leader>bb", function()
+  Snacks.picker.buffers()
+end, { desc = "Open Buffer List" })
 vim.keymap.set("n", "<leader>bn", "<cmd>BufferLineCycleNext<CR>", { remap = true, desc = "Next Buffer Cycle" })
 vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineCyclePrev<CR>", { remap = true, desc = "Prev Buffer Cycle" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { remap = true, desc = "Delete Current Buffer " })
