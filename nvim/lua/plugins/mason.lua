@@ -7,6 +7,8 @@ return {
         "gitui",
         "clangd",
         "codelldb",
+        "debugpy",
+        "js-debug-adapter",
         "cmake-language-server",
         "stylua",
         "shellcheck",
