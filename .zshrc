@@ -38,7 +38,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -145,9 +145,13 @@ export NVM_DIR="$HOME/.nvm"
 
 # added by SGK 2026.07.25
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-set -i vi
+bindkey -v
 
 # Added by Antigravity CLI installer
 export PATH="/home/user01/.local/bin:$PATH"
 
-export TERM="screen-256color"
+# export TERM="screen-256color"
+source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
