@@ -1,5 +1,6 @@
 
 [include]
   path = ~/.gitalias
+
 [commit]
-	template = /home/user01/.gitmessage
+	template = /home/user01/.gitmessage.txt

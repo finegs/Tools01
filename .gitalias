@@ -83,11 +83,20 @@
   m = merge
   o = checkout
   p = pull
+  r = remote
   s = status
   w = whatchanged
 
   ##
-  # Short aliases for frequent commands and options.
+  # Short aliases for our frequent commands.
+  #
+  # Guidelines:
+  #
+  #  * Generally speaking, the alias should be in the same
+  #    order as the command name followed by its options.
+  #
+  #    * Right: fb = foo --bar
+  #    * Wrong: bf = foo --bar
   ##
 
   ### add aliases ###
@@ -101,7 +110,10 @@
   # add just the files that are updated.
   au = add --update
 
-  ### branch aliases ###
+  ### branch ###
+
+  # branch - edit the description
+  be = branch --edit-description
 
   # branch and only list branches whose tips are reachable from the specified commit (HEAD if not specified).
   bm = branch --merged

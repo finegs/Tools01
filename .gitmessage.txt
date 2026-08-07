@@ -1,0 +1,26 @@
+# <type>(<scope>): <subject>
+# Keep subject under 50 characters. No period at the end. Imperative mood.
+# Example: feat(auth): add OAuth2 Google login flow
+
+# Body: Why is this change necessary? What does it address? How does it fix it?
+# Wrap lines at 72 characters. Put a blank line between subject and body.
+
+
+# Footer: Reference issues, breaking changes, or co-authors.
+# Example: Closes #123
+# Example: BREAKING CHANGE: The API now requires an API key.
+
+# --- COMMIT END ---
+# Type options:
+#   ✨ feat     (New feature for the user, not a new feature for build script)
+#   🐛 fix      (Bug fix for the user, not a fix to a build script)
+#   📝 docs     (Changes to the documentation)
+#   🎨 style    (Formatting, missing semi colons, etc; no production code change)
+#   ♻️  refactor (Refactoring production code, eg. renaming a variable)
+#   ⚡️ perf     (Code change that improves performance)
+#   🧪 test     (Adding missing tests, refactoring tests; no production code change)
+#   💚 build    (Changes that affect the build system or external dependencies)
+#   👷 ci       (Changes to our CI configuration files and scripts)
+#   🧹 chore    (Other changes that don't modify src or test files)
+#   ⏪️ revert    (Reverts a previous commit)
+
