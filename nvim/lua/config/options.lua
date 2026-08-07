@@ -27,6 +27,19 @@ vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
 
 vim.g.lazyvim_python_ruff = "ruff"
 
+-- Register LSP handlers to silence unhandled server requests
+if vim.lsp and vim.lsp.handlers then
+  vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, context)
+    return vim.NIL, nil
+  end
+end
+
+-- Fallback configs for LSP plugins using vim.lsp.start
+if vim.lsp and vim.lsp.config then
+  vim.lsp.config["crates.nvim"] = { cmd = { "true" } }
+  vim.lsp.config["rust-analyzer"] = { cmd = { "rust-analyzer" } }
+end
+
 -- Keymap
 vim.keymap.set("n", "<Leader>ww", "<Cmd>w<CR><ESC>", { remap = true, desc = "Save File" })
 vim.keymap.set("n", "<Tab>", "<C-W>k", { remap = true, desc = "Next Window" })

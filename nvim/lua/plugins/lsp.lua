@@ -1,10 +1,37 @@
+-- Register LSP handlers to silence unhandled server requests
+vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, context)
+  return vim.NIL, nil
+end
+
+-- Register fallback configs for plugins using vim.lsp.start
+if vim.lsp.config then
+  vim.lsp.config["crates.nvim"] = vim.lsp.config["crates.nvim"] or { cmd = { "true" } }
+  vim.lsp.config["rust-analyzer"] = vim.lsp.config["rust-analyzer"] or { cmd = { "rust-analyzer" } }
+end
+
 return {
+  {
+    "mason-org/mason.nvim",
+    opts = {
+      ensure_installed = { "gitui", "codelldb" },
+    },
+  },
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      mappings = {
-        server = {},
+      ensure_installed = {
+        "vimls",
+        "lua_ls",
+        "vtsls",
+        "rust_analyzer",
+        "pyright",
+        "gopls",
+        "marksman",
+        "taplo",
       },
+    },
+    dependencies = {
+      "neovim/nvim-lspconfig",
     },
   },
   {
@@ -20,6 +47,23 @@ return {
       setup = {
         -- Specify * to use this function as a fallback for any server
         ["*"] = function(server, opts) end,
+        vimls = {},
+        lua_ls = {},
+        vtsls = {},
+        rust_analyzer = { enabled = false }, -- Managed by rustaceanvim
+        pyright = {},
+        gopls = {},
+        marksman = {},
+        taplo = {
+          settings = {
+            evenBetterToml = {
+              schema = {
+                enabled = true,
+                catalogs = {},
+              },
+            },
+          },
+        },
       },
     },
   },
@@ -61,6 +105,27 @@ return {
     --   })
     -- end
     -- or use `opts = {}` and let lazy.nvim handle `setup` if available
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "vim",
+        "vimdoc",
+        "lua",
+        "luadoc",
+        "typescript",
+        "javascript",
+        "tsx",
+        "rust",
+        "ron",
+        "python",
+        "go",
+        "gomod",
+        "gowork",
+        "gotmpl",
+        "markdown",
+        "markdown_inline",
+      })
+    end,
   },
 
   -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,

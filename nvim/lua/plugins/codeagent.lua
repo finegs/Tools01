@@ -1,0 +1,57 @@
+-- return {
+--   -- {
+--   --   "yetone/avante.nvim",
+--   --   event = "VeryLazy",
+--   --   lazy = false,
+--   --   version = false, -- set this if you want to always pull the latest changes
+--   --   opts = {
+--   --     provider = "gemini",
+--   --     providers = {
+--   --       gemini = {
+--   --         model = "gemini-3.6-flash ", -- Or "gemini-2.0-flash" for high speed
+--   --         context_window = 1048576, -- Gemini 1M+ token context window
+--   --         extra_request_body = {
+--   --           generationConfig = {
+--   --             temperature = 0.4,
+--   --           },
+--   --         },
+--   --       },
+--   --     },
+--   --   },
+--   --   -- If you want to build dependencies from source
+--   --   build = "make",
+--   --   dependencies = {
+--   --     "nvim-treesitter/nvim-treesitter",
+--   --     "stevearc/dressing.nvim",
+--   --     "nvim-lua/plenary.nvim",
+--   --     "MunifTanjim/nui.nvim",
+--   --     --- Optional dependencies:
+--   --     "hrsh7th/nvim-cmp", -- Autocompletion for avante commands
+--   --     "nvim-tree/nvim-web-devicons", -- File icons
+--   --     {
+--   --       -- Support for image pasting/visual context
+--   --       "HakonHarnes/img-clip.nvim",
+--   --       event = "VeryLazy",
+--   --       opts = {
+--   --         default = {
+--   --           embed_image_as_base64 = false,
+--   --           prompt_for_file_name = false,
+--   --           drag_and_drop = {
+--   --             insert_mode = true,
+--   --           },
+--   --         },
+--   --       },
+--   --     },
+--   --     {
+--   --       -- Make sure render-markdown handles Avante chat windows
+--   --       "MeanderingProgrammer/render-markdown.nvim",
+--   --       opts = {
+--   --         file_types = { "markdown", "Avante" },
+--   --       },
+--   --       ft = { "markdown", "Avante" },
+--   --     },
+--   --   },
+--   },
+-- }
+return {}
+
