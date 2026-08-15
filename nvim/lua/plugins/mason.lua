@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
@@ -21,6 +21,12 @@ return {
         "typescript-language-server",
         "jdtls",
         "rust-analyzer",
+        "json-lsp",
+        "yaml-language-server",
+        "taplo",
+        "html-lsp",
+        "css-lsp",
+        "prettier",
       })
     end,
   },

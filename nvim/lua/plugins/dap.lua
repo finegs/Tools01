@@ -14,18 +14,6 @@ return {
       { "<F10>", function() require("dap").step_over() end, desc = "Debug: Step Over" },
       { "<F11>", function() require("dap").step_into() end, desc = "Debug: Step Into" },
       { "<F12>", function() require("dap").step_out() end, desc = "Debug: Step Out" },
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Debug: Toggle Breakpoint" },
-      {
-        "<leader>dB",
-        function()
-          require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-        end,
-        desc = "Debug: Conditional Breakpoint",
-      },
-      { "<leader>du", function() require("dapui").toggle() end, desc = "Debug: Toggle DAP UI" },
-      { "<leader>dr", function() require("dap").repl.open() end, desc = "Debug: Open REPL" },
-      { "<leader>dl", function() require("dap").run_last() end, desc = "Debug: Run Last" },
-      { "<leader>dt", function() require("dap").terminate() end, desc = "Debug: Terminate Session" },
       {
         "<leader>dO",
         function()
@@ -34,50 +22,27 @@ return {
         desc = "Debug: Launch Lua Server (osv)",
       },
     },
-    config = function()
+    opts = function()
       local dap = require("dap")
-      local dapui = require("dapui")
-
-      -- 1. Setup DAP UI & Virtual Text
-      dapui.setup()
-      require("nvim-dap-virtual-text").setup({})
-
-      -- Auto open/close DAP UI
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-      end
-
-      -- 2. Define Custom Breakpoint Signs
-      vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapBreakpointCondition", { text = "🟡", texthl = "", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapLogPoint", { text = "ℹ️", texthl = "", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapStopped", { text = "▶️", texthl = "", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapBreakpointRejected", { text = "⚪", texthl = "", linehl = "", numhl = "" })
 
       -- =======================================================================
       -- ADAPTER CONFIGURATIONS
       -- =======================================================================
 
-      -- -----------------------------------------------------------------------
       -- 1. C / C++ / Rust (codelldb)
-      -- -----------------------------------------------------------------------
       local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
       local codelldb_cmd = is_windows and "codelldb.cmd" or "codelldb"
 
-      dap.adapters.codelldb = {
-        type = "server",
-        port = "${port}",
-        executable = {
-          command = codelldb_cmd,
-          args = { "--port", "${port}" },
-        },
-      }
+      if not dap.adapters.codelldb then
+        dap.adapters.codelldb = {
+          type = "server",
+          port = "${port}",
+          executable = {
+            command = codelldb_cmd,
+            args = { "--port", "${port}" },
+          },
+        }
+      end
 
       local cpp_config = {
         {
@@ -100,13 +65,11 @@ return {
         },
       }
 
-      dap.configurations.cpp = cpp_config
-      dap.configurations.c = cpp_config
-      dap.configurations.rust = cpp_config
+      dap.configurations.cpp = dap.configurations.cpp or cpp_config
+      dap.configurations.c = dap.configurations.c or cpp_config
+      dap.configurations.rust = dap.configurations.rust or cpp_config
 
-      -- -----------------------------------------------------------------------
       -- 2. Python (debugpy)
-      -- -----------------------------------------------------------------------
       local python_adapter = is_windows and "python.exe" or "python3"
       local mason_path = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/" .. (is_windows and "Scripts/python.exe" or "bin/python")
 
@@ -116,20 +79,20 @@ return {
         require("dap-python").setup(python_adapter)
       end
 
-      -- -----------------------------------------------------------------------
       -- 3. JavaScript / TypeScript (js-debug-adapter)
-      -- -----------------------------------------------------------------------
       local js_adapter_cmd = is_windows and "js-debug-adapter.cmd" or "js-debug-adapter"
 
-      dap.adapters["pwa-node"] = {
-        type = "server",
-        host = "localhost",
-        port = "${port}",
-        executable = {
-          command = js_adapter_cmd,
-          args = { "${port}" },
-        },
-      }
+      if not dap.adapters["pwa-node"] then
+        dap.adapters["pwa-node"] = {
+          type = "server",
+          host = "localhost",
+          port = "${port}",
+          executable = {
+            command = js_adapter_cmd,
+            args = { "${port}" },
+          },
+        }
+      end
 
       local js_config = {
         {
@@ -149,12 +112,10 @@ return {
       }
 
       for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
-        dap.configurations[language] = js_config
+        dap.configurations[language] = dap.configurations[language] or js_config
       end
 
-      -- -----------------------------------------------------------------------
       -- 4. Lua (one-small-step-for-vimkind / osv)
-      -- -----------------------------------------------------------------------
       dap.adapters.nlua = function(callback, config)
         callback({
           type = "server",
@@ -163,7 +124,7 @@ return {
         })
       end
 
-      dap.configurations.lua = {
+      dap.configurations.lua = dap.configurations.lua or {
         {
           type = "nlua",
           request = "attach",

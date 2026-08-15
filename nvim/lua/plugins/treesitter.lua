@@ -1,44 +1,51 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      -- A tailored list of parsers to always keep installed and updated
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        -- C / C++
         "c",
         "cpp",
-        "lua",
-        "vim",
-        "vimdoc",
-        "query",
-        "markdown",
-        "markdown_inline",
-        "regex",
+        -- Rust
         "rust",
-        "python",
-        "typescript",
+        "ron",
+        -- Web (TS/JS/HTML/CSS)
         "javascript",
+        "typescript",
+        "tsx",
+        "html",
+        "css",
+        -- Config / Data formats
         "toml",
         "yaml",
-        "sql",
+        "json",
+        "json5",
+        "jsonc",
+        -- Python
         "python",
+        "ninja",
+        "rst",
+        -- Lua & Vim
+        "lua",
+        "luadoc",
+        "luap",
+        "vim",
+        "vimdoc",
+        -- Shell & Utilities
+        "bash",
+        "regex",
+        "markdown",
+        "markdown_inline",
+        -- Build / Tools
         "cmake",
         "make",
-      },
-    },
-    config = function(opts)
-      -- 1. Define where you want the parsers to live
-      -- (Using stdpath("data") puts it in your AppData/Local/nvim-data folder)
-      -- local parser_dir = vim.fn.stdpath("data") .. "/treesitter-parsers"
-      local parser_dir = vim.fs.joinpath(vim.fn.stdpath("data"), "treesitter-parsers")
-
-      -- 2. Use the exact logic we built earlier to guarantee the folder exists
-      -- AND is added to Neovim's runtimepath so Neovim can actually read the .dll files!
-      if vim.fn.isdirectory(parser_dir) == 0 then
-        vim.fn.mkdir(parser_dir, "p")
-      end
-      vim.opt.rtp:append(parser_dir)
-
-      require("nvim-treesitter").setup(opts)
+        "sql",
+        "go",
+        "gomod",
+        "gowork",
+        "gotmpl",
+      })
     end,
   },
 }
